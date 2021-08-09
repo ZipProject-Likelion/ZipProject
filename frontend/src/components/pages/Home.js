@@ -8,8 +8,8 @@ function Home() {
   return (
     <>
       <HeroSection />
-      <Cards />
-      <Cards />
+      <Cards title="인기 큐레이터"/>
+      <Cards title="인기 상품"/>
       <Footer />
     </>
   );

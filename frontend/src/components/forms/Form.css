@@ -14,7 +14,7 @@
   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.2);
   position: relative;
   border-radius: 10px;
-  height: 600px;
+  height: 100vh;
   display: grid;
 }
 .close-btn {
@@ -66,8 +66,14 @@
   border-radius: 0 10px 10px 0;
   position: relative;
   background: linear-gradient(90deg, rgb(40, 40, 40) 0%, rgb(17, 17, 17) 100%);
+  /* background: #E5E5E5; */
 }
-
+.form-title{
+  position:absolute;
+  top: 10%;
+  left: 23%;
+  color: #fff;
+}
 .form {
   position: absolute;
   top: 50%;
@@ -102,8 +108,7 @@
 
 .form-label {
   display: inline-block;
-  font-size: 0.8rem;
-  margin-bottom: 6px;
+  margin-bottom: 15px;
   color: #fff;
 }
 
@@ -160,4 +165,10 @@
   text-decoration: none;
   color: #27cdff;
   font-weight: 600;
+}
+.fileUploader{
+  width:80% !important;
+}
+.fileContainer .uploadPictureContainer{
+  height: 25% !important;
 }
