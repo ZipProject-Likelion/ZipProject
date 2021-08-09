@@ -4,8 +4,23 @@ from .models import Item, ItemComment
 from .forms import ItemForm, ItemCommentForm
 from django.contrib.auth.decorators import login_required
 
-# Create your views here.
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializer import ItemSerializer, ItemCommentSerializer
 
+class ItemListAPI(APIView):
+    def get(self, request):
+        queryset = Item.objects.all()
+        print(queryset)
+        serializer = ItemSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+class ItemCommentListAPI(APIView):
+    def get(self, request):
+        queryset = ItemComment.objects.all()
+        print(queryset)
+        serializer = ItemCommentSerializer(queryset, many=True)
+        return Response(serializer.data)
 
 def homeitem(request):
     items = Item.objects.all()

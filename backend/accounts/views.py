@@ -1,12 +1,21 @@
+from django.core import serializers
 from .forms import CustomUserChangeForm, ProfileForm
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import authenticate, get_user_model, login, logout
 from .models import Profile 
-from item.models import Item
 
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializer import ProfileSerializer
 
-# Create your views here.
+class ProfileListAPI(APIView):
+    def get(self, request):
+        queryset = Profile.objects.all()
+        print(queryset)
+        serializer = ProfileSerializer(queryset, many=True)
+        return Response(serializer.data)
+
 def signup_view(request):
     if request.method=="POST":
         form=UserCreationForm(request.POST)

@@ -9,4 +9,4 @@ class Content(models.Model):
 
 class Image(models.Model):
     post = models.ForeignKey(Content, on_delete=models.CASCADE)
-    file = models.ImageField(upload_to='images/', blank=True, null=True)
+    file = models.ImageField( blank=True, null=True)

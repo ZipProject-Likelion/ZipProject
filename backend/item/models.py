@@ -16,7 +16,7 @@ class Item(models.Model):
     }
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,related_name="post_items")
     name=models.CharField(max_length=20)
-    image=models.ImageField(upload_to='images/',blank=True)
+    image=models.ImageField(blank=True)
     price=models.IntegerField(default=0)
     shop=models.URLField(default='')
     type=models.CharField(max_length=20,choices=TYPE_CHOICES)

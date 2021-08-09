@@ -2,7 +2,25 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from .models import Content, Image
 from .forms import ContentForm
-# Create your views here.
+
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializer import ContentSerializer, ImageSerializer
+
+class ContentListAPI(APIView):
+    def get(self, request):
+        queryset = Content.objects.all()
+        print(queryset)
+        serializer = ContentSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+class ImageListAPI(APIView):
+    def get(self, request):
+        queryset = Image.objects.all()
+        print(queryset)
+        serializer = ImageSerializer(queryset, many=True)
+        return Response(serializer.data)
+
 def new(request):
     if request.method == 'POST': form = ContentForm(request.POST,request.FILES)
     else: form = ContentForm()

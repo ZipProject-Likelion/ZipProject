@@ -16,6 +16,9 @@ urlpatterns = [
     path('detail/<int:index>', views.detail, name="detail"),
     path('edit/<int:index>', views.edit, name='edit'),
     path('detail/<int:pk>/delete', views.delete, name="delete"),
+
+    path('api/content/', views.ContentListAPI.as_view()),
+    path('api/image/', views.ImageListAPI.as_view()),
 ]
 
 if settings.DEBUG:
