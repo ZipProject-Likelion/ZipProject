@@ -1,78 +1,72 @@
-import React from 'react';
+import React, {useState} from 'react';
 import validate from './validateInfo';
 import useForm from './useForm';
-import './Form.css';
+import './IForm.css';
+import IForm2 from './IForm2';
+import Dropzone from './Dropzone';
+import FormSuccess from './FormSuccess';
 
-const Form = ({ submitForm }) => {
+const IForm = ({ submitForm }) => {
   const { handleChange, handleSubmit, values, errors } = useForm(
     submitForm,
     validate
   );
+  const [nextPage, setNextPage]=useState(0);
 
-  return (
-    <div className='form-content-right'>
-      <form onSubmit={handleSubmit} className='form' noValidate>
-        <h1>
-          Get started with us today! Create your account by filling out the
-          information below.
-        </h1>
-        <div className='form-inputs'>
-          <label className='form-label'>Username</label>
-          <input
-            className='form-input'
-            type='text'
-            name='username'
-            placeholder='Enter your username'
-            value={values.username}
-            onChange={handleChange}
-          />
-          {errors.username && <p>{errors.username}</p>}
+  function nextPageHandler(x) {
+    setNextPage(x);
+  }
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  function submitForm() {
+    setIsSubmitted(true);
+  }
+  switch(nextPage){
+    case 0:
+      return (
+        <div className="dropzone-form-container">
+        <h2 className="dropzone-form-title">상품 사진을 등록하세요</h2>
+        <Dropzone nextPageHandler={nextPageHandler}/>
         </div>
-        <div className='form-inputs'>
-          <label className='form-label'>Email</label>
-          <input
-            className='form-input'
-            type='email'
-            name='email'
-            placeholder='Enter your email'
-            value={values.email}
-            onChange={handleChange}
-          />
-          {errors.email && <p>{errors.email}</p>}
+      );
+    case 1:
+      return (
+        <div className="dropzone-form-container">
+        <h2 className="dropzone-form-title">상품 정보를 입력하세요</h2>
+        <IForm2 nextPageHandler={nextPageHandler}/>
         </div>
-        <div className='form-inputs'>
-          <label className='form-label'>Password</label>
-          <input
-            className='form-input'
-            type='password'
-            name='password'
-            placeholder='Enter your password'
-            value={values.password}
-            onChange={handleChange}
-          />
-          {errors.password && <p>{errors.password}</p>}
+      )
+    case 2:
+      return (
+        <div className="dropzone-form-container">
+        <FormSuccess title='상품 정보가 등록되었습니다.'/>
         </div>
-        <div className='form-inputs'>
-          <label className='form-label'>Confirm Password</label>
-          <input
-            className='form-input'
-            type='password'
-            name='password2'
-            placeholder='Confirm your password'
-            value={values.password2}
-            onChange={handleChange}
-          />
-          {errors.password2 && <p>{errors.password2}</p>}
-        </div>
-        <button className='form-input-btn' type='submit'>
-          Sign up
-        </button>
-        <span className='form-input-login'>
-          Already have an account? Login <a href='#'>here</a>
-        </span>
-      </form>
-    </div>
-  );
+      )
+    default:
+      return null;
+  }  
+
+  // return (
+  //   <div className="dropzone-form-container">
+    
+  //   {!nextPage?
+  //     (
+  //       <>
+  //       <h2 className="dropzone-form-title">상품 사진을 등록하세요</h2>
+  //       <Dropzone nextPageHandler={nextPageHandler}/>
+  //       </>
+  //     )
+  //     :
+  //     (
+  //       <>
+  //       <h2 className="dropzone-form-title">상품 정보를 입력하세요</h2>
+  //       <IForm2 submitForm={submitForm}/>
+  //       </>
+  //     )
+  //     }
+
+  //   </div>
+  // );
 };
 
-export default Form;
+export default IForm;

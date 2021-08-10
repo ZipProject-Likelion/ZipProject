@@ -7,7 +7,7 @@ import Curations from './components/pages/Curations';
 import Products from './components/pages/Products';
 import SignUp from './components/pages/SignUp';
 import CurationAdd from './components/pages/CurationAdd';
-import ItemAdd from './components/pages/ItemAdd';
+import itemAdd from './components/pages/ItemAdd';
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
           <Route path='/products' component={Products} />
           <Route path='/sign-up' component={SignUp} />
           <Route path='/curation-add' component={CurationAdd} />
-          <Route path='/item-add' component={ItemAdd} />
+          <Route path='/item-add' component={itemAdd} />
         </Switch>
       </Router>
     </>

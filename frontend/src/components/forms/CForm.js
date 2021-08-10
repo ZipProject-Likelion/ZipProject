@@ -3,7 +3,7 @@ import ImageUploader from "react-images-upload";
 import validate from './validateInfo';
 import useForm from './useForm';
 import './Form.css';
-import Dropzone from '../Dropzone';
+
 
 
 
