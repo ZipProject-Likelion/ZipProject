@@ -10,7 +10,7 @@ function HeroSection() {
       <h1>ZIP 서비스 시작하기</h1>
       <p>Zipper들과 당신의 취향을 공유해보세요</p>
       <div className='hero-btns'>
-        <Link to='/curation-add'>
+        <Link to='/curation-add2'>
           <Button
             buttonStyle='btn--outline'
             buttonSize='btn--large'

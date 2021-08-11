@@ -2,25 +2,26 @@ import React from 'react';
 import './Cards.css';
 import CardItem from './CardItem';
 
-function Cards({title}) {
+function Cards({title, data}) {
+  console.log(data)
   return (
     <div className='cards'>
       <h1>{title}</h1>
       <div className='cards__container'>
         <div className='cards__wrapper'>
           <ul className='cards__items'>
-            <CardItem
-              src='images/img-9.jpg'
-              text='Explore the hidden waterfall deep inside the Amazon Jungle'
-              label='Adventure'
-              path='/curations'
-            />
-            <CardItem
-              src='images/img-2.jpg'
-              text='Travel through the Islands of Bali in a Private Cruise'
-              label='Luxury'
-              path='/curations'
-            />
+            {!data? <></>:
+            ( 
+              data.map(curation=>(
+                <CardItem
+                key={curation.id}
+                src={curation.image}
+                text= {curation.title}
+                label={curation.context}
+                path= {`/curation-detail/${curation.id}`}
+              />
+              ))
+            )}
           </ul>
           <ul className='cards__items'>
             <CardItem
