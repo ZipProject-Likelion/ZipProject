@@ -11,14 +11,23 @@ import { Link } from 'react-router-dom';
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 
-const Products=()=> {
+const ProductCategory=({match})=> {
   const [products, setProducts]=useState('');
 
   // product list 가져오기
   const renderProduct = async()=> {
     const response =  await axios.get('/product/product-list/')
-    setProducts(response.data);
+    let result=[]
+    response.data.map((data)=>{
+      if(data.type.includes(match.params.category)){
+        console.log('데이터 가구',data)
+        result.push(data)
+      }
+    })
+    console.log('필터링 결과입니다', result)
+    setProducts(result);
   }
+
   const checkUser = () =>{
     const user = localStorage.getItem('user');
     console.log(user);
@@ -38,7 +47,7 @@ const Products=()=> {
     <>
       <div className="curation-container">
         <ProductAdd/>
-        <ProdDropdown title='카테고리' />
+        <ProdDropdown title={match.params.category}/>
         <ProductCards title="인기 상품" data={products}/>
       </div>
 
@@ -46,4 +55,4 @@ const Products=()=> {
   )
 }
 
-export default Products;
+export default ProductCategory;

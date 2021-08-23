@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from './Button';
+import Avatar from '@material-ui/core/Avatar';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
+
 
 function Navbar() {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
+  const [user, setUser]=useState(false);
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
@@ -17,9 +20,18 @@ function Navbar() {
       setButton(true);
     }
   };
+  const checkUser = () =>{
+    const user = localStorage.getItem('user');
+    console.log(user);
+    if (user){
+      setUser(user);
+    }
+    console.log(user);
+  }
 
   useEffect(() => {
     showButton();
+    checkUser();
   }, []);
 
   window.addEventListener('resize', showButton);
@@ -58,22 +70,37 @@ function Navbar() {
                 Products
               </Link>
             </li>
-
-            <li>
-              <Link
+            <li className='nav-item'>
+              {!user && button?
+              (
+                <>
+                <Link
                 to='/sign-up'
-                className='nav-links-mobile'
+                className='nav-links'
                 onClick={closeMobileMenu}
-              >
+                >
                 Sign Up
-              </Link>
+                </Link>
+                </>
+              )
+              :
+              (
+                <>
+                <Link
+                to='/profile'
+                className='nav-links nav-profile'
+                onClick={closeMobileMenu}
+                >
+                <Avatar src="/broken-image.jpg" >
+                {user}
+                </Avatar>
+                </Link>
+                </>
+              )
+              }
+
             </li>
           </ul>
-          {button && 
-          <Link to='/sign-up'>
-            <Button buttonStyle='btn--outline'>SIGN UP</Button>
-          </Link>
-          }
         </div>
       </nav>
     </>

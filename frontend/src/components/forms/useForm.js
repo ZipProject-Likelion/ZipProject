@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useState, useEffect } from 'react';
 
 const useForm = (callback, validate) => {
@@ -5,7 +6,9 @@ const useForm = (callback, validate) => {
     username: '',
     email: '',
     password: '',
-    password2: ''
+    password2: '',
+    firstname:'',
+    lastname:''
   });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -22,8 +25,35 @@ const useForm = (callback, validate) => {
     e.preventDefault();
 
     setErrors(validate(values));
+    let form_data=new FormData();
+    form_data.append('username',values.username);
+    form_data.append('email',values.email);
+    form_data.append('password1',values.password);
+    form_data.append('password2',values.password2);
+    form_data.append('first_name',values.firstname);
+    form_data.append('last_name',values.lastname);
+    axios
+    .post('/users/auth/register/', form_data, {
+        headers:{
+            'content-type':'multipart/form-data'
+        }
+    })
+    .then((res)=>console.log(res))
+    .catch(err=>console.log(err));
+
+    setValues({
+      username: '',
+      email: '',
+      password: '',
+      password2: '',
+      firstname:'',
+      lastname:''
+    });
+
     setIsSubmitting(true);
   };
+
+  
 
   useEffect(
     () => {

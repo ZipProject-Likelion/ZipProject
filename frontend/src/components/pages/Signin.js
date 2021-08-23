@@ -1,5 +1,4 @@
-import React, { useState , useEffect} from 'react';
-import validateInfo from '../forms/validateInfo';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -11,7 +10,6 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import swal from 'sweetalert';
 import axios from 'axios';
-import {Link} from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,40 +38,40 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const loginUser =(credentials) =>{
+    let form_data=new FormData();
+    form_data.append('username',credentials.username)
+    form_data.append('email',credentials.email)
+    form_data.append('password',credentials.password)
+    const response =axios
+    .post('/users/auth/login/', form_data, {
+        headers:{
+            'content-type':'multipart/form-data'
+        }
+    })
+    .then((res)=>{
+        console.log(res)
+        return res.data;
+    })
+    .catch(err=>console.log(err));
+    return response
+}
 
-export default function SignUp() {
+export default function Signin() {
   const classes = useStyles();
-  const [values, setValues] = useState({
-    username: '',
-    email: '',
-    password: '',
-    password2: '',
-    firstname:'',
-    lastname:''
-  });
-  const [errors, setErrors] = useState({});
-
-  const handleChange = e => {
-    const { name, value } = e.target;
-    setValues({
-      ...values,
-      [name]: value
-    });
-  };
+  const [username, setUserName] = useState();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [key,setKey]=useState();
 
   const handleSubmit = async e => {
     e.preventDefault();
-    setErrors(validateInfo(values));
     let form_data=new FormData();
-    form_data.append('username',values.username);
-    form_data.append('email',values.email);
-    form_data.append('password1',values.password);
-    form_data.append('password2',values.password2);
-    form_data.append('first_name',values.firstname);
-    form_data.append('last_name',values.lastname);
-
+    form_data.append('username',username)
+    form_data.append('email',email)
+    form_data.append('password',password)
     axios
-    .post('/users/auth/register/', form_data, {
+    .post('/users/auth/login/', form_data, {
         headers:{
             'content-type':'multipart/form-data'
         }
@@ -81,12 +79,15 @@ export default function SignUp() {
     .then((res)=>{
         console.log(res);
         console.log(res.data)
+        setKey(res.data);
         if ('key' in res.data) {
             swal("Success", '성공', "success", {
                 buttons: false,
                 timer: 5000,
             })
-            window.location.href = "/sign-in";
+            localStorage.setItem('accessToken', res.data['key']);
+            localStorage.setItem('user', username);
+            window.location.href = "/";
         } else {
             swal("Failed", '실패', "error");
         }
@@ -95,32 +96,9 @@ export default function SignUp() {
         console.log(err);
         swal("Failed", '실패', "error");
     });
-    setValues({
-      username: '',
-      email: '',
-      password: '',
-      password2: '',
-      firstname:'',
-      lastname:''
-    });
+
+
   }
-
-  useEffect(
-    () => {
-      if (Object.keys(errors).length === 0) {
-      }
-      setValues({
-        username: '',
-        email: '',
-        password: '',
-        password2: '',
-        firstname:'',
-        lastname:''
-      });
-    },
-    [errors]
-  );
-
 
   return (
     <Grid container className={classes.root}>
@@ -132,7 +110,7 @@ export default function SignUp() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign Up
+            Sign in
           </Typography>
           <form className={classes.form} noValidate onSubmit={handleSubmit}>
             <TextField
@@ -143,9 +121,8 @@ export default function SignUp() {
               id="username"
               name="username"
               label="Username"
-              onChange={handleChange}
+              onChange={e => setUserName(e.target.value)}
             />
-            {errors.username && <p>{errors.username}</p>}
             <TextField
               variant="outlined"
               margin="normal"
@@ -154,9 +131,8 @@ export default function SignUp() {
               id="email"
               name="email"
               label="Email Address"
-              onChange={handleChange}
+              onChange={e => setEmail(e.target.value)}
             />
-            {errors.email && <p>{errors.email}</p>}
             <TextField
               variant="outlined"
               margin="normal"
@@ -166,43 +142,8 @@ export default function SignUp() {
               name="password"
               label="Password"
               type="password"
-              onChange={handleChange}
+              onChange={e => setPassword(e.target.value)}
             />
-            {errors.password && <p>{errors.password}</p>}
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="password2"
-              name="password2"
-              label="Password2"
-              type="password"
-              onChange={handleChange}
-            />
-            {errors.password2 && <p>{errors.password2}</p>}
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="lastname"
-              name="lastname"
-              label="Lastname"
-              onChange={handleChange}
-            />
-            {errors.lastname && <p>{errors.lastname}</p>}
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="firstname"
-              name="firstname"
-              label="Firstname"
-              onChange={handleChange}
-            />
-            {errors.firstname && <p>{errors.firstname}</p>}
             <Button
               type="submit"
               fullWidth
@@ -210,15 +151,9 @@ export default function SignUp() {
               color="primary"
               className={classes.submit}
             >
-              Sign Up
+              Sign In
             </Button>
           </form>
-          <div>
-            <span>이미 계정이 있다면? </span>
-            <Link to='/sign-in'>
-            <span>Login</span>
-            </Link>
-          </div>
         </div>
       </Grid>
     </Grid>
