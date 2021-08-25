@@ -16,7 +16,7 @@ const Products=()=> {
 
   // product list 가져오기
   const renderProduct = async()=> {
-    const response =  await axios.get('/product/product-list/')
+    const response =  await axios.get('/product/productlist/')
     setProducts(response.data);
   }
   const checkUser = () =>{

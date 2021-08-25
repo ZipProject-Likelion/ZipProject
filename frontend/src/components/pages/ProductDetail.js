@@ -31,8 +31,6 @@ const ProductDetail= ({match}) =>{
 
     return(
         <>
-        <div className="background">
-        <div className="curation-add-form-container form-box">
                 <Link to='/products'>
                 <button className='close-btn'>×</button>
                 </Link>
@@ -86,8 +84,6 @@ const ProductDetail= ({match}) =>{
                     </>
                     }
                 </div>
-        </div>
-        </div>
         </>
     )
 }

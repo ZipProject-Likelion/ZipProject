@@ -48,7 +48,7 @@ const ProductAdd = ()=>{
         // form data 만드는 부분
         let form_data=new FormData();
         form_data.append('title', values.title);
-        form_data.append('user', values.user);
+        form_data.append('user', user);
         form_data.append('content', values.content);
         form_data.append('image', values.image);
         form_data.append('price', values.price);

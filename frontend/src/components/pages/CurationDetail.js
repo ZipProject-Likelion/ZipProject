@@ -1,7 +1,9 @@
 import axios from 'axios';
 import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
-import '../css/CurationAdd2.css';
+import { Image} from 'react-bootstrap';
+import ProductCards from '../ProductCards';
+import '../css/CurationDetail.css';
 
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
@@ -9,10 +11,19 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 const CurationDetail= ({match}) =>{
     const [curationinfo, setCurationinfo] = useState('');
     const [curationdelete, setCurationdelete]=useState(false);
+    const [productinfo, setProductinfo]=useState();
+
     const renderCurationInfo = async() =>{
-        const response= await axios.get(`/api/curation/curation-detail/${match.params.id}`)
+        const response=await axios.get(`/curation/add/${match.params.id}/`)
         setCurationinfo(response.data);
         console.log(response.data);
+        let products=[]
+        for (let i=0; i<response.data.products.length; i++){
+            const response2=await axios.get(`/product/add/${response.data.products[i]}`)
+            products.push(response2.data)
+        }
+        console.log('가져온 product 정보들', products)
+        setProductinfo(products)
     }
 
     useEffect (()=>{
@@ -20,7 +31,7 @@ const CurationDetail= ({match}) =>{
     },[])
 
     const deleteCuration =  () =>{
-        axios.delete(`/api/curation/curation-delete/${match.params.id}`)
+        axios.delete(`/curation/add/${match.params.id}/`)
             .then(response=>setCurationdelete(true))
             .catch(error=>{
                 setCurationdelete(true);
@@ -30,35 +41,46 @@ const CurationDetail= ({match}) =>{
 
     return(
         <>
-        <div className="background">
-        <div className="curation-add-form-container form-box">
+        <div className="curation-detail-container">
                 <Link to='/curations'>
-                <button className='close-btn'>×</button>
+                <button className='close-btn'> X </button>
                 </Link>
-                <div className="curation-detail-form-box">
+                <div className="curation-detail-info-box">
                     {(curationinfo!==''&&!curationdelete) &&
                     <>
                     <div className="curation-detail-left">
-                        <img src={curationinfo.image} alt='no-image' className="curation-detail-img"/>
+                        <img src={curationinfo.image} alt='no-image'  className="curation-thumbnail" />
                     </div>
                     <div className="curation-detail-right">
-                        <div>
-                            {match.params.id}
-                        </div>
-                        <div>
-                            제목: {curationinfo.title}
-                        </div>
-                        <div>
-                            내용: {curationinfo.context}
-                        </div>
-                        <div>
-                            작성일: {curationinfo.pub_date}
-                        </div>
+                        <ul className='curation-detail-list'>
+                            <li>
+                                {match.params.id}
+                            </li>
+                            <li>
+                                제목: {curationinfo.title}
+                            </li>
+                            <li>
+                                내용: {curationinfo.content}
+                            </li>
+                            <li>
+                                작성자: {curationinfo.user}
+                            </li>
+                        </ul>
                         <button onClick={deleteCuration} className='delete-btn'>삭제하기</button>
                     </div>
                     </>
                     }
-                    
+                </div>
+                <div className="curation-product-container">
+                    <div className="title">
+                        <span className="curation-title">{curationinfo.title}</span> 큐레이션에 담겨있는 상품들
+                    </div>
+                    <hr></hr>
+                    <div className="curation-products">
+                    <ProductCards title="" data={productinfo}/>
+                    </div>
+                </div>
+                <div>
                     
                     {curationdelete &&
                     <>
@@ -73,7 +95,6 @@ const CurationDetail= ({match}) =>{
                     </>
                     }
                 </div>
-        </div>
         </div>
         </>
     )

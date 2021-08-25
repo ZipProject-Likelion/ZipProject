@@ -73,26 +73,6 @@ function ProductCards({title, data}) {
               ))
             )}
           </ul>
-          <ul className='cards__items'>
-            <CardItem
-              src='https://images.pexels.com/photos/1866149/pexels-photo-1866149.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260'
-              text='소파'
-              label='가구'
-              path='/products'
-            />
-            <CardItem
-              src='https://www.ikea.com/kr/ko/images/products/gladom-tray-table-high-gloss-dark-blue__0955051_pe803644_s5.jpg?f=xl'
-              text='Gladom 글라돔 탁상'
-              label='가구'
-              path='/products'
-            />
-            <CardItem
-              src='https://www.ikea.com/kr/ko/images/products/pjaetteryd-picture-set-of-3-coast__0878838_pe781730_s5.jpg?f=xl'
-              text='피에테뤼드 포스터'
-              label='패븨릭'
-              path='/products'
-            />
-          </ul>
         </div>
       </div>
     </div>

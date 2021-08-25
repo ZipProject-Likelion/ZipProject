@@ -3,14 +3,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import { Typography } from '@material-ui/core';
 import {ProgressBar} from 'react-bootstrap';
+import axios from 'axios';
 import '../css/CurationAdd3.css'
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
-        background: '#F1F3F4',
-        height: '100vh',
+        height: '100%',
         flexWrap: 'wrap',
         '& > *': {
             margin: theme.spacing(1),
@@ -20,7 +20,6 @@ const useStyles = makeStyles((theme) => ({
     },
     paper_container:{
         margin: '0 auto',
-        marginTop: '100px',
     }
   }));
 
@@ -82,25 +81,26 @@ const CurationAddForm= ()=> {
     const submitHandler=(e)=>{
         e.preventDefault();
         console.log(values);
+        const user=localStorage.getItem('user');
         let form_data=new FormData();
         form_data.append('title', values.title);
         form_data.append('content', values.content);
         form_data.append('image',values.image, values.image.name);
-        form_data.append('user', values.user);
+        form_data.append('user', user);
         form_data.append('private', values.private);
         form_data.append('share', values.share);
 
 
         console.log('form_data입니다',form_data);
         setSuccess(true);
-        // axios
-        // .post('/api/curation/curation-create/', form_data, {
-        //     headers:{
-        //         'content-type':'multipart/form-data'
-        //     }
-        // })
-        // .then((res)=>console.log(res))
-        // .catch(err=>console.log(err));
+        axios
+        .post('/curation/add/', form_data, {
+            headers:{
+                'content-type':'multipart/form-data'
+            }
+        })
+        .then((res)=>console.log(res))
+        .catch(err=>console.log(err));
 
         setValues({
             title:'',
@@ -115,7 +115,12 @@ const CurationAddForm= ()=> {
         })
         
     }
-
+    const onClickProduct = ()=>{
+        window.location.href = "/products";
+    }
+    const onClickCuration = ()=>{
+        window.location.href = "/curations";
+    }
     const classes=useStyles();
     
 
@@ -125,9 +130,9 @@ const CurationAddForm= ()=> {
                 {!success?
                 (
                     <>
-                     <Typography>
-                    큐레이션 추가하기
-                </Typography>
+                <div className="progress-desc">
+                    {now}% 만큼 채워졌습니다.
+                </div>
                 <ProgressBar animated now={now}  label={`${now}%`} max={100}></ProgressBar>
                 <form className="form-container" onSubmit={submitHandler}>
                     <div className="right-container">
@@ -155,7 +160,7 @@ const CurationAddForm= ()=> {
                                             value={values.share}
                                             onChange={handleChange} 
                                             on/>
-                                    <label className="form-check-label" for="share">
+                                    <label className="form-check-label" htmlFor="share">
                                         공개
                                     </label>
                                 </div>
@@ -166,7 +171,7 @@ const CurationAddForm= ()=> {
                                             id="private"
                                             value={values.private}
                                             onChange={handleChange}/>
-                                    <label className="form-check-label" for="private">
+                                    <label className="form-check-label"  htmlFor="private">
                                         비공개
                                     </label>
                                 </div>
@@ -177,7 +182,7 @@ const CurationAddForm= ()=> {
                     <div className="left-container">
                             <div className="form-box">
                                 <div className="mb-3">
-                                <label for="title" className="form-label">큐레이션 제목</label>
+                                <label  htmlFor="title" className="form-label">큐레이션 제목</label>
                                 <input  type="text" 
                                         className="form-control" 
                                         name="title"
@@ -188,7 +193,7 @@ const CurationAddForm= ()=> {
                                         required/>
                                 </div>
                                 <div className="mb-3">
-                                <label for="content" className="form-label">큐레이션 설명</label>
+                                <label  htmlFor="content" className="form-label">큐레이션 설명</label>
                                 <input  type="text" 
                                         className="form-control" 
                                         name="content"
@@ -200,7 +205,7 @@ const CurationAddForm= ()=> {
 
                                 </div>
                                 <div className="mb-3">
-                                <label for="category" className="form-label">큐레이션 카테고리</label>
+                                <label htmlFor="category" className="form-label">큐레이션 카테고리</label>
                                 <input  type="text" 
                                         className="form-control" 
                                         name="category"
@@ -211,7 +216,7 @@ const CurationAddForm= ()=> {
                                         required/>
                                 </div>
                                 <div className="mb-3">
-                                <label for="tags" className="form-label">검색용 키워드</label>
+                                <label  htmlFor="tags" className="form-label">검색용 키워드</label>
                                 <input  type="text" 
                                         className="form-control" 
                                         name="tags"
@@ -237,16 +242,12 @@ const CurationAddForm= ()=> {
                         큐레이션이 성공적으로 만들어졌습니다.
                         </div>
                         <div className="btn-container">
-                            <Link to='/products'>
-                            <button className='btn'>
+                            <button className='btn'onClick={onClickProduct}>
                                 상품 추가하러가기
                             </button>
-                            </Link>
-                            <Link to='/curations'>
-                            <button className="btn">
+                            <button className="btn" onClick={onClickCuration}>
                                 큐레이션 리스트 보러가기
                             </button>
-                            </Link>
                         </div>
                     </div>
                     </>
