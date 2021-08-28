@@ -15,3 +15,18 @@
 
 - 1. git branch는 기능별로 나눠서 (ex. backend-login, frontend-home)
 - 2. commit 메시지는 `frontend-추가하거나 바뀐 기능`
+
+
+### frontend 시작
+- `cd frontend`
+- `npm i` //dependencies 설치
+- `npm start`
+
+### backend 시작
+- `cd backend`
+- `source myvenv/bin/activate`
+- `pip install -r requirements.txt` //dependencies 설치
+- `python manage.py runserver`
+- `python manage.py makemigrations`
+- `python manage.py migrate`
+- `python manage.py createsuperuser`
