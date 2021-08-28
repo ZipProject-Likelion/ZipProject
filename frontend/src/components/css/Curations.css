@@ -1,0 +1,13 @@
+.curation-container-header{
+    padding: 0 4rem;
+    padding-top: 2rem;
+    max-width: 1120px;
+    margin: 0 auto;
+    display:flex;
+    justify-content:space-between;
+}
+.curation-title-box{
+    font-size:2rem;
+    color:#EC6D37;
+    font-weight: bold;
+}

@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 #!/Users/minji/Desktop/zip/7:3-seoyeon/ZipProject/myvenv/bin/python3
+=======
+#!/Users/minji/Desktop/zip/project/0815_회원가입:로그인/backend/myvenv/bin/python3
+>>>>>>> Stashed changes
 # -*- coding: utf-8 -*-
 import re
 import sys

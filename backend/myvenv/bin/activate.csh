@@ -8,7 +8,11 @@ alias deactivate 'test $?_OLD_VIRTUAL_PATH != 0 && setenv PATH "$_OLD_VIRTUAL_PA
 # Unset irrelevant variables.
 deactivate nondestructive
 
+<<<<<<< Updated upstream
 setenv VIRTUAL_ENV "/Users/minji/Desktop/zip/7:3-seoyeon/ZipProject/myvenv"
+=======
+setenv VIRTUAL_ENV "/Users/minji/Desktop/zip/project/0815_회원가입:로그인/backend/myvenv"
+>>>>>>> Stashed changes
 
 set _OLD_VIRTUAL_PATH="$PATH"
 setenv PATH "$VIRTUAL_ENV/bin:$PATH"
