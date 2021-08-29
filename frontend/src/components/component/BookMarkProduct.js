@@ -46,12 +46,14 @@ const BookMarkProduct = (props) =>{
     }
     const addProductData =(e) =>{
         e.preventDefault();
-        console.log(mycurations[checkedid].products);
-        let products_data = mycurations[checkedid].products;
-        console.log('기존 curation info', mycurations[checkedid]);
-        console.log('기존 products', products_data);
-        console.log('추가되는 product',props.id);
-        let form_data=new FormData();
+        let products_data=[]
+        try{
+            products_data = mycurations[checkedid-1].products;
+            console.log('products_data가 존재합니다.');
+        }catch(error){
+            console.log('products_data가 존재하지 않습니다.');
+            products_data=[];
+        }
 
         products_data.push(props.id);
         console.log(products_data);
@@ -100,10 +102,10 @@ const BookMarkProduct = (props) =>{
                 </div>
                 <div className="right-modal-box">
                     <ul className="mycuration-list">
-                        {mycurations && mycurations.map((item,index)=>{
+                        {mycurations && mycurations.map((item)=>{
                             return ( 
                             <li className="mycuration-list-titles">
-                                <Form.Check aria-label="option 1" onClick={oneCheckBox} onChange={handleChange} value={index} name="checkbox-one" className="mycuration-list-checkbox"/>
+                                <Form.Check aria-label="option 1" onClick={oneCheckBox} onChange={handleChange} value={item.id} name="checkbox-one" className="mycuration-list-checkbox"/>
                                 <div className="mycurattion-list-title">
                                 <div>
                                 {item.title}
