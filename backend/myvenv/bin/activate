@@ -37,11 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-<<<<<<< Updated upstream
-VIRTUAL_ENV="/Users/minji/Desktop/zip/7:3-seoyeon/ZipProject/myvenv"
-=======
 VIRTUAL_ENV="/Users/minji/Desktop/zip/project/0815_회원가입:로그인/backend/myvenv"
->>>>>>> Stashed changes
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
