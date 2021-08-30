@@ -3,6 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import { Typography } from '@material-ui/core';
 import {ProgressBar} from 'react-bootstrap';
+import { DropzoneArea } from 'material-ui-dropzone';
+
 import axios from 'axios';
 import '../css/CurationAdd3.css'
 import { Link } from 'react-router-dom';
@@ -62,20 +64,27 @@ const CurationAddForm= ()=> {
         })
         if(checkv[e.target.name]===false &&e.target.name!=='tags'){
             setNow(now+20);
+            console.log(e.target.name);
         }
-        console.log(values);
     }
     const handleImageChange = (e)=>{
-        setValues({
-            ...values,
-            image:e.target.files[0]
-        })
-        setCheckv({
-            ...checkv,
-            image:true
-        })
-        if(checkv[e.target.name]===false){
-            setNow(now+20);
+        if(e[0]=== undefined){
+            return;
+        }
+        else{
+            console.log('이미지 파일',e[0]);
+            setValues({
+                ...values,
+                image:e[0]
+            })
+            setCheckv({
+                ...checkv,
+                image:true
+            })
+            if(checkv.image===false){
+                setNow(now+20);
+                console.log('image');
+            }
         }
     }
     const submitHandler=(e)=>{
@@ -139,13 +148,12 @@ const CurationAddForm= ()=> {
                         <div className="image-container" >
                             <div>큐레이션 커버</div>
                             <div className="image-box">
-                                드래그하거나 클릭하여 업로드
-                                <input
-                                type="file"
-                                name="image"
-                                accept="image/png, image/jpeg"
-                                onChange={handleImageChange}
-                                required
+                                <DropzoneArea
+                                    acceptedFiles={['image/*']}
+                                    dropzoneText={"드래그하거나 클릭해서 업로드"}
+                                    onChange={(files) => console.log('Files:', files)}
+                                    name="image"
+                                    onChange={handleImageChange}
                                 />
                             </div>
                         </div>

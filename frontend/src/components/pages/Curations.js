@@ -35,7 +35,7 @@ const Curations=()=> {
     <>
       <div className="curation-container">
         <div className="curation-container-header">
-          <div className="curation-title-box">큐레이션</div>
+          <div className="curation-title-box">Curations</div>
           <div className="curation-add-box">  
           <CurationAdd />
           </div>

@@ -101,7 +101,7 @@ const BookMarkProduct = (props) =>{
                     </img>
                 </div>
                 <div className="right-modal-box">
-                    <ul className="mycuration-list">
+                *    <ul className="mycuration-list">
                         {mycurations && mycurations.map((item)=>{
                             return ( 
                             <li className="mycuration-list-titles">

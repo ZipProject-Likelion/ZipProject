@@ -13,6 +13,7 @@
     background: #EC6D37 !important;
 }
 .right-container{
+    width: 370px;
     height: 100%;
     padding: 20px
 }
@@ -22,7 +23,7 @@
     padding: 20px;
 }
 .image-box{
-    width:  350px;
+    width:  100%;
     height: 250px;
     margin-top : 20px;
     background: #DADCE0;
@@ -82,4 +83,15 @@
 }
 .btn-container .btn:hover{
     background: #EC6D37;
+}
+
+.MuiGrid-spacing-xs-8{
+    margin: 0 !important;
+}
+.MuiGrid-spacing-xs-8 > .MuiGrid-item {
+    padding: 0 !important;
+}
+.MuiDropzonePreviewList-image {
+    width: 100% !important;
+    height: 100% !important;
 }

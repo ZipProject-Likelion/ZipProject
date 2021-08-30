@@ -16,6 +16,6 @@ class ProductSerializer(serializers.ModelSerializer) :
     comments = ProductCommentSerializer(many=True, read_only=True)
     class Meta :
         model = Product
-        fields = ('id','title','user','content','image','price'
+        fields = ('id','title','user','content','online_shop','image','price'
         ,'shop_Type','shop_URL_Location','type','tags','comments')
 

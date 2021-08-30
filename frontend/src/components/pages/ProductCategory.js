@@ -45,10 +45,19 @@ const ProductCategory=({match})=> {
 
   return(
     <>
-      <div className="curation-container">
-        <ProductAdd/>
-        <ProdDropdown title={match.params.category}/>
-        <ProductCards title="인기 상품" data={products}/>
+    <div className="curation-container">
+        <div className="curation-container-header">
+          <div className="curation-title-box">Products</div>
+          <div className="curation-add-box">
+            <div>
+            <ProdDropdown title={match.params.category}/>
+            </div>
+            <div>
+            <ProductAdd/>
+            </div>
+          </div>
+        </div>
+        <ProductCards data={products}/>
       </div>
 
     </>

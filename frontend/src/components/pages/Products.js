@@ -37,9 +37,18 @@ const Products=()=> {
   return(
     <>
       <div className="curation-container">
-        <ProductAdd/>
-        <ProdDropdown title='카테고리' />
-        <ProductCards title="인기 상품" data={products}/>
+        <div className="curation-container-header">
+          <div className="curation-title-box">Products</div>
+          <div className="curation-add-box">
+            <div>
+            <ProdDropdown title='카테고리' />
+            </div>
+            <div>
+            <ProductAdd/>
+            </div>
+          </div>
+        </div>
+        <ProductCards data={products}/>
       </div>
 
     </>

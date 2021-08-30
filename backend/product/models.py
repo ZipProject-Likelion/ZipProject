@@ -9,9 +9,10 @@ class Product(models.Model):
     # pub_date = models.DateTimeField(default=timezone.now) #생성날짜/시간
     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name="post_products",default='') #작성자
     content = models.TextField(default='') #설명
+    online_shop=models.CharField(max_length=100, blank=True) #오늘의집, 이케아, 인스타그램 등..
     image = models.ImageField(upload_to='images/',blank=True) #상품이미지
     price = models.IntegerField(default=0) #가격
-
+    title = models.CharField(max_length=20) #상품명
     SHOP_CHOICES = {
         ('온라인','온라인'),
         ('오프라인','오프라인'),

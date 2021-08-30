@@ -11,3 +11,12 @@
     color:#EC6D37;
     font-weight: bold;
 }
+.curation-add-box{
+    display: flex;
+    align-items: center;
+}
+.curation-add-box div .mt-2{
+    line-height: 2rem;
+    margin-top:0 !important;
+    margin-right: 10px;
+}
