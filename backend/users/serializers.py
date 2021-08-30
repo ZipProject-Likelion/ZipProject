@@ -4,7 +4,9 @@ from django.db import transaction
 from rest_framework import fields, serializers
 from rest_auth.registration.serializers import RegisterSerializer
 
-# for Profile
+# for Custom Login
+from rest_auth.serializers import LoginSerializer
+
 class CustomRegisterSerializer(RegisterSerializer):
 		# 추가할 속성
     first_name = serializers.CharField()
@@ -19,6 +21,9 @@ class CustomRegisterSerializer(RegisterSerializer):
         user.last_name = self.data.get('last_name')
         user.save()
         return user
+
+class CustomLoginSerializer(LoginSerializer):
+    email = None
 
 class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:

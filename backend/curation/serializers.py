@@ -16,10 +16,5 @@ class CurationSerializer(serializers.ModelSerializer) :
     comments = CurationCommentSerializer(many=True, read_only=True)
     class Meta :
         model = Curation
-        fields = ('id','title','user','content','image','private'
+        fields = ('title','pub_date','user','content','image','private'
         ,'share','products','product_user','tags','comments')
-
-class CurationProductsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model=Curation
-        fields=('id', 'products')

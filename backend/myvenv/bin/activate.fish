@@ -29,11 +29,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-<<<<<<< Updated upstream
-set -gx VIRTUAL_ENV "/Users/minji/Desktop/zip/7:3-seoyeon/ZipProject/myvenv"
-=======
 set -gx VIRTUAL_ENV "/Users/minji/Desktop/zip/project/0815_회원가입:로그인/backend/myvenv"
->>>>>>> Stashed changes
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH

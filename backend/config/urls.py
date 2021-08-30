@@ -26,7 +26,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include(router.urls)),
     path('users/', include('users.urls')),
-    path('api/', include('curation.urls')),
+    path('curation/', include('curation.urls')),
     path('product/', include('product.urls')),
 ]
 
