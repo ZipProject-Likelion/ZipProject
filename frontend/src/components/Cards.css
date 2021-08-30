@@ -51,10 +51,10 @@ h1 {
   overflow: hidden;
   text-decoration: none;
 }
-.MuiPaper-elevation1{
-  box-shadow: 0 6px 20px rgba(56, 125, 255, 0.17);
-  -webkit-filter: drop-shadow(0 6px 20px rgba(56, 125, 255, 0.017)) !important;
 
+.MuiPaper-elevation1{
+  box-shadow: 0 6px 20px rgba(56, 125, 255, 0.17) !important;
+  -webkit-filter: drop-shadow(0 6px 20px rgba(56, 125, 255, 0.017)) !important; 
 }
 
 .cards__item__pic-wrap {

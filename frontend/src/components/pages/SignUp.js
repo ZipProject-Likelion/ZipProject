@@ -89,19 +89,19 @@ export default function SignUp() {
             window.location.href = "/sign-in";
         } else {
             swal("Failed", '실패', "error");
+            setValues({
+              username: '',
+              email: '',
+              password: '',
+              password2: '',
+              firstname:'',
+              lastname:''
+            });
         }
     })
     .catch(err=>{
         console.log(err);
         swal("Failed", '실패', "error");
-    });
-    setValues({
-      username: '',
-      email: '',
-      password: '',
-      password2: '',
-      firstname:'',
-      lastname:''
     });
   }
 

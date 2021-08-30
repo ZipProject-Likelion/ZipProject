@@ -90,11 +90,17 @@ export default function Signin() {
             window.location.href = "/";
         } else {
             swal("Failed", '실패', "error");
+            setUserName('');
+            setEmail('');
+            setPassword('');
         }
     })
     .catch(err=>{
         console.log(err);
         swal("Failed", '실패', "error");
+        setUserName('');
+        setEmail('');
+        setPassword('');
     });
 
 

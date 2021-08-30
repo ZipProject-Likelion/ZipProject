@@ -20,6 +20,7 @@ const BookMarkProduct = (props) =>{
         '내가 사고 싶은 가구'
     ]);
     const [checkedid, setCheckedid]= useState();
+
     
     const oneCheckBox= (e)=>{
         var obj=document.getElementsByName("checkbox-one");
@@ -39,12 +40,14 @@ const BookMarkProduct = (props) =>{
         console.log(e.target.value);
     }
     const getCurationData = () =>{
+        const user = localStorage.getItem('user');
         axios
-        .get(`/api/get-user-curation/${props.user}/`)
+        .get(`/api/get-user-curation/${user}/`)
         .then((res)=>setMycurations(res.data))
         .catch(err=>console.log(err));
     }
     const addProductData =(e) =>{
+
         e.preventDefault();
         let products_data=[]
         try{

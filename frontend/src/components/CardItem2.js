@@ -54,7 +54,7 @@ export default function CardItem2({curation}) {
 
   return (
     <Card className={classes.root}>
-      <CardActionArea onClick={openDetail}>
+      <CardActionArea >
         <CardHeader
           avatar={
             <Avatar aria-label="recipe" className={classes.avatar}>
@@ -73,6 +73,7 @@ export default function CardItem2({curation}) {
           className={classes.media}
           image= {curation.image}
           title="Curation Image"
+          onClick={openDetail}
         />
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
