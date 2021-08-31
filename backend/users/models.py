@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
+from product.models import Product, ProductComment
+from curation.models import Curation, CurationComment
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, username,first_name, last_name, password=None):
@@ -36,6 +38,7 @@ class Interest(models.Model):
         return self.interest
 
 class CustomUser(AbstractUser):
+    # 기본 정보
     email =             models.EmailField(verbose_name='email', max_length=60, unique=True)
     username =          models.CharField(max_length=30, unique=True, primary_key=True)
     date_joined =       models.DateField(verbose_name='date joined', auto_now_add=True)
@@ -50,6 +53,16 @@ class CustomUser(AbstractUser):
     profile_image =     models.ImageField(null=True, blank=True, upload_to='profile/')
     header_image =      models.ImageField(null=True, blank=True, upload_to='header/')
     interest =          models.ManyToManyField(Interest, related_name='CustomUser', blank=True)
+
+    # 작성 글
+    created_curation =  models.ManyToManyField(Curation, related_name='CreatedCustomUser', blank=True)
+    created_product =      models.ManyToManyField(Product, related_name='CreatedCustomUser', blank=True)
+    # 작성 댓글
+    comment_curation =  models.ManyToManyField(CurationComment, related_name='CommentCustomUser', blank=True)
+    comment_product =      models.ManyToManyField(ProductComment, related_name='CommentCustomUser', blank=True)
+    # 좋아요
+    like_curation =  models.ManyToManyField(Curation, related_name='LikeCustomUser', blank=True)
+    like_product =      models.ManyToManyField(Product, related_name='LikeCustomUser', blank=True)
 
     USERNAME_FIELD = 'username' 
 #this field means that when you try to sign in the username field will be the email 

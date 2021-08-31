@@ -4,8 +4,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
 
-from product.models import Product
-from users.models import CustomUser
+# from product.models import Product
+# from users.models import CustomUser
 
 class Curation(models.Model):
     title = models.CharField(max_length=20) #큐레이션명

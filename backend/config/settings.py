@@ -184,14 +184,14 @@ REST_AUTH_SERIALIZERS = {
 SOCIALACCOUNT_PROVIDERS = {
     "google": {
         "APP": {
-            "client_id": "303934270010-06p3pc5rm7h4lur0vnp7pu85n07g8vvi.apps.googleusercontent.com",
-            "secret": "eWLmLWnT_68W59CH8e3JSg5y",
+            "client_id": "",
+            "secret": "",
         },
     },
     'naver': {
         "APP": {
-            "client_id": "LdXjt13ZCDoBsiHkgI8R",
-            "secret": "4XmwmRDby7",
+            "client_id": "",
+            "secret": "",
         },
     },
 }
@@ -201,8 +201,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 #s3
-AWS_ACCESS_KEY_ID = 'AKIAZUCMN2VS2ETCYEHQ'
-AWS_SECRET_ACCESS_KEY = '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'
+AWS_ACCESS_KEY_ID = ''
+AWS_SECRET_ACCESS_KEY = ''
 AWS_REGION = 'ap-northeast-2'
 AWS_STORAGE_BUCKET_NAME = 'zip-project'
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.%s.amazonaws.com' % (AWS_STORAGE_BUCKET_NAME, AWS_REGION) 
