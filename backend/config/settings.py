@@ -95,7 +95,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'zip', 
         'USER' : 'root', # DB 접속 계정명
-        'PASSWORD' : 'Dkdldb425!', 
+        'PASSWORD' : '', 
         'HOST' : 'localhost', #엔드포인트, 실제 DB 주소
         'PORT' : '3306',
     }
