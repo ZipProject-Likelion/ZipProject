@@ -53,17 +53,25 @@ const CurationDetail= ({match}) =>{
                     </div>
                     <div className="curation-detail-right">
                         <ul className='curation-detail-list'>
-                            <li>
-                                {match.params.id}
-                            </li>
-                            <li>
-                                제목: {curationinfo.title}
+                            <li className="list-title">
+                                {curationinfo.title}
                             </li>
                             <li>
                                 내용: {curationinfo.content}
                             </li>
                             <li>
                                 작성자: {curationinfo.user}
+                            </li>
+                            <li>
+                                {curationinfo.private?(
+                                    <>
+                                    개인 큐레이션
+                                    </>
+                                ):(
+                                    <>
+                                    공유 큐레이션
+                                    </>
+                                )}
                             </li>
                         </ul>
                         <button onClick={deleteCuration} className='delete-btn'>삭제하기</button>

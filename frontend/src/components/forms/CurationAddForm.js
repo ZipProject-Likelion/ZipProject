@@ -4,6 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import { Typography } from '@material-ui/core';
 import {ProgressBar} from 'react-bootstrap';
 import { DropzoneArea } from 'material-ui-dropzone';
+import {Button} from 'react-bootstrap';
 
 import axios from 'axios';
 import '../css/CurationAdd3.css'
@@ -22,7 +23,11 @@ const useStyles = makeStyles((theme) => ({
     },
     paper_container:{
         margin: '0 auto',
-    }
+    },
+    shareBtn:{
+        backgroundColor: '#EC6D37',
+        marginRight: '20px',
+      },
   }));
 
 const CurationAddForm= ()=> {
@@ -54,10 +59,18 @@ const CurationAddForm= ()=> {
 
     // curation 만들기
     const handleChange = (e)=>{
-        setValues({
-            ...values,
-            [e.target.name]:e.target.value
-        });
+        if(e.target.name==='private' ||e.target.name=='share'){
+            setValues({
+                ...values,
+                [e.target.name]:true
+            })
+        }
+        else{ 
+            setValues({
+                ...values,
+                [e.target.name]:e.target.value
+            });
+        }
         setCheckv({
             ...checkv,
             [e.target.name]:true
@@ -154,6 +167,7 @@ const CurationAddForm= ()=> {
                                     onChange={(files) => console.log('Files:', files)}
                                     name="image"
                                     onChange={handleImageChange}
+                                    className="dropzone"
                                 />
                             </div>
                         </div>
@@ -169,7 +183,10 @@ const CurationAddForm= ()=> {
                                             onChange={handleChange} 
                                             on/>
                                     <label className="form-check-label" htmlFor="share">
-                                        공개
+                                        <Button variant="primary" size="sm" className={classes.shareBtn}>
+                                        공유
+                                        </Button> 
+        
                                     </label>
                                 </div>
                                 <div className="form-check form-check-inline">
@@ -180,10 +197,11 @@ const CurationAddForm= ()=> {
                                             value={values.private}
                                             onChange={handleChange}/>
                                     <label className="form-check-label"  htmlFor="private">
-                                        비공개
+                                    <Button variant="primary" size="sm" >
+                                    개인
+                                    </Button>
                                     </label>
                                 </div>
-                                <div>모든 사람이 큐레이션을 볼 수 있어요</div>
                             </div>
                         </div>
                     </div>
@@ -236,7 +254,7 @@ const CurationAddForm= ()=> {
                                 </div>
                             </div>
                     </div>
-                    <button className="form-btn" type="submit" >
+                    <button onClick={submitHandler} className="form-btn">
                         큐레이션 만들기
                     </button>
                 </form>

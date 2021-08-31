@@ -1,3 +1,7 @@
+.curation-container{
+    max-width: 1120px;
+    margin:0 auto;
+}
 .curation-container-header{
     padding: 0 4rem;
     padding-top: 2rem;
@@ -19,4 +23,8 @@
     line-height: 2rem;
     margin-top:0 !important;
     margin-right: 10px;
+}
+.nav-tabs{
+    width: 1000px !important;
+    margin: 50px auto;
 }
