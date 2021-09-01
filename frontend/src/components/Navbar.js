@@ -47,64 +47,69 @@ function Navbar() {
             <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
           </div>
           <ul className={click ? 'nav-menu active' : 'nav-menu'}>
-            <li className='nav-item'>
-              <Link to='/' className='nav-links' onClick={closeMobileMenu}>
-                Home
-              </Link>
-            </li>
-            <li className='nav-item'>
-              <Link
-                to='/curations'
-                className='nav-links'
-                onClick={closeMobileMenu}
-              >
-                Curations
-              </Link>
-            </li>
-            <li className='nav-item'>
-              <Link
-                to='/products'
-                className='nav-links'
-                onClick={closeMobileMenu}
-              >
-                Products
-              </Link>
-            </li>
-            <li className='nav-item'>
-              {!user && button?
-              (
-                <>
+              <li className='nav-item'>
                 <Link
-                to='/sign-up'
-                className='nav-links'
-                onClick={closeMobileMenu}
+                  to='/curations'
+                  className='nav-links'
+                  onClick={closeMobileMenu}
                 >
-                Sign Up
+                  Curations
                 </Link>
-                </>
-              )
-              :
-              (
-                <>
+              </li>
+              <li className='nav-item'>
                 <Link
-                to='/profile'
-                className='nav-links nav-profile'
-                onClick={closeMobileMenu}
+                  to='/products'
+                  className='nav-links'
+                  onClick={closeMobileMenu}
                 >
-                <Avatar src="/broken-image.jpg" >
-                {user}
-                </Avatar>
+                  Products
                 </Link>
-                </>
-              )
-              }
-
-            </li>
-          </ul>
-        </div>
+              </li>
+            </ul>
+          </div>
+          <Link to='/sign-up'>
+          <Button
+            className='btn'
+            buttonStyle='btn--primary'
+            buttonSize='btn--medium'
+          >시작하기
+          </Button>
+        </Link>
       </nav>
     </>
   );
 }
 
 export default Navbar;
+{/* <Button
+              buttonStyle='btn--primary'
+              buttonSize='btn--medium'
+            >
+                            {!user && button?
+                (
+                  <>
+                  <Link
+                  to='/sign-up'
+                  className='nav-links'
+                  onClick={closeMobileMenu}
+                  >
+                  시작하기
+                  </Link>
+                  </>
+                )
+                :
+                (
+                  <>
+                  <Link
+                  to='/profile'
+                  className='nav-links nav-profile'
+                  onClick={closeMobileMenu}
+                  >
+                  <Avatar src="/broken-image.jpg" >
+                  {user}
+                  </Avatar>
+                  </Link>
+                  </>
+                )
+                }
+            </Button> */}

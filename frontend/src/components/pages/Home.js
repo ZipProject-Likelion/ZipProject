@@ -9,8 +9,8 @@ function Home() {
   return (
     <>
       <HeroSection />
-      <CurationCards title="인기 큐레이터"/>
-      <ProductCards title="인기 상품"/>
+      {/* <CurationCards title="인기 큐레이터"/>
+      <ProductCards title="인기 상품"/> */}
       <Footer />
     </>
   );

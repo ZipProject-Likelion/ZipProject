@@ -1,21 +1,22 @@
-ul{
-  padding-left: 0 !important;
+ul {
+  display: table;
+  margin: auto;
+  padding-left: 0px;
 }
 .navbar {
   /* background: linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(26, 23, 23) 100%); */
   background: #fff;
-  height: 80px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 1.2rem;
   position: sticky;
-  top: 0;
   z-index: 999;
+  box-shadow: orange;
 }
-a:hover{
-  color:  #EC6D37;
-
+a:hover {
+  color: #ec6d37;
+  transition: all 0.2s ease-out;
 }
 .navbar-container {
   display: flex;
@@ -26,14 +27,13 @@ a:hover{
 }
 
 .navbar-logo {
-  color: black;
+  color: #ec6d37;
   justify-self: start;
   margin-left: 20px;
   margin-right: 20px;
   cursor: pointer;
   text-decoration: none;
   font-size: 2rem;
-  height: 80%;
   align-items: center;
 }
 
@@ -44,21 +44,17 @@ a:hover{
 
 .nav-menu {
   display: grid;
-  grid-template-columns: repeat(4, auto);
+  grid-template-columns: repeat(2, auto);
   grid-gap: 10px;
   list-style: none;
   text-align: center;
   width: 60vw;
   justify-content: start;
-  margin-right: 2rem;
-}
-
-.nav-item {
-  height: 80px;
+  margin-right: 20px;
 }
 
 .nav-links {
-  color: black;
+  color: #333;
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -67,7 +63,6 @@ a:hover{
 }
 
 .nav-links:hover {
-  border-bottom: 4px solid black;
   transition: all 0.2s ease-out;
 }
 
@@ -88,26 +83,6 @@ a:hover{
     position: relative;
   }
 
-  .nav-menu {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 90vh;
-    position: absolute;
-    top: 80px;
-    left: -100%;
-    opacity: 1;
-    transition: all 0.5s ease;
-  }
-
-  .nav-menu.active {
-    background: #fff;
-    left: 0;
-    opacity: 1;
-    transition: all 0.5s ease;
-    z-index: 1;
-  }
-
   .nav-links {
     text-align: center;
     padding: 2rem;
@@ -116,9 +91,7 @@ a:hover{
   }
 
   .nav-links:hover {
-    background-color: #EC6D37;
-    color: #fff;
-    border-radius: 0;
+    transition: all 0.2s ease-out;
   }
 
   .navbar-logo {
@@ -162,5 +135,4 @@ a:hover{
     color: #242424;
     transition: 250ms;
   }
-  
 }

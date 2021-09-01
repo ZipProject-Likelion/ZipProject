@@ -6,30 +6,39 @@ import { Link } from 'react-router-dom';
 function HeroSection() {
   return (
     <div className='hero-container'>
-      <video src='/videos/interior_home.mp4' autoPlay loop muted />
-      <h1>ZIP 서비스 시작하기</h1>
-      <p>Zipper들과 당신의 취향을 공유해보세요</p>
-      <div className='hero-btns'>
-        <Link to='/curation-add2'>
+      <div className='top-container'>
+        <div className='title-section'>
+          <h1>🛌 ZIP에서 🛋 당신의 🏠을 꾸며봐요 🛌</h1>
+        </div>
+        <div id='serach' class='serach_area'>
+              <input
+                className='serach-input'
+                placeholder='원하는 상품과 큐레이션을 검색해보세요!'
+              />
+              <Button buttonStyle='btn--primary'>검색</Button>
+          </div>
+        <div className='hero-btns'>
+          <Link to='/curation-add2'>
+            <Button
+              buttonStyle='btn--primary'
+              buttonSize='btn--large'
+            >
+            새 큐레이션 만들기
+            </Button>
+          </Link>
+          <Link to='/item-add'>
           <Button
-            buttonStyle='btn--outline'
+            className='btns'
+            buttonStyle='btn--primary'
             buttonSize='btn--large'
           >
-          큐레이션 만들기
+          새 상품 추가하기
           </Button>
-        </Link>
-        <Link to='/item-add'>
-        <Button
-          className='btns'
-          buttonStyle='btn--primary'
-          buttonSize='btn--large'
-          onClick={console.log('hey')}
-        >
-          상품 등록하기
-        </Button>
-        </Link>
-
+          </Link>
+          </div>
       </div>
+      {/* <div className='mid-container'></div>
+      <div className='bottom-container'></div> */}
     </div>
   );
 }
