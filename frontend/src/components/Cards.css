@@ -23,7 +23,11 @@ h1 {
   display:flex;
   flex-direction: column-reverse;
 }
-
+.cards__wrapper2{
+  position: relative;
+  display:flex;
+  flex-direction: row-revsere;
+}
 .cards__items {
   margin: 0 auto;
   margin-bottom: 24px;

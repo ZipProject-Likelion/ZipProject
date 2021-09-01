@@ -1,6 +1,6 @@
 import React from 'react';
-import './Cards.css';
-import CardItem from './CardItem';
+import '../Cards.css';
+import CardItem from '../CardItem';
 
 function ProductCards({title, data}) {
   let remain=[]
@@ -32,7 +32,7 @@ function ProductCards({title, data}) {
                 src={result[1].image}
                 text= {result[1].title}
                 label={result[1].type}
-                user={result[1].user}
+                user={result[0].user}
                 path= {`/product-detail/${result[1].id}`}
           />
           <CardItem
@@ -41,7 +41,7 @@ function ProductCards({title, data}) {
                 src={result[2].image}
                 text= {result[2].title}
                 label={result[2].type}
-                user={result[2].user}
+                user={result[0].user}
                 path= {`/product-detail/${result[2].id}`}
           />
         </ul>
@@ -63,7 +63,7 @@ function ProductCards({title, data}) {
     <div className='cards'>
       <h1>{title}</h1>
       <div className='cards__container'>
-        <div className='cards__wrapper'>
+        <div className='cards__wrapper2'>
         {data&&rendering()}
           <ul className='cards__items'>
             {!remain? <></>:
