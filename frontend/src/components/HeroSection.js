@@ -18,7 +18,7 @@ function HeroSection() {
               <Button buttonStyle='btn--primary'>검색</Button>
           </div>
         <div className='hero-btns'>
-          <Link to='/curation-add2'>
+          <Link to='/curations'>
             <Button
               buttonStyle='btn--primary'
               buttonSize='btn--large'
@@ -26,7 +26,7 @@ function HeroSection() {
             새 큐레이션 만들기
             </Button>
           </Link>
-          <Link to='/item-add'>
+          <Link to='/products'>
           <Button
             className='btns'
             buttonStyle='btn--primary'
