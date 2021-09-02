@@ -53,3 +53,14 @@
     width: 1000px !important;
 }
 
+.delete-btn{
+    border:none;
+    padding: 10px 20px;
+    background-color: #EC6D37;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 5px;
+}
+.delete-btn:hover{
+    background-color: rgb(122, 3, 3);
+}

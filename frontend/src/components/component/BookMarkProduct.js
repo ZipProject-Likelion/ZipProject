@@ -93,7 +93,7 @@ const BookMarkProduct = (props) =>{
 
         <Modal show={show} onHide={handleClose} size="lg" className="bookmark-product-modal">
             <Modal.Header closeButton>
-                <Modal.Title id="example-modal-sizes-title-lg">내 큐레이션에 추가</Modal.Title>
+                <Modal.Title id="modal-title">내 큐레이션에 추가</Modal.Title>
             </Modal.Header>
             <Modal.Body>
             {!success?
@@ -134,9 +134,12 @@ const BookMarkProduct = (props) =>{
             
             </Modal.Body>
             <Modal.Footer>
+            {
+                success===false&&
             <Button variant="secondary"  onClick={addProductData}>
                 추가하기
             </Button>
+            }
             </Modal.Footer>
         </Modal>
         </>

@@ -55,7 +55,7 @@ const ProductAdd = ()=>{
         form_data.append('image', values.image);
         form_data.append('price', values.price);
         form_data.append('shop_type', values.shop_type);
-        form_data.append('shop_url_location', values.shop_url_location);
+        form_data.append('shop_URL_Location', values.shop_url_location);
         form_data.append('type', values.type);
 
         // product-add (post)
@@ -192,7 +192,7 @@ const ProductAdd = ()=>{
                             />
                         </div>
                         <Button type="submit" variant="primary">
-                            Save Changes
+                            상품 등록하기
                         </Button>
                     </form>
                         </>
@@ -210,11 +210,7 @@ const ProductAdd = ()=>{
                     }
                     </div>
                 </Modal.Body>
-            <Modal.Footer>
-            <Button variant="secondary"  onClick={handleClose}>
-                Close
-            </Button>
-            </Modal.Footer>
+
         </Modal>
         </>
     )   

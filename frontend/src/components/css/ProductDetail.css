@@ -1,0 +1,10 @@
+.curation-detail-list{
+    padding-top:0;
+}
+.curation-detail-list li{
+    font-size: 1.1rem;
+}
+.list-title{
+    font-size:2rem !important;
+    color:#EC6D37;
+}

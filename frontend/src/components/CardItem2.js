@@ -16,7 +16,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-
+import {Button} from 'react-bootstrap';
 const useStyles = makeStyles((theme) => ({
   root: {
     width: 345,
@@ -39,6 +39,13 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     backgroundColor: red[500],
   },
+  shareBtn:{
+    backgroundColor: '#EC6D37',
+  },
+  iconDisplay:{
+    display: 'flex',
+    justifyContent: 'space-between',
+  }
 }));
 
 export default function CardItem2({curation}) {
@@ -80,12 +87,26 @@ export default function CardItem2({curation}) {
             {curation.content}
           </Typography>
         </CardContent>
-        <CardActions disableSpacing>
+        <CardActions disableSpacing className={classes.iconDisplay}>
+          <IconButton aria-label="share">
+          {
+            curation.private?(
+              <>
+            <Button variant="primary" size="sm" >
+              개인
+            </Button>
+              </>
+            ):(
+              <>
+            <Button variant="primary" size="sm" className={classes.shareBtn}>
+            공유
+            </Button>
+              </>
+            )
+          }
+          </IconButton>
           <IconButton aria-label="add to favorites">
             <FavoriteIcon />
-          </IconButton>
-          <IconButton aria-label="share">
-            <ShareIcon />
           </IconButton>
         {/* <IconButton
           className={clsx(classes.expand, {
