@@ -6,10 +6,19 @@ from django.conf import settings
 
 class Product(models.Model):
     title = models.CharField(max_length=20) #상품명
-    # pub_date = models.DateTimeField(default=timezone.now) #생성날짜/시간
+    pub_date = models.DateTimeField(default=timezone.now) #생성날짜/시간
     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name="post_products",default='') #작성자
     content = models.TextField(default='') #설명
-    online_shop=models.CharField(max_length=100, blank=True) #오늘의집, 이케아, 인스타그램 등..
+    ONLINE_SHOP_CHOICES = {
+        ('오늘의 집','오늘의 집'),
+        ('집꾸미기','집꾸미기'),
+        ('이케아', '이케아'),
+        ('네이버 스마트스토어','네이버 스마트스토어'),
+        ('해외사이트','해외사이트'),
+        ('기타', '기타'),
+    }
+    online_shop=models.CharField(max_length=100, choices=ONLINE_SHOP_CHOICES,default='오늘의 집')
+    #online_shop=models.CharField(max_length=100, blank=True) #오늘의집, 이케아, 인스타그램 등..
     image = models.ImageField(upload_to='images/',blank=True) #상품이미지
     price = models.IntegerField(default=0) #가격
     title = models.CharField(max_length=20) #상품명

@@ -9,7 +9,7 @@ from users.models import CustomUser
 
 class Curation(models.Model):
     title = models.CharField(max_length=20) #큐레이션명
-    # pub_date = models.DateTimeField(default=timezone.now) #생성날짜/시간
+    pub_date = models.DateTimeField(default=timezone.now) #생성날짜/시간
     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name="post_curations",default='') #작성자
     content = models.TextField(default='') #설명
     image = models.ImageField(upload_to='images/',blank=True) #썸네일이미지

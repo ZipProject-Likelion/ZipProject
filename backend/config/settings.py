@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_seed',
+    'django_filters',
 
     'rest_framework',
     'rest_framework.authtoken',
@@ -151,9 +152,8 @@ ACCOUNT_EMAIL_VERIFICATION = "none"
 # Rest Framework config. Add all of this.
 REST_FRAMEWORK = {
     'DATETIME_FORMAT': "%m/%d/%Y %I:%M%P",
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
-    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': ['rest_framework.authentication.TokenAuthentication',],
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend',],
 }
 
 REST_AUTH_REGISTER_SERIALIZERS = {
