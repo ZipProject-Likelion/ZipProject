@@ -165,13 +165,13 @@ SOCIALACCOUNT_PROVIDERS = {
     "google": {
         "APP": {
             "client_id": "303934270010-06p3pc5rm7h4lur0vnp7pu85n07g8vvi.apps.googleusercontent.com",
-            "secret": "eWLmLWnT_68W59CH8e3JSg5y",
+            "secret": "",
         },
     },
     'naver': {
         "APP": {
             "client_id": "LdXjt13ZCDoBsiHkgI8R",
-            "secret": "4XmwmRDby7",
+            "secret": "",
         },
     },
 }
@@ -179,3 +179,20 @@ SOCIALACCOUNT_PROVIDERS = {
 # Media
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+#s3
+AWS_ACCESS_KEY_ID = ''
+AWS_SECRET_ACCESS_KEY = ''
+AWS_REGION = 'ap-northeast-2'
+AWS_STORAGE_BUCKET_NAME = 'zip-project'
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.%s.amazonaws.com' % (AWS_STORAGE_BUCKET_NAME, AWS_REGION) 
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl':'max-age=86400',
+}
+AWS_DEFAULT_ACL = 'public-read'
+AWS_LOCATION = 'static'
+
+STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN,AWS_LOCATION)
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
