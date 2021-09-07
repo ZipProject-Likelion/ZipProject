@@ -9,9 +9,11 @@ from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 from rest_auth.registration.serializers import SocialLoginSerializer
 
 # for Profile
-from rest_framework import response, viewsets
+from rest_framework import viewsets
 from .models import CustomUser
 from .serializers import CustomUserSerializer
+
+# from config import permissions
 
 def index(request):
     return render(request, 'index.html')
@@ -39,6 +41,7 @@ class GoogleLogin(SocialLoginView):
 
 # Profile 
 class UserViewSet(viewsets.ModelViewSet):
+    # permission_classes = [permissions.IsOwnerOrReadOnly]
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserSerializer
     lookup_field = 'username'

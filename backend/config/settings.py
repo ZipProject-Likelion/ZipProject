@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.naver',
     'allauth.socialaccount.providers.google',
+
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -79,10 +81,24 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+import pymysql 
+# pymysql.version_info = (1, 4, 2, "final", 0)
+pymysql.install_as_MySQLdb()
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'zip', 
+        'USER' : 'root', # DB 접속 계정명
+        'PASSWORD' : '', 
+        'HOST' : 'localhost', #엔드포인트, 실제 DB 주소
+        'PORT' : '3306',
     }
 }
 
@@ -151,26 +167,32 @@ ACCOUNT_EMAIL_VERIFICATION = "none"
 
 # Rest Framework config. Add all of this.
 REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS':['django_filters.rest_framework.DjangoFilterBackend'],
     'DATETIME_FORMAT': "%m/%d/%Y %I:%M%P",
-    'DEFAULT_AUTHENTICATION_CLASSES': ['rest_framework.authentication.TokenAuthentication',],
-    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend',],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
 }
 
 REST_AUTH_REGISTER_SERIALIZERS = {
     'REGISTER_SERIALIZER': 'users.serializers.CustomRegisterSerializer',
 }
 
+REST_AUTH_SERIALIZERS = {
+    'LOGIN_SERIALIZER': 'users.serializers.CustomLoginSerializer',
+}
+
 #Social Login
 SOCIALACCOUNT_PROVIDERS = {
     "google": {
         "APP": {
-            "client_id": "303934270010-06p3pc5rm7h4lur0vnp7pu85n07g8vvi.apps.googleusercontent.com",
+            "client_id": "",
             "secret": "",
         },
     },
     'naver': {
         "APP": {
-            "client_id": "LdXjt13ZCDoBsiHkgI8R",
+            "client_id": "",
             "secret": "",
         },
     },

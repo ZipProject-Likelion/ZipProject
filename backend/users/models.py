@@ -1,11 +1,15 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
+from product.models import Product, ProductComment
+from curation.models import Curation, CurationComment
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, username,first_name, last_name, password=None):
         user = self.model(
             email=self.normalize_email(email),
             username=username,
+            first_name=first_name,
+            last_name=last_name,
         )
 
         user.set_password(password)
@@ -27,12 +31,14 @@ class CustomUserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
+class Interest(models.Model):
+    interest =          models.CharField(default="", max_length=20)
+
+    def __str__(self):
+        return self.interest
+
 class CustomUser(AbstractUser):
-    INTEREST_CHOICES = {
-        ('choice1', 'Choice1'),
-        ('choice2', 'Choice2'),
-        ('choice3', 'Choice3'),
-    }
+    # 기본 정보
     email =             models.EmailField(verbose_name='email', max_length=60, unique=True)
     username =          models.CharField(max_length=30, unique=True, primary_key=True)
     date_joined =       models.DateField(verbose_name='date joined', auto_now_add=True)
@@ -46,12 +52,22 @@ class CustomUser(AbstractUser):
     description =       models.TextField(default="", blank=True, max_length=150)
     profile_image =     models.ImageField(null=True, blank=True, upload_to='profile/')
     header_image =      models.ImageField(null=True, blank=True, upload_to='header/')
-    interest =          models.CharField(default="", max_length=20, choices=INTEREST_CHOICES)
+    interest =          models.ManyToManyField(Interest, related_name='CustomUser', blank=True)
 
-    USERNAME_FIELD = 'email' 
+    # 작성 글
+    created_curation =  models.ManyToManyField(Curation, related_name='CreatedCustomUser', blank=True)
+    created_product =      models.ManyToManyField(Product, related_name='CreatedCustomUser', blank=True)
+    # 작성 댓글
+    comment_curation =  models.ManyToManyField(CurationComment, related_name='CommentCustomUser', blank=True)
+    comment_product =      models.ManyToManyField(ProductComment, related_name='CommentCustomUser', blank=True)
+    # 좋아요
+    like_curation =  models.ManyToManyField(Curation, related_name='LikeCustomUser', blank=True)
+    like_product =      models.ManyToManyField(Product, related_name='LikeCustomUser', blank=True)
+
+    USERNAME_FIELD = 'username' 
 #this field means that when you try to sign in the username field will be the email 
 #change it to whatever you want django to see as the username when authenticating the user
-    REQUIRED_FIELDS = ['username', 'first_name', 'last_name',]
+    REQUIRED_FIELDS = ['email', 'first_name', 'last_name',]
 
     objects = CustomUserManager()
 
