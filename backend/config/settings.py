@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     'users',
     'product',
     'curation',
+    'recommender',
 
     'django.contrib.admin',
     'django.contrib.auth',
