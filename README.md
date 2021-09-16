@@ -8,6 +8,7 @@
 ### 처음 Clone 받았을 때 해줘야할 것
 - mysql 서버 접속
 > mysql.server start
+
 > mysql -uroot -p
 
 - .secret file reveal 하기
