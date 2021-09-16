@@ -11,9 +11,9 @@
 
 > `mysql -uroot -p`
 
-- .secret file reveal 하기
-- makemigrations 및 migrate 하기
- 
+- `cd config` 에서 settings.py.secret 파일 reveal 하기
+- `python manage.py makemigrations`
+- `python manage.py migrate`
 
 ### 폴더 구조 정리
 
@@ -36,5 +36,3 @@
 - `source myvenv/bin/activate`
 - `pip install -r requirements.txt` //dependencies 설치
 - `python manage.py runserver`
-- `python manage.py makemigrations`
-- `python manage.py migrate`
