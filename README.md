@@ -3,7 +3,7 @@
 ### Git 명령어 정리
 - 특정 branch clone 받기 :
 
-  git clone -b {branchname} --single-branch https://github.com/ZipProject-Likelion/ZipProject.git
+> git clone -b {branchname} --single-branch https://github.com/ZipProject-Likelion/ZipProject.git
   
 ### 처음 Clone 받았을 때 해줘야할 것
 - mysql 서버 접속
