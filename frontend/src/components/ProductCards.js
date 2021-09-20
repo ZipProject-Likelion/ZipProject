@@ -11,9 +11,6 @@ function ProductCards({title, data}) {
     for (let i=0; i<data.length; i++){
       if (i%3===2){
         result.push(data[i])
-        console.log('첫번째 데이터', result[0])
-        console.log('두번째 데이터', result[1])
-        console.log('세번쨰 데이터', result[2])
 
         render.push(
           <ul className='cards__items'>
@@ -58,7 +55,7 @@ function ProductCards({title, data}) {
     })
     return render;
   }
-  console.log(data)
+
   return (
     <div className='cards'>
       <h1>{title}</h1>

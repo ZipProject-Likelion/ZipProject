@@ -1,8 +1,13 @@
 from rest_framework import viewsets
+from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
 from django.shortcuts import render, get_list_or_404
+
+import django_filters.rest_framework
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters
 
 from .models import Product, ProductComment, ProductTag
 from .serializers import ProductSerializer, ProductCommentSerializer, ProductTagSerializer
@@ -10,6 +15,9 @@ from .serializers import ProductSerializer, ProductCommentSerializer, ProductTag
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    search_fields = ['title', 'content']
+    ordering_fields = ['pub_date']
 
 class ProductCommentViewSet(viewsets.ModelViewSet):
     queryset = ProductComment.objects.all()

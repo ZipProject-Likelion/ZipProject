@@ -8,6 +8,7 @@
     max-width: 1120px;
     margin: 0 auto;
     display:flex;
+    flex-wrap: wrap;
     justify-content:space-between;
 }
 .curation-title-box{
@@ -27,4 +28,21 @@
 .nav-tabs{
     width: 1000px !important;
     margin: 50px auto;
+}
+.search-box{
+    width:300px;
+}
+.MuiOutlinedInput-input {
+    padding: 10px 5px !important;
+}
+.search-result-container{
+    margin-top: 150px;
+}
+.search-result-title{
+    margin-left: 100px;
+}
+.hightlight{
+    font-size: 2rem;
+    font-weight: bold;
+    color:#EC6D37; 
 }

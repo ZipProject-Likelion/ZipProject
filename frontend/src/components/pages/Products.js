@@ -3,21 +3,28 @@ import axios from 'axios';
 
 import '../../App.css';
 import {Tabs,Tab} from 'react-bootstrap';
+import { makeStyles } from '@material-ui/core/styles';
+import { TextField } from '@material-ui/core';
+import IconButton from '@material-ui/core/IconButton';
+import SearchIcon from '@material-ui/icons/Search';
+
 
 import ProductCards from '../ProductCards';
-import CurationCards from '../CurationCards';
-
-import ProdDropdown from '../component/ProdDropdown';
 import ProductAdd from './ProductAdd';
-import { Link } from 'react-router-dom';
+
 
 // csrf token 설정
 // django의 기본 셋팅에 맞추어 axios 통신의 기본 cookiename과 headername설정
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 
+
 const Products=()=> {
+
+  const [search, setSearch]=useState('');
+  const [searchData, setSearchData]=useState('');
   const [products, setProducts]=useState('');
+  const [rendered, setRendered]=useState('');
   const [cat1, setCat1]=useState('');
   const [cat2, setCat2]=useState('');
   const [cat3, setCat3]=useState('');
@@ -27,7 +34,9 @@ const Products=()=> {
 
   // product list 가져오기
   const renderProduct = async()=> {
+
     const response =  await axios.get('/product/productlist/')
+    console.log(response.data);
     setProducts(response.data);
     let _cat1=response.data.filter((data)=>data.type==='DIY/공구');
     let _cat2=response.data.filter((data)=>data.type==='패브릭');
@@ -48,7 +57,26 @@ const Products=()=> {
     if (!user){
         window.location.href = "/sign-in";
     }
-}
+  }
+  const handleSearch = (e)=>{
+    e.preventDefault();
+
+    if(e.target.value){
+      setSearch(e.target.value);
+    }
+  }
+  const submitHandler =(e) =>{
+    e.preventDefault();
+    axios
+    .get(`/product/add/?search=${search}`)
+    .then((res)=>{
+      setSearchData(res.data);
+      setRendered(search);
+      setSearch('');
+      
+    })
+    .catch(err=>console.log(err));
+  }
 
   useEffect(()=>{
     renderProduct();
@@ -62,15 +90,34 @@ const Products=()=> {
       <div className="curation-container">
         <div className="curation-container-header">
           <div className="curation-title-box">Products</div>
+          <div className="container-header-search">
+            <form noValidate autoComplete="off" onSubmit={submitHandler}>
+            <TextField
+              id="search-box"
+              className="search-box"
+              variant="outlined"
+              color="secondary"
+              placeholder="검색어를 입력하세요"
+              inputProps={{ 'aria-label': '검색어를 입력하세요' }}
+              value={search}
+              onChange={handleSearch}
+            />
+            <IconButton type="submit" className="search-icon-btn" aria-label="search">
+              <SearchIcon />
+            </IconButton>
+            </form>
+          </div>
           <div className="curation-add-box">
             <ProductAdd/>
           </div>
         </div>
-        <Tabs
+        {!searchData? (
+          <>
+          <Tabs
           defaultActiveKey="전체"
           id="curation-tab"
           className="curation-tab"
-        >
+          >
           <Tab eventKey="전체" title="전체">
             <ProductCards data={products}/>
           </Tab>
@@ -94,6 +141,21 @@ const Products=()=> {
           </Tab>
 
         </Tabs>
+        </>
+
+        ) :
+        (
+          <>
+          <div className="search-result-container">
+          <h3 className="search-result-title"><span className="hightlight"> {rendered} </span> 키워드로 검색한 결과입니다.</h3>
+          <ProductCards data={searchData}/>
+          </div>
+
+          </>
+          
+        )}
+        
+        
       </div>
 
     </>
