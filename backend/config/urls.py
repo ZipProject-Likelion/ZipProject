@@ -11,6 +11,8 @@ from product.views import ProductViewSet,ProductCommentViewSet,ProductTagViewSet
 from curation.views import CurationViewSet,CurationCommentViewSet,CurationTagViewSet
 #for recommender app
 from recommender.views import RecommenderViewSet
+#for scrap app
+from scrap.views import ScrapCurationViewSet,ScrapProductViewSet
 
 router = routers.DefaultRouter()
 # for product app
@@ -23,6 +25,9 @@ router.register('curation/comment',CurationCommentViewSet)
 router.register('curation/tag',CurationTagViewSet)
 # for recommender app
 router.register('recommender/add',RecommenderViewSet)
+# for scrap app
+router.register('scrap/product/add',ScrapProductViewSet)
+router.register('scrap/curation/add',ScrapCurationViewSet)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -31,6 +36,7 @@ urlpatterns = [
     path('curation/', include('curation.urls')),
     path('product/', include('product.urls')),
     path('recommender/', include('recommender.urls')),
+    path('scrap/',include('scrap.urls')),
 ]
 
 if settings.DEBUG:

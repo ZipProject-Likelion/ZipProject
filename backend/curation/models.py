@@ -19,6 +19,8 @@ class Curation(models.Model):
     product_user = models.ManyToManyField('users.CustomUser', blank=True) #상품을 추가한 유저 리스트
     tags = models.ManyToManyField('CurationTag',blank=True) #큐레이션 태그
 
+    #scrap_users = models.ManyToManyField('users.CustomUser',blank=True,related_name='scrap_curation') #스크랩한 유저
+
     def __str__(self):
         return str(self.title)
     

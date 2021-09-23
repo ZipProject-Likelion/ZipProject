@@ -41,6 +41,8 @@ class Product(models.Model):
     type = models.CharField(max_length=20,choices=TYPE_CHOICES,default='가구') #상품 카테고리
     tags = models.ManyToManyField('ProductTag',blank=True)
 
+    #scrap_users = models.ManyToManyField('users.CustomUser',blank=True,related_name='scrap_product') #스크랩한 유저
+
     def __str__(self):
         return str(self.title)
 
