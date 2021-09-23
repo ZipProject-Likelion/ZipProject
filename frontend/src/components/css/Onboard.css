@@ -1,0 +1,56 @@
+.onboard-title{
+    font-size: 26px;
+    text-align: center;
+    font-weight: bold;
+}
+.onboard-subtitle{
+    margin-top: 20px;
+    font-weight: normal;
+    font-size:16px;
+}
+.highlight{
+    color: #EC6D37
+}
+.onboard-btn{
+    background: #E8EAED;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #9AA0A6 !important;
+    padding: 15px !important;
+    margin-top: 15px !important;
+    margin-bottom: 30px !important;
+}
+.onboard-password-desc{
+    font-size: 12px;
+    color: #5F6368;
+}
+.onboard-btn:hover{
+    background: #EC6D37 !important;
+    color: #fff !important;
+}
+
+
+
+.second-onboard-container{
+    width: 60%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* form style*/
+.MuiFormControl-marginNormal {
+    margin-bottom: 0 !important;
+}
+
+/*stpper style*/
+.MuiStepIcon-root.MuiStepIcon-active {
+    color: #EC6D37  !important;
+}
+.MuiStepIcon-root.MuiStepIcon-completed {
+    color: #EC6D37  !important;
+}
+
+/*avatar upload component*/
+body > div.fade.modal.show > div > div > div.modal-body > div > div.second-onboard-container > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div{
+    border: 1px dashed rgb(151, 151, 151) !important;
+}
