@@ -4,10 +4,11 @@ from product.models import Product, ProductComment
 from curation.models import Curation, CurationComment
 
 class CustomUserManager(BaseUserManager):
-    def create_user(self, email, username,first_name, last_name, password=None):
+    def create_user(self, email, username, nickname, first_name, last_name, password=None):
         user = self.model(
             email=self.normalize_email(email),
             username=username,
+            nickname=nickname,
             first_name=first_name,
             last_name=last_name,
         )
@@ -16,10 +17,11 @@ class CustomUserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self,email, username, password, first_name, last_name):
+    def create_superuser(self,email, username, nickname, password, first_name, last_name):
         user = self.create_user(
             email=self.normalize_email(email),
             username=username,
+            nickname=nickname,
             password=password,
             first_name=first_name,
             last_name=last_name,
@@ -31,16 +33,11 @@ class CustomUserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-class Interest(models.Model):
-    interest =          models.CharField(default="", max_length=20)
-
-    def __str__(self):
-        return self.interest
-
 class CustomUser(AbstractUser):
     # 기본 정보
     email =             models.EmailField(verbose_name='email', max_length=60, unique=True)
     username =          models.CharField(max_length=30, unique=True, primary_key=True)
+    nickname =          models.CharField(max_length=30, unique=True)
     date_joined =       models.DateField(verbose_name='date joined', auto_now_add=True)
     last_login =        models.DateField(verbose_name='last login', auto_now=True)
     is_admin =          models.BooleanField(default=False, verbose_name='admin')
@@ -52,7 +49,6 @@ class CustomUser(AbstractUser):
     description =       models.TextField(default="", blank=True, max_length=150)
     profile_image =     models.ImageField(null=True, blank=True, upload_to='profile/')
     header_image =      models.ImageField(null=True, blank=True, upload_to='header/')
-    interest =          models.ManyToManyField(Interest, related_name='CustomUser', blank=True)
 
     # 작성 글
     created_curation =  models.ManyToManyField(Curation, related_name='CreatedCustomUser', blank=True)
@@ -67,7 +63,7 @@ class CustomUser(AbstractUser):
     USERNAME_FIELD = 'username' 
 #this field means that when you try to sign in the username field will be the email 
 #change it to whatever you want django to see as the username when authenticating the user
-    REQUIRED_FIELDS = ['email', 'first_name', 'last_name',]
+    REQUIRED_FIELDS = ['email', 'first_name', 'last_name','nickname']
 
     objects = CustomUserManager()
 
