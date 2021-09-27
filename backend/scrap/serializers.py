@@ -11,3 +11,7 @@ class ScrapCurationSerializer(serializers.ModelSerializer):
     class Meta:
         model = ScrapCuration
         fields ='__all__'
+
+class BestProductSerializer(serializers.Serializer):
+    product = ScrapProduct
+    scrap = serializers.IntegerField
