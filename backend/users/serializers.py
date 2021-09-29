@@ -9,6 +9,7 @@ from rest_auth.serializers import LoginSerializer
 
 class CustomRegisterSerializer(RegisterSerializer):
 		# 추가할 속성
+    nickname = serializers.CharField()
     first_name = serializers.CharField()
     last_name = serializers.CharField()
     
@@ -17,6 +18,7 @@ class CustomRegisterSerializer(RegisterSerializer):
         # user = super(CustomRegisterSerializer, self).save(request)
         user = super().save(request)
 				# 데이터 입력
+        user.nickname = self.data.get('nickname')
         user.first_name= self.data.get('first_name')
         user.last_name = self.data.get('last_name')
         user.save()
@@ -28,4 +30,4 @@ class CustomLoginSerializer(LoginSerializer):
 class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:
       model = CustomUser
-      fields = ['username', 'email', 'first_name', 'last_name', 'description', 'profile_image', 'header_image','interest',]
+      fields = ['username', 'nickname', 'email', 'first_name', 'last_name', 'description', 'profile_image', 'header_image','interest',]
