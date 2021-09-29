@@ -13,6 +13,7 @@ import ProductDetail from './components/pages/ProductDetail';
 import Signin from './components/pages/Signin';
 import Profile from './components/pages/Profile';
 import BookMarkProduct from './components/component/BookMarkProduct';
+import Onboard from './components/pages/Onboard';
 
 
 function App() {
@@ -31,7 +32,7 @@ function App() {
           <Route path='/product-detail/:id' component={ProductDetail} />
           <Route path='/sign-in' component={Signin} />
           <Route path='/profile' component={Profile} />
-          <Route path='/test' component={BookMarkProduct} />
+          <Route path='/test' component={Onboard} /> 
       </Router>
     </>
   );

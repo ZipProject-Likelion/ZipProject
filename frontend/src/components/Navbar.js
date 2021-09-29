@@ -67,14 +67,28 @@ function Navbar() {
               </li>
             </ul>
           </div>
-          <Link to='/sign-up'>
-          <Button
-            className='btn'
-            buttonStyle='btn--primary'
-            buttonSize='btn--medium'
-          >시작하기
-          </Button>
-        </Link>
+          {!user?
+          (
+            <Link to='/sign-up'>
+            <Button
+              className='btn'
+              buttonStyle='btn--primary'
+              buttonSize='btn--medium'
+            >시작하기
+            </Button>
+          </Link>
+          ):(
+            <Link
+            to='/profile'
+            className='nav-links nav-profile'
+            onClick={closeMobileMenu}
+            >
+            <Avatar src="/broken-image.jpg" >
+            {user}
+            </Avatar>
+            </Link>
+          )
+          }
       </nav>
     </>
   );
@@ -100,15 +114,7 @@ export default Navbar;
                 :
                 (
                   <>
-                  <Link
-                  to='/profile'
-                  className='nav-links nav-profile'
-                  onClick={closeMobileMenu}
-                  >
-                  <Avatar src="/broken-image.jpg" >
-                  {user}
-                  </Avatar>
-                  </Link>
+
                   </>
                 )
                 }
