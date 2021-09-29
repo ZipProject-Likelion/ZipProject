@@ -251,28 +251,30 @@ const FirstOnboard =({nextShow, setIndex}) =>{
         {stage==3&&
         (
           <>
-          <Grid container>
-          <Grid item xs= {12} sm={6}>
+          <div className="second-onboard-container">
+            <Grid container>
+            <Grid item xs= {12} sm={6}>
+                <Button
+                onClick={()=>{
+                  prevStage()
+                }}
+                fullWidth
+                variant="contained"
+                className="onboard-btn">
+              이전으로
+              </Button>
+            </Grid>
+            <Grid item xs= {12} sm={6}>
               <Button
-              onClick={()=>{
-                prevStage()
-              }}
-              fullWidth
-              variant="contained"
-              className="onboard-btn">
-            이전으로
-            </Button>
-          </Grid>
-          <Grid item xs= {12} sm={6}>
-            <Button
-              onClick={()=>handleSubmit()}
-              fullWidth
-              variant="contained"
-              className="onboard-btn">
-            회원가입
-            </Button>
-          </Grid>
-          </Grid>
+                onClick={()=>handleSubmit()}
+                fullWidth
+                variant="contained"
+                className="onboard-btn">
+              회원가입
+              </Button>
+            </Grid>
+            </Grid>
+          </div>
 
           </>
         )
