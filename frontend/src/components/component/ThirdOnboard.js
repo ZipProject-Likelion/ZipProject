@@ -1,13 +1,17 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import {  ImageList, ImageListItem, ImageListItemBar } from '@material-ui/core';
+import {AiOutlineArrowLeft} from "react-icons/ai";
 
 
-const ThirdOnboard =() =>{
+const ThirdOnboard =({prevStage}) =>{
 
     return (
         <>
         <div className="second-onboard-container third-onboard-container">
+          <div className="prev-icon">
+            <AiOutlineArrowLeft onClick={()=>{prevStage()}}/>
+          </div>
             <div className="onboard-title">관심사를 5개 이상 선택해 보세요</div>
             <ImageList sx={{ width: 500, height: 300 }} cols={3} rowHeight={164} className="onboard-imagelist">
             {itemData.map((item) => (

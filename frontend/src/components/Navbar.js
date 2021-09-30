@@ -69,7 +69,7 @@ function Navbar() {
           </div>
           {!user?
           (
-            <Link to='/sign-up'>
+            <Link to='/onboard'>
             <Button
               className='btn'
               buttonStyle='btn--primary'
@@ -95,27 +95,3 @@ function Navbar() {
 }
 
 export default Navbar;
-{/* <Button
-              buttonStyle='btn--primary'
-              buttonSize='btn--medium'
-            >
-                            {!user && button?
-                (
-                  <>
-                  <Link
-                  to='/sign-up'
-                  className='nav-links'
-                  onClick={closeMobileMenu}
-                  >
-                  시작하기
-                  </Link>
-                  </>
-                )
-                :
-                (
-                  <>
-
-                  </>
-                )
-                }
-            </Button> */}

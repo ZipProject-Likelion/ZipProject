@@ -169,11 +169,12 @@ const FirstOnboard =({nextShow, setIndex}) =>{
         console.log(name, value)
       };
 
-    const handleImageChange = (e)=>{
+    const handleImageChange = (file)=>{
         setValues({
             ...values,
-            profile_image:e.target.files[0]
+            profile_image:file
         })
+        console.log('profile_image', file);
     }
     
 
@@ -187,6 +188,9 @@ const FirstOnboard =({nextShow, setIndex}) =>{
         form_data.append('password2',values.password2);
         form_data.append('first_name',values.firstname);
         form_data.append('last_name',values.lastname);
+        form_data.append('nickname ',values.nickname);
+        
+        // form_data.append('profile_image',values.profile_image);
     
         axios
         .post('/users/auth/register/', form_data, {
@@ -206,11 +210,34 @@ const FirstOnboard =({nextShow, setIndex}) =>{
               nickname:'',
               profile_image:'',
             });
+            if('key' in res.data){
+              swal("Success", '성공', "success", {
+                buttons: false,
+                timer: 5000,
+            })
+            localStorage.setItem('accessToken', res.data['key']);
+            localStorage.setItem('user', values.username);
+            window.location.href = "/";
+            }
           }
         )
         .catch(err=>{
+            setValues({
+              username: '',
+              email: '',
+              password: '',
+              password2: '',
+              firstname:'',
+              lastname:'',
+              nickname:'',
+              profile_image:'',
+            });
             console.log(err);
-            swal("Failed", '실패', "error");
+            swal("Failed", '실패', "error",{
+              buttons:false,
+              timer:5000,
+            });
+            window.location.href="/test";
         });
       }
       
@@ -252,21 +279,10 @@ const FirstOnboard =({nextShow, setIndex}) =>{
         (
           <>
           <div className="second-onboard-container">
-            <Grid container>
-            <Grid item xs= {12} sm={6}>
-                <Button
-                onClick={()=>{
-                  prevStage()
-                }}
-                fullWidth
-                variant="contained"
-                className="onboard-btn">
-              이전으로
-              </Button>
-            </Grid>
+            <Grid container justifyContent="center" alignItems="center">
             <Grid item xs= {12} sm={6}>
               <Button
-                onClick={()=>handleSubmit()}
+                onClick={handleSubmit}
                 fullWidth
                 variant="contained"
                 className="onboard-btn">

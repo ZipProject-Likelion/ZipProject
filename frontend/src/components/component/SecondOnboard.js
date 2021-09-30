@@ -4,34 +4,41 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Avatar from "react-avatar-edit";
 import Grid from "@material-ui/core/Grid";
-
+import {AiOutlineArrowLeft} from "react-icons/ai";
 
 
 const SecondOnboard =({nextStage, handleChange, handleImageChange, setIndex, prevStage}) =>{
     const [image, setImage]=useState();
     const [preview, setPreview]= useState(false);
-    const [isSave, setIsSave]=useState(false);
+    const dataURLtoFile = (dataurl, fileName) => {
+ 
+      var arr = dataurl.split(','),
+          mime = arr[0].match(/:(.*?);/)[1],
+          bstr = atob(arr[1]), 
+          n = bstr.length, 
+          u8arr = new Uint8Array(n);
+          
+      while(n--){
+          u8arr[n] = bstr.charCodeAt(n);
+      }
+      
+      return new File([u8arr], fileName, {type:mime});
+  }
     const onClose =()=>{
         setPreview(false);
     }
     const onCrop =(image) =>{
+        const user= "kim";
         setImage(image);
-    }
-    const onBeforeFileLoad= (elem) => {
-        if (elem.target.files[0].size > 71680) {
-          alert("File is too big!");
-          elem.target.value = "";
-        }
-    }
-
-    const onChangeImage =(e) =>{
-        handleImageChange(e);
-        setImage(e.target.files[0]);
-        console.log(e.target.files[0]);
+        var file=dataURLtoFile(image, user+" profile.png");
+        handleImageChange(file);
     }
     return (
         <>
         <div className="second-onboard-container">
+        <div className="prev-icon">
+        <AiOutlineArrowLeft onClick={()=>{prevStage()}}/>
+        </div>
         <div>
             <h2 className="onboard-title">
                 ZIP 에 오신 것을 환영합니다!
@@ -99,20 +106,7 @@ const SecondOnboard =({nextStage, handleChange, handleImageChange, setIndex, pre
         </div>
 
         </div>
-        <Grid container>
-          <Grid item xs= {12} sm={6}>
-              <Button
-              onClick={()=>{
-                prevStage()
-              }}
-              fullWidth
-              variant="contained"
-              className="onboard-btn"
-              
-            >
-              이전으로
-            </Button>
-          </Grid>
+        <Grid container justifyContent="center" alignItems="center">
           <Grid item xs= {12} sm={6}>
               <Button
               onClick={()=>{
@@ -122,7 +116,6 @@ const SecondOnboard =({nextStage, handleChange, handleImageChange, setIndex, pre
               fullWidth
               variant="contained"
               className="onboard-btn"
-              
             >
               다음으로
             </Button>
