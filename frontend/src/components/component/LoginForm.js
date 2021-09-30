@@ -1,6 +1,4 @@
 import React, { useState , useEffect} from 'react';
-import {Link} from 'react-router-dom'
-import validateInfo from '../forms/validateInfo';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -22,10 +20,8 @@ const LoginForm =({prevShow}) =>{
     const classes = useStyles();
     const [values, setValues] = useState({
         username: '',
-        email: '',
         password: '',
       });
-    const [errors,setErrors]=useState({});
 
     
     const handleChange = e => {
@@ -38,10 +34,8 @@ const LoginForm =({prevShow}) =>{
 
     const handleSubmit = async e => {
         e.preventDefault();
-        setErrors(validateInfo(values));
         let form_data=new FormData();
         form_data.append('username',values.username)
-        form_data.append('email',values.email)
         form_data.append('password',values.password)
         axios
         .post('/users/auth/login/', form_data, {
@@ -64,7 +58,6 @@ const LoginForm =({prevShow}) =>{
                 swal("Failed", '실패', "error");
                 setValues({
                     username: '',
-                    email: '',
                     password: '',
                 });
             }
@@ -74,26 +67,11 @@ const LoginForm =({prevShow}) =>{
             swal("Failed", '실패', "error");
             setValues({
                 username: '',
-                email: '',
                 password: '',
             });
         });
     
       }
-
-    useEffect(
-        () => {
-          if (Object.keys(errors).length === 0) {
-          }
-          setValues({
-            username: '',
-            email: '',
-            password: ''
-          });
-        },
-        [errors]
-    );
-    
 
 
     return (
@@ -115,17 +93,7 @@ const LoginForm =({prevShow}) =>{
               label="아이디"
               onChange={handleChange}
             />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              name="email"
-              label="이메일"
-              onChange={handleChange}
-            />
-            {errors.email && <p>{errors.email}</p>}
+
             <TextField
               variant="outlined"
               margin="normal"
@@ -137,7 +105,7 @@ const LoginForm =({prevShow}) =>{
               type="password"
               onChange={handleChange}
             />
-            {errors.password && <p>{errors.password}</p>}
+
 
             <Button
               type="submit"

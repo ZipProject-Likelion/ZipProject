@@ -69,7 +69,7 @@ function Navbar() {
           </div>
           {!user?
           (
-            <Link to='/sign-up'>
+            <Link to='/onboard'>
             <Button
               className='btn'
               buttonStyle='btn--primary'

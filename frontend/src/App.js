@@ -32,7 +32,7 @@ function App() {
           <Route path='/product-detail/:id' component={ProductDetail} />
           <Route path='/sign-in' component={Signin} />
           <Route path='/profile' component={Profile} />
-          <Route path='/test' component={Onboard} /> 
+          <Route path='/onboard' component={Onboard} /> 
       </Router>
     </>
   );
