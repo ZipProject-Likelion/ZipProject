@@ -95,27 +95,3 @@ function Navbar() {
 }
 
 export default Navbar;
-{/* <Button
-              buttonStyle='btn--primary'
-              buttonSize='btn--medium'
-            >
-                            {!user && button?
-                (
-                  <>
-                  <Link
-                  to='/sign-up'
-                  className='nav-links'
-                  onClick={closeMobileMenu}
-                  >
-                  시작하기
-                  </Link>
-                  </>
-                )
-                :
-                (
-                  <>
-
-                  </>
-                )
-                }
-            </Button> */}
