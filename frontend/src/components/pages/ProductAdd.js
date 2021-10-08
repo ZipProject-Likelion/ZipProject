@@ -1,6 +1,6 @@
 import React , {useState} from 'react';
 import '../../App.css';
-import '../css/Products.css'
+import '../css/ProductAdd.css'
 import { Modal , Button} from 'react-bootstrap';
 import axios from 'axios';
 import { Link , withRouter} from 'react-router-dom';

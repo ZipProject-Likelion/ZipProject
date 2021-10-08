@@ -1,20 +1,20 @@
 import React from 'react';
-import './Cards.css';
-import CardItem from './CardItem';
+import './BestCards.css';
+import BestCardItem from './BestCardItem';
 
-function ProductCards({title, data}) {
+function BestCards({title, data}) {
   let remain=[]
 
   const rendering = () =>{
     let result=[];
     let render=[];
-    for (let i=0; i<data.length; i++){
-      if (i%4===3){
+    for (let i=0; i<3; i++){
+      if (i%4===2){
         result.push(data[i])
 
         render.push(
           <ul className='cards__items'>
-          <CardItem
+          <BestCardItem
                 key={result[0].id}
                 id={result[0].id}
                 src={result[0].image}
@@ -23,7 +23,7 @@ function ProductCards({title, data}) {
                 user={result[0].user}
                 path= {`/product-detail/${result[0].id}`}
           />
-          <CardItem
+          <BestCardItem
                 key={result[1].id}
                 id={result[1].id}
                 src={result[1].image}
@@ -32,7 +32,7 @@ function ProductCards({title, data}) {
                 user={result[1].user}
                 path= {`/product-detail/${result[1].id}`}
           />
-          <CardItem
+          <BestCardItem
                 key={result[2].id}
                 id={result[2].id}
                 src={result[2].image}
@@ -40,15 +40,6 @@ function ProductCards({title, data}) {
                 label={result[2].type}
                 user={result[2].user}
                 path= {`/product-detail/${result[2].id}`}
-          />
-          <CardItem
-                key={result[3].id}
-                id={result[3].id}
-                src={result[3].image}
-                text= {result[3].title}
-                label={result[3].type}
-                user={result[3].user}
-                path= {`/product-detail/${result[3].id}`}
           />
         </ul>
         )
@@ -75,7 +66,7 @@ function ProductCards({title, data}) {
             {!remain? <></>:
             ( 
               remain.map(product=>(
-                <CardItem
+                <BestCardItem
                 key={product.id}
                 id={product.id}
                 src={product.image}
@@ -93,4 +84,4 @@ function ProductCards({title, data}) {
   );
 }
 
-export default ProductCards;
+export default BestCards;
