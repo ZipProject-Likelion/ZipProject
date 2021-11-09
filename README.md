@@ -6,7 +6,7 @@
 > `git clone -b {branchname} --single-branch https://github.com/ZipProject-Likelion/ZipProject.git`
   
 ### 처음 Clone 받았을 때 해줘야할 것
-~~> mysql 서버 접속~~
+~~mysql 서버 접속~~
 
 ~~`mysql.server start`~~
 
