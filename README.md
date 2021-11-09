@@ -8,9 +8,9 @@
 ### 처음 Clone 받았을 때 해줘야할 것
 ~~> mysql 서버 접속~~
 
-~~> `mysql.server start`~~
+~~- `mysql.server start`~~
 
-~~> `mysql -uroot -p`~~
+~~- `mysql -uroot -p`~~
 
 > `cd config` 에서 settings.py.secret 파일 reveal 하기
 - `python manage.py makemigrations`
