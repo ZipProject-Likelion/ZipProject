@@ -1,10 +1,11 @@
 from rest_framework import serializers
-from .models import Product,ProductComment,ProductTag
+from .models import Product,ProductTag
+# from .models import ProductReview
 
-class ProductCommentSerializer(serializers.ModelSerializer) :
-    class Meta :
-        model = ProductComment
-        fields ='__all__'
+# class ProductReviewSerializer(serializers.ModelSerializer) :
+#     class Meta :
+#         model = ProductReview
+#         fields ='__all__'
 
 class ProductTagSerializer(serializers.ModelSerializer):
     class Meta:
@@ -13,9 +14,10 @@ class ProductTagSerializer(serializers.ModelSerializer):
 
 class ProductSerializer(serializers.ModelSerializer) :
     image = serializers.ImageField(use_url=True)
-    comments = ProductCommentSerializer(many=True, read_only=True)
+    # reviews = ProductReviewSerializer(many=True, read_only=True)
     class Meta :
         model = Product
         fields = ('id','title','user','content','online_shop','image','price'
-        ,'shop_Type','shop_URL_Location','type','tags','comments','pub_date')
+        ,'shop_Type','shop_URL_Location','type','tags','pub_date')
+        # , 'reviews')
 

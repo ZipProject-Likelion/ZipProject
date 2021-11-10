@@ -4,9 +4,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
 
-# from product.models import Product
-# from users.models import CustomUser
-
 class Curation(models.Model):
     title = models.CharField(max_length=20) #큐레이션명
     pub_date = models.DateTimeField(default=timezone.now) #생성날짜/시간
@@ -26,6 +23,7 @@ class Curation(models.Model):
     
 class CurationComment(models.Model) :
     curation = models.ForeignKey('Curation',related_name='curation_comments',on_delete=models.CASCADE)
+    # comment_user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name="comment_user",default='')
     content = models.TextField()
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(default=timezone.now)
