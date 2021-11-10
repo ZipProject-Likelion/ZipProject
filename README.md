@@ -23,8 +23,8 @@
 - frontend 폴더 : react project localhost:3000
 
 ### 깃 branch 규칙
-- 1. git branch는 기능별로 나눠서 (ex. backend-login, frontend-home)
-- 2. commit 메시지는 `frontend-추가하거나 바뀐 기능`
+- git branch는 기능별로 나눠서 (ex. backend-login, frontend-home)
+- commit 메시지는 `frontend-추가하거나 바뀐 기능`
 
 
 ### frontend 시작
