@@ -15,9 +15,9 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AddField(
-            model_name='product',
-            name='user',
-            field=models.ForeignKey(default='', on_delete=django.db.models.deletion.CASCADE, related_name='post_products', to=settings.AUTH_USER_MODEL),
-        ),
+        # migrations.AddField(
+        #     model_name='product',
+        #     name='user',
+        #     field=models.ForeignKey(default='', on_delete=django.db.models.deletion.CASCADE, related_name='post_products', to=settings.AUTH_USER_MODEL),
+        # ),
     ]

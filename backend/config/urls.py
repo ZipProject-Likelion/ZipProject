@@ -6,7 +6,7 @@ from django.conf.urls.static import static
 from rest_framework import routers
 
 # for product app
-from product.views import ProductViewSet,ProductTagViewSet,ProductReviewViewSet
+from product.views import ProductViewSet,ProductTagViewSet
 
 # for curation app
 from curation.views import CurationViewSet,CurationCommentViewSet,CurationTagViewSet
@@ -20,7 +20,7 @@ from scrap.views import ScrapCurationViewSet,ScrapProductViewSet
 # for product app
 router = routers.DefaultRouter()
 router.register('product/add',ProductViewSet)
-router.register('product/review', ProductReviewViewSet)
+# router.register('product/review', ProductReviewViewSet)
 router.register('product/tag',ProductTagViewSet)
 
 # for curation app
