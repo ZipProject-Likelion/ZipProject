@@ -15,3 +15,7 @@ class ScrapCurationSerializer(serializers.ModelSerializer):
 class BestProductSerializer(serializers.Serializer):
     product = ScrapProduct
     scrap = serializers.IntegerField
+
+class BestCurationSerializer(serializers.Serializer):
+    product = ScrapCuration
+    scrap = serializers.IntegerField

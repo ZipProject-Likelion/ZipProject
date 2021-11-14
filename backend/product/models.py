@@ -56,6 +56,24 @@ class ProductComment(models.Model) :
     def __str__(self):
         return str(self.product)
 
+# class ProductReview(models.Model) :
+#     product = models.ForeignKey('Product',related_name='product_comments',on_delete=models.CASCADE)
+#     review_user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name="review_user",default='')
+#     RATE = {
+#         ('1','1'),
+#         ('2','2'),
+#         ('3','3'),
+#         ('4','4'),
+#         ('5','5'),
+#     } product_rate = models.CharField(max_length=20,choices=RATE,default='5')
+#     content = models.TextField()
+#     image = models.ImageField(upload_to='images/',blank=True)
+#     created_at = models.DateTimeField(default=timezone.now)
+#     updated_at = models.DateTimeField(default=timezone.now)
+
+#     def __str__(self):
+#         return str(self.product)
+
 class ProductTag(models.Model):
     name = models.CharField(max_length=10, unique=True,blank=True)
 

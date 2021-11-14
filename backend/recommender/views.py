@@ -3,10 +3,13 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 
 from .models import Recommender
-from .serializers import RecommenderSerializer
+from product.models import Product
+from curation.models import Curation
 
+from .serializers import RecommenderSerializer
 from product.serializers import ProductSerializer
 from product.serializers import ProductTagSerializer
+from curation.serializers import CurationSerializer
 
 class RecommenderViewSet(viewsets.ModelViewSet):
     queryset = Recommender.objects.all()
@@ -72,7 +75,7 @@ class RecommenderViewSet(viewsets.ModelViewSet):
         serializer = ProductTagSerializer(top_tags,many=True)
         return Response(serializer.data)
 
-    '''def recommend_product(self,request):
+    def recommend_product(self,request):
         choice = Recommender.objects.all()
         chosen_tags = []
         for i in choice:
@@ -110,8 +113,16 @@ class RecommenderViewSet(viewsets.ModelViewSet):
                 break
         
         # top-tags를 포함하는 product 모두 반환
+        recommended_products = []
+        product_list = Product.objects.all()
+        for i in top_tags:
+            for p in product_list.iterator():
+                for p_tag_name in p.tags.all():
+                    if i.name == p_tag_name.name:
+                        if p not in recommended_products:
+                            recommended_products.append(p)
 
-        serializer = ProductTagSerializer(top_tags,many=True)
+        serializer = ProductSerializer(recommended_products,many=True)
         return Response(serializer.data)
 
     def recommend_curation(self,request):
@@ -151,11 +162,21 @@ class RecommenderViewSet(viewsets.ModelViewSet):
                     if j.id == i[0]: top_tags.append(j)
                 break
         
-        # top-tags를 포함하는 product 모두 반환
+        # top-tags를 포함하는 curation 모두 반환
+        recommended_curations = []
+        curation_list = Curation.objects.all()
+        for i in top_tags:
+            for c in curation_list.iterator():
+                for c_tag_name in c.tags.all():
+                    if i.name == c_tag_name.name:
+                        if c not in recommended_curations:
+                            recommended_curations.append(c)
 
-        serializer = ProductTagSerializer(top_tags,many=True)
-        return Response(serializer.data)'''
+        serializer = CurationSerializer(recommended_curations,many=True)
+        return Response(serializer.data)
 
 recommender_list = RecommenderViewSet.as_view({'get': 'list'})
 chosen_tag_list = RecommenderViewSet.as_view({'get': 'chosen_tag_list'})
 top_tag_list = RecommenderViewSet.as_view({'get': 'top_tag_list'})
+recommended_products = RecommenderViewSet.as_view({'get': 'recommend_product'})
+recommended_curations = RecommenderViewSet.as_view({'get': 'recommend_curation'})
