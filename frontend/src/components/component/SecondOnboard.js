@@ -39,6 +39,7 @@ const SecondOnboard =({nextStage, handleChange, handleImageChange, setIndex, pre
   
       input.click();
       input.onchange = function (event) {
+        console.log(event.target.files[0]);
         processFile(event.target.files[0]);
         handleImageChange(event.target.files[0]);
       };

@@ -172,3 +172,9 @@ body > div.fade.modal.show > div > div > div.modal-body > div > div.second-onboa
     background: none !important;
 }
 
+.MuiImageListItemBar-title {
+    font-size: 10px !important;
+    line-height: 24px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

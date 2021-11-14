@@ -172,7 +172,7 @@ const FirstOnboard =({nextShow, setIndex}) =>{
     const handleImageChange = (file)=>{
         setValues({
             ...values,
-            profile_image:file
+            profile_image :file
         })
         console.log('profile_image', values.profile_image);
     }
@@ -200,7 +200,6 @@ const FirstOnboard =({nextShow, setIndex}) =>{
             }
         })
         .then((res)=>{
-            console.log(res);
             setValues({
               username: '',
               email: '',
@@ -238,7 +237,7 @@ const FirstOnboard =({nextShow, setIndex}) =>{
               buttons:false,
               timer:5000,
             });
-            window.location.href="/test";
+            window.location.href = "/";
         });
       }
       
