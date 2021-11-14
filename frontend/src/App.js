@@ -12,12 +12,10 @@ import CurationDetail from './components/pages/CurationDetail';
 import ProductDetail from './components/pages/ProductDetail';
 import Signin from './components/pages/Signin';
 import Profile from './components/pages/Profile';
-import BookMarkProduct from './components/component/BookMarkProduct';
 import Onboard from './components/pages/Onboard';
 
 
 function App() {
-
 
   return (
     <>

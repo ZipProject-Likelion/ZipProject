@@ -174,7 +174,7 @@ const FirstOnboard =({nextShow, setIndex}) =>{
             ...values,
             profile_image:file
         })
-        console.log('profile_image', file);
+        console.log('profile_image', values.profile_image);
     }
     
 
@@ -189,6 +189,7 @@ const FirstOnboard =({nextShow, setIndex}) =>{
         form_data.append('first_name',values.firstname);
         form_data.append('last_name',values.lastname);
         form_data.append('nickname ',values.nickname);
+        form_data.append('profile_image',values.profile_image);
         
         // form_data.append('profile_image',values.profile_image);
     

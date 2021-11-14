@@ -1,11 +1,17 @@
 import React, {useState} from 'react';
-import axios from 'axios';
 import {  ImageList, ImageListItem, ImageListItemBar } from '@material-ui/core';
-import {AiOutlineArrowLeft} from "react-icons/ai";
+import {AiOutlineArrowLeft, AiFillCheckCircle} from "react-icons/ai";
 
 
 const ThirdOnboard =({prevStage}) =>{
+  const[items, setItems]=useState([]);
+  const selectItem=(e)=>{
+    e.preventDefault();
+    console.log(e.target.id);
+    e.target.classList.add('selected-item');
+    document.getElementById(`check-box-${e.target.name}`).style.display = "block";
 
+  }
     return (
         <>
         <div className="second-onboard-container third-onboard-container">
@@ -13,21 +19,24 @@ const ThirdOnboard =({prevStage}) =>{
             <AiOutlineArrowLeft onClick={()=>{prevStage()}}/>
           </div>
             <div className="onboard-title">관심사를 5개 이상 선택해 보세요</div>
-            <ImageList sx={{ width: 500, height: 300 }} cols={3} rowHeight={164} className="onboard-imagelist">
-            {itemData.map((item) => (
+            <ImageList sx={{ width: 600, height: 300 }} cols={4} rowHeight={164} className="onboard-imagelist">
+            {itemData.map((item,i) => (
                 <ImageListItem key={item.img}>
-            
-                <div className="onboard-image-item">
+                <div className="onboard-image-item"  >
                     <img
                         src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
                         srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
                         alt={item.title}
                         loading="lazy"
+                        id={item.title}
+                        name={i}
+                        onClick={selectItem}
                     />
                 </div>
+                <div className="check-box" id={`check-box-${i}`}><AiFillCheckCircle className="check-icon"/></div>
                 <ImageListItemBar
                 title={item.title}
-                position="top"
+                position="bottom"
                 />
                 </ImageListItem>
             ))}
@@ -75,16 +84,17 @@ const itemData = [
       title: 'Mushrooms',
     },
     {
-      img: 'https://images.unsplash.com/photo-1567306301408-9b74779a11af',
-      title: 'Tomato basil',
+      img: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62',
+      title: 'Honey',
     },
     {
-      img: 'https://images.unsplash.com/photo-1471357674240-e1a485acb3e1',
-      title: 'Sea star',
+      img: 'https://images.unsplash.com/photo-1516802273409-68526ee1bdd6',
+      title: 'Basketball',
     },
     {
-      img: 'https://images.unsplash.com/photo-1589118949245-7d38baf380d6',
-      title: 'Bike',
+      img: 'https://images.unsplash.com/photo-1518756131217-31eb79b20e8f',
+      title: 'Fern',
     },
+
   ];
 export default ThirdOnboard;

@@ -1,96 +1,90 @@
-import React, {useState} from 'react';
-import axios from 'axios';
+import React, {useEffect, useState} from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import Avatar from "react-avatar-edit";
+import Avatar from '@material-ui/core/Avatar';
 import Grid from "@material-ui/core/Grid";
 import {AiOutlineArrowLeft} from "react-icons/ai";
+import { makeStyles } from '@material-ui/core/styles';
+import ImageSet from "./ImageSet";
 
+const useStyles = makeStyles((theme) => ({
+    root: {
+      display: 'flex',
+      '& > *': {
+        margin: theme.spacing(1),
+      },
+    },
+    avartar: {
+      width:'200px',
+      height:'200px',
+    },
+    nickname:{
+      width: '350px',
+      height: '80px',
+    }
+  }));
 
 const SecondOnboard =({nextStage, handleChange, handleImageChange, setIndex, prevStage}) =>{
-    const [image, setImage]=useState();
-    const [preview, setPreview]= useState(false);
-    const dataURLtoFile = (dataurl, fileName) => {
- 
-      var arr = dataurl.split(','),
-          mime = arr[0].match(/:(.*?);/)[1],
-          bstr = atob(arr[1]), 
-          n = bstr.length, 
-          u8arr = new Uint8Array(n);
-          
-      while(n--){
-          u8arr[n] = bstr.charCodeAt(n);
-      }
-      
-      return new File([u8arr], fileName, {type:mime});
-  }
-    const onClose =()=>{
-        setPreview(false);
+    const classes = useStyles();
+    const [option, setOption] = useState(0);
+    const [attachment, setAttachment] = useState(
+      "https://i.stack.imgur.com/GNhxO.png"
+    );
+  
+    function openFile() {
+      var input = document.createElement("input");
+  
+      input.type = "file";
+      input.accept = "image/*";
+  
+      input.click();
+      input.onchange = function (event) {
+        processFile(event.target.files[0]);
+        handleImageChange(event.target.files[0]);
+      };
     }
-    const onCrop =(image) =>{
-        const user= "kim";
-        setImage(image);
-        var file=dataURLtoFile(image, user+" profile.png");
-        handleImageChange(file);
+  
+    function processFile(file) {
+      var reader = new FileReader();
+  
+      reader.onload = function () {
+        var result = reader.result;
+        setAttachment(result);
+      };
+      reader.readAsDataURL(file);
+      setOption(1);
     }
+
+
     return (
         <>
         <div className="second-onboard-container">
         <div className="prev-icon">
         <AiOutlineArrowLeft onClick={()=>{prevStage()}}/>
         </div>
-        <div>
-            <h2 className="onboard-title">
-                ZIP 에 오신 것을 환영합니다!
-            </h2>
-            <p className="onboard-subtitle">프로필 사진과 
-            이름 대신 사용할 닉네임을 설정해주세요.</p>
+        <div className="second-onboard-header">
+          <div className="second-onboard-title">ZIP에 오신 것을 환영합니다!</div>
+          <div className="second-onboard-subtitle">프로필 사진과 이름 대신 사용할 닉네임을 설정해주세요.</div>
         </div>
-        <div>
-            {!preview ?(
-                <div
-                style={{
-                    margin: "0 auto",
-                    width: "100%",
-                    textAlign: "center"
-                  }}
-                >
-                <Avatar
-                    width={"100%"}
-                    height={295}
-                    onCrop={onCrop}
-                    onClose={onClose}
-                    src={image}
-                />
-                {image&&
-                 <div
-                 style={{ margin: "20px auto", width: "30%", textAlign: "center" }}
-                 >
-                <Button
-                     type="submit"
-                     fullWidth
-                     variant="contained"
-                     color="primary"
-                     onClick={()=>setPreview(true)}>
-                     CROP
-                </Button>
-                 </div>
-                }
-               
+        {option===0 ?
+        (
+            <>
+            <div onClick={openFile} className="avartar-container">
+            <div>
+                <Avatar src="/broken-image.jpg" className={classes.avartar}/>
             </div>
-            ):
-            (
-                <div
-                style={{
-                    margin: "0 auto",
-                    width: "80%",
-                    textAlign: "center"
-                  }}
-                >
-                <img src={image} alt="Preview"/>
-                </div>
-            )
-            }
+            </div>
+            </>
+
+        ):(
+            <>
+            <ImageSet
+                attachment={attachment}
+                back={() => setOption(0)}
+                openFile={openFile}
+            ></ImageSet>
+            </>
+        )}
         <div
          style={{ margin: "20px auto", width: "100%", textAlign: "center" }}>
         <TextField
@@ -102,6 +96,7 @@ const SecondOnboard =({nextStage, handleChange, handleImageChange, setIndex, pre
             id="nickname"
             name="nickname"
             onChange={handleChange}
+            className={classes.nickname}
         />
         </div>
 
@@ -121,9 +116,8 @@ const SecondOnboard =({nextStage, handleChange, handleImageChange, setIndex, pre
             </Button>
           </Grid>
         </Grid>
-        </div>
-       
         </>
+
     )
 }
 

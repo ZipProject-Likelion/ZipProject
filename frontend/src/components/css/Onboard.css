@@ -43,11 +43,73 @@
 .onboard-imagelist{
     margin-bottom: 70px !important;
 }
-
+/*seconde-onboard*/
 .second-onboard-container{
     width: 70%;
     margin: 0 auto;
     text-align: center;
+}
+.second-onboard-header{
+    width:100%;
+    padding: 15px;
+}
+.second-onboard-title{
+    font-size: 26px;
+    font-weight: bold;
+    text-align: center;
+    padding:10px;
+}
+.second-onboard-subtitle{
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.check-box{
+    position:absolute;
+    top:10px;
+    right: 15px;
+    height:20px;
+    display:none;
+}
+.check-icon{
+    color:  #fff;
+}
+.avartar-container{
+    display:flex;
+    justify-content: center;
+}
+.image-container {
+    margin: auto;
+    padding: 5%;
+    text-align: center;
+    vertical-align: middle;
+    max-width: 40rem;
+    align-items: center;
+    padding-bottom: 1em;
+}
+.reset-button {
+    width: 1.5rem;
+    position: absolute;
+    left: 92.5%;
+    border-radius: 100%;
+}
+.img-text {
+    font-size: 80%;
+    margin-top: 1rem;
+}
+.img-holder {
+    position: relative;
+    margin: 0 auto;
+    width: 70%;
+    height: 100%;
+    border: none;
+    border-radius: 5px;
+}
+.no-image {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 100%;
 }
 .third-onboard-container{
     margin-top: 10px;
@@ -72,8 +134,7 @@ body > div.fade.modal.show > div > div > div.modal-body > div > div.second-onboa
 }
 /*image list*/
 .MuiImageList-root {
-    height: 450px;
-    margin-top: 70px !important;
+    margin-top: 40px !important;
 }
 /* 스크롤바 설정*/
 .MuiImageList-root::-webkit-scrollbar{
@@ -92,16 +153,22 @@ body > div.fade.modal.show > div > div > div.modal-body > div > div.second-onboa
     background-color: rgb(151, 151, 151) !important;
 }
 .onboard-image-item{
-    width: 100%;
-    height: 100%;
+    border-radius:20px;
+    overflow: hidden;
+
+}
+.selected-item{
+    filter: brightness(50%);
+}
+.MuiImageListItem-item{
+    border-radius:20px;
     overflow: hidden;
 }
 .MuiImageListItem-item:hover img{
     filter: brightness(70%);
-    transform: scale(1.2);
-    transition: transform 0.5s;
     cursor: pointer;
 }
 .MuiImageListItemBar-root{
     background: none !important;
 }
+
