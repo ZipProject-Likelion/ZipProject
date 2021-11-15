@@ -18,7 +18,6 @@ class Product(models.Model):
         ('기타', '기타'),
     }
     online_shop=models.CharField(max_length=100, choices=ONLINE_SHOP_CHOICES,default='오늘의 집')
-    #online_shop=models.CharField(max_length=100, blank=True) #오늘의집, 이케아, 인스타그램 등..
     image = models.ImageField(upload_to='images/',blank=True) #상품이미지
     price = models.IntegerField(default=0) #가격
 
@@ -40,39 +39,29 @@ class Product(models.Model):
     }
     type = models.CharField(max_length=20,choices=TYPE_CHOICES,default='가구') #상품 카테고리
     tags = models.ManyToManyField('ProductTag',blank=True)
-
     #scrap_users = models.ManyToManyField('users.CustomUser',blank=True,related_name='scrap_product') #스크랩한 유저
 
     def __str__(self):
         return str(self.title)
 
-
-class ProductComment(models.Model) :
+class ProductReview(models.Model) :
     product = models.ForeignKey('Product',related_name='product_comments',on_delete=models.CASCADE)
+    review_user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name="review_user",default='')
+    RATE = {
+        ('1','1'),
+        ('2','2'),
+        ('3','3'),
+        ('4','4'),
+        ('5','5')
+    }
+    product_rate = models.CharField(max_length=20,choices=RATE,default='5')
     content = models.TextField()
+    image = models.ImageField(upload_to='images/',blank=True)
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return str(self.product)
-
-# class ProductReview(models.Model) :
-#     product = models.ForeignKey('Product',related_name='product_comments',on_delete=models.CASCADE)
-#     review_user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name="review_user",default='')
-#     RATE = {
-#         ('1','1'),
-#         ('2','2'),
-#         ('3','3'),
-#         ('4','4'),
-#         ('5','5'),
-#     } product_rate = models.CharField(max_length=20,choices=RATE,default='5')
-#     content = models.TextField()
-#     image = models.ImageField(upload_to='images/',blank=True)
-#     created_at = models.DateTimeField(default=timezone.now)
-#     updated_at = models.DateTimeField(default=timezone.now)
-
-#     def __str__(self):
-#         return str(self.product)
 
 class ProductTag(models.Model):
     name = models.CharField(max_length=10, unique=True,blank=True)

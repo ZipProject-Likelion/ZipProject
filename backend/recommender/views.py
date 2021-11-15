@@ -1,6 +1,9 @@
 import operator
 from rest_framework import viewsets
 from rest_framework.response import Response
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from .permissions import IsOwnerOrReadOnly
 
 from .models import Recommender
 from product.models import Product
@@ -12,6 +15,8 @@ from product.serializers import ProductTagSerializer
 from curation.serializers import CurationSerializer
 
 class RecommenderViewSet(viewsets.ModelViewSet):
+    authentication_classes = [BasicAuthentication, SessionAuthentication]
+    permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
     queryset = Recommender.objects.all()
     serializer_class = RecommenderSerializer
 
@@ -21,16 +26,17 @@ class RecommenderViewSet(viewsets.ModelViewSet):
 
         # 이용자의 선택지에서 tag 요소를 모두 추출
         for i in choice:
-            for product in i.products.all(): # 상품
-                for tag in product.tags.all():
+            if i.target_user==request.user:
+                for product in i.products.all(): # 상품
+                    for tag in product.tags.all():
+                        chosen_tags.append(tag)
+                for tag in i.product_tags.all(): # 상품 태그
                     chosen_tags.append(tag)
-            for tag in i.product_tags.all(): # 상품 태그
-                chosen_tags.append(tag)
-            for curations in i.curations.all(): # 큐레이션
-                for tag in curations.tags.all():
+                for curations in i.curations.all(): # 큐레이션
+                    for tag in curations.tags.all():
+                        chosen_tags.append(tag)
+                for tag in i.curation_tags.all(): # 큐레이션 태그
                     chosen_tags.append(tag)
-            for tag in i.curation_tags.all(): # 큐레이션 태그
-                chosen_tags.append(tag)
 
         serializer = ProductTagSerializer(chosen_tags,many=True)
         return Response(serializer.data)
@@ -39,16 +45,17 @@ class RecommenderViewSet(viewsets.ModelViewSet):
         choice = Recommender.objects.all()
         chosen_tags = []
         for i in choice:
-            for product in i.products.all():
-                for tag in product.tags.all():
+            if i.target_user==request.user:
+                for product in i.products.all():
+                    for tag in product.tags.all():
+                        chosen_tags.append(tag)
+                for tag in i.product_tags.all():
                     chosen_tags.append(tag)
-            for tag in i.product_tags.all():
-                chosen_tags.append(tag)
-            for curations in i.curations.all():
-                for tag in curations.tags.all():
+                for curations in i.curations.all():
+                    for tag in curations.tags.all():
+                        chosen_tags.append(tag)
+                for tag in i.curation_tags.all():
                     chosen_tags.append(tag)
-            for tag in i.curation_tags.all():
-                chosen_tags.append(tag)
 
         # 각 tag 요소의 개수를 count
         tag_count = {}
@@ -58,13 +65,18 @@ class RecommenderViewSet(viewsets.ModelViewSet):
         tag_count = sorted(tag_count.items(),key=operator.itemgetter(0))
 
         # 가장 많이 선택된 tag-top3 선별, 태그 종류가 2개 이하 : tag-top1 만 선별
-        top_tags = []; idx = 0
+        top_tags = []; idx = 0; flag = 0
         if len(tag_count)>2:
             for i in tag_count:
                 for j in chosen_tags:
-                    if j.id == i[0]: 
-                        if j not in top_tags: top_tags.append(j)
-                idx += 1
+                    if j.id == i[0]:
+                        flag = 0
+                        for k in top_tags:
+                            if k.name == j.name: flag = 1; break
+                        if flag == 0:
+                            top_tags.append(j)
+                            idx += 1
+                            if idx == 3: break
                 if idx == 3: break
         elif len(tag_count)<2:
             for i in tag_count:
@@ -110,6 +122,7 @@ class RecommenderViewSet(viewsets.ModelViewSet):
             for i in tag_count:
                 for j in chosen_tags:
                     if j.id == i[0]: top_tags.append(j)
+                    break
                 break
         
         # top-tags를 포함하는 product 모두 반환

@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
-from product.models import Product, ProductComment
+from product.models import Product, ProductReview
 from curation.models import Curation, CurationComment
 
 class CustomUserManager(BaseUserManager):
@@ -55,7 +55,7 @@ class CustomUser(AbstractUser):
     created_product =      models.ManyToManyField(Product, related_name='CreatedCustomUser', blank=True)
     # 작성 댓글
     comment_curation =  models.ManyToManyField(CurationComment, related_name='CommentCustomUser', blank=True)
-    comment_product =      models.ManyToManyField(ProductComment, related_name='CommentCustomUser', blank=True)
+    review_product =    models.ManyToManyField(ProductReview, related_name='ReviewCustomUser', blank=True)
     # 좋아요
     like_curation =  models.ManyToManyField(Curation, related_name='LikeCustomUser', blank=True)
     like_product =      models.ManyToManyField(Product, related_name='LikeCustomUser', blank=True)

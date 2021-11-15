@@ -15,7 +15,6 @@ class Curation(models.Model):
     products = models.ManyToManyField('product.Product',blank=True) #큐레이션에 담긴 상품 리스트
     product_user = models.ManyToManyField('users.CustomUser', blank=True) #상품을 추가한 유저 리스트
     tags = models.ManyToManyField('CurationTag',blank=True) #큐레이션 태그
-
     #scrap_users = models.ManyToManyField('users.CustomUser',blank=True,related_name='scrap_curation') #스크랩한 유저
 
     def __str__(self):
@@ -23,7 +22,7 @@ class Curation(models.Model):
     
 class CurationComment(models.Model) :
     curation = models.ForeignKey('Curation',related_name='curation_comments',on_delete=models.CASCADE)
-    # comment_user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name="comment_user",default='')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name="comment_user",default='')
     content = models.TextField()
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(default=timezone.now)
