@@ -13,7 +13,7 @@ const ProductDetail= ({match}) =>{
     const [productdelete, setProductdelete]=useState(false);
 
     const renderProductInfo = async() =>{
-        const response= await axios.get(`/product/add/${match.params.id}/`)
+        const response= await axios.get(`http://localhost/api/product/add/${match.params.id}/`)
         setProductinfo(response.data);
         console.log(response.data);
     }
@@ -23,7 +23,7 @@ const ProductDetail= ({match}) =>{
     },[])
 
     const deleteProduct =  () =>{
-        axios.delete(`/product/add/${match.params.id}/`)
+        axios.delete(`http://localhost/api/product/add/${match.params.id}/`)
             .then(response=>setProductdelete(true))
             .catch(error=>{
                 setProductdelete(true);
