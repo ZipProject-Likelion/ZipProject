@@ -12,9 +12,8 @@ import django_filters.rest_framework
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
 
-from .models import Product, ProductTag
-from .serializers import ProductSerializer, ProductTagSerializer
-# from .serializers import ProductReviewSerializer
+from .models import Product,ProductTag,ProductReview
+from .serializers import ProductSerializer,ProductTagSerializer,ProductReviewSerializer
 
 class ProductViewSet(viewsets.ModelViewSet):
     authentication_classes = [BasicAuthentication, SessionAuthentication]
@@ -25,14 +24,16 @@ class ProductViewSet(viewsets.ModelViewSet):
     search_fields = ['title', 'content']
     ordering_fields = ['pub_date']
 
-# class ProductReviewViewSet(viewsets.ModelViewSet):
-#     queryset = ProductReview.objects.all()
-#     serializer_class = ProductReviewSerializer
+class ProductReviewViewSet(viewsets.ModelViewSet):
+    authentication_classes = [BasicAuthentication, SessionAuthentication]
+    permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+    queryset = ProductReview.objects.all()
+    serializer_class = ProductReviewSerializer
 
 class ProductTagViewSet(viewsets.ModelViewSet):
     queryset = ProductTag.objects.all()
     serializer_class = ProductTagSerializer
 
 product_list = ProductViewSet.as_view({'get': 'list'})
-# review_list = ProductReviewViewSet.as_view({'get': 'list'})
+review_list = ProductReviewViewSet.as_view({'get': 'list'})
 tag_list = ProductTagViewSet.as_view({'get': 'list'})
