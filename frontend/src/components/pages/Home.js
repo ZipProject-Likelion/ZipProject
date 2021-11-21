@@ -16,6 +16,7 @@ function Home() {
 
   const checkuser=()=>{
     const user=localStorage.getItem('user');
+    setUser(user);
     console.log(user);
     if(user){
       setUser(user);
@@ -69,9 +70,13 @@ function Home() {
     <>
       <HeroSection />
       <div className="home-body">
+        <h3 className="home-section-title">{user} 님을 위한 <span className="user-highlight">추천 큐레이션 리스트</span></h3>
+        <hr></hr>
         <div>
           <CurationCards data={recommendcurations}/>
         </div>
+         <h3 className="home-section-title">{user} 님을 위한 <span className="user-highlight">추천 상품 리스트</span></h3>
+        <hr></hr>
         <div>
           <ProductCards data={recommendproducts}/>
         </div>

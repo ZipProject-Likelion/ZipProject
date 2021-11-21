@@ -6,9 +6,7 @@
   justify-content: center;
   background: wheat;
 }
-.home-body{
-  flex-direction: column-reverse;
-}
+
 .top-container {
   align-items: center;
   justify-content: center;
