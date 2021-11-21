@@ -40,7 +40,7 @@ function Home() {
   }
   const handleCurationsAxios=async()=>{
     axios
-    .get('/api/recommender/recommended_products/')
+    .get('/api/recommender/recommended_curations/')
     .then((res)=>{
       console.log(res);
       setRecommendcurations(res.data);
@@ -52,7 +52,7 @@ function Home() {
   }
   const handleProductsAxios=async()=>{
     axios
-    .get('/api/recommender/recommended_curations/')
+    .get('/api/recommender/recommended_products/')
     .then((res)=>{
       console.log(res);
       setRecommendproducts(res.data);

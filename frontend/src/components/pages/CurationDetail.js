@@ -19,8 +19,8 @@ const CurationDetail= ({match}) =>{
         console.log(response.data);
         let products=[]
         for (let i=0; i<response.data.products.length; i++){
-            // const response2=await axios.get(`/api/product/add/${response.data.products[i]}`)
-            // products.push(response2.data)
+            const response2=await axios.get(`/api/product/add/${response.data.products[i]}`)
+            products.push(response2.data)
             console.log(response.data.products[i]);
         }
         console.log('가져온 product 정보들', products)
