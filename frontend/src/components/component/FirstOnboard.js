@@ -51,7 +51,7 @@ const FirstOnboard =({nextShow, setIndex}) =>{
           case 2:
               return <SecondOnboard nextStage={nextStage} prevStage={prevStage} handleChange={handleChange} handleImageChange={handleImageChange} setIndex={setIndex}/>
           case 3:
-              return <ThirdOnboard nextStage={nextStage} prevStage={prevStage} handleChange ={handleChange} />
+              return <ThirdOnboard nextStage={nextStage} prevStage={prevStage} handleChange ={handleChange} handleRecommenderAxios={handleRecommenderAxios} handleSubmit={handleSubmit}/>
           default:
               return <div>ㅇㄴ라ㅓ</div>
       }
@@ -176,10 +176,41 @@ const FirstOnboard =({nextShow, setIndex}) =>{
         })
         console.log('profile_image', values.profile_image);
     }
-    
+    const handleRecommenderAxios= async(request, user,key)=>{
+      
+      const request_data={
+      target_user:user,
+      curations:request.curations,
+      curation_tags:request.curation_tags,
+      products:request.products,
+      product_tags:request.product_tags
+    }
+    console.log(request_data);
+    axios
+    .post('/api/recommender/add/',JSON.stringify(request_data),{
+      headers:{
+        'content-type':'application/json',
+      }
+    })
+    .then((res)=>{
+      if(key){
+        swal("Success", '성공', "success", {
+          buttons: false,
+          timer: 5000,
+        })
+        localStorage.setItem('accessToken', key);
+        localStorage.setItem('user', user);
+      }
+      
+      alert('성공했습니다.');
+    })
+    .catch((err)=>{
+      console.log(err);
+      alert('실패했습니다.')
+    })
+    }
 
-    const handleSubmit = async e => {
-        e.preventDefault();
+    const handleSubmit = async (request) => {
         setErrors(validateInfo(values));
         let form_data=new FormData();
         form_data.append('username',values.username);
@@ -200,6 +231,7 @@ const FirstOnboard =({nextShow, setIndex}) =>{
             }
         })
         .then((res)=>{
+            const user=values.username;
             setValues({
               username: '',
               email: '',
@@ -210,15 +242,8 @@ const FirstOnboard =({nextShow, setIndex}) =>{
               nickname:'',
               profile_image:'',
             });
-            if('key' in res.data){
-              swal("Success", '성공', "success", {
-                buttons: false,
-                timer: 5000,
-            })
-            localStorage.setItem('accessToken', res.data['key']);
-            localStorage.setItem('user', values.username);
-            window.location.href = "/";
-            }
+            const key=res.data['key'];
+            handleRecommenderAxios(request,user,key);
           }
         )
         .catch(err=>{
@@ -275,26 +300,6 @@ const FirstOnboard =({nextShow, setIndex}) =>{
         </div>
 
         {render()}
-        {stage==3&&
-        (
-          <>
-          <div className="second-onboard-container">
-            <Grid container justifyContent="center" alignItems="center">
-            <Grid item xs= {12} sm={6}>
-              <Button
-                onClick={handleSubmit}
-                fullWidth
-                variant="contained"
-                className="onboard-btn">
-              회원가입
-              </Button>
-            </Grid>
-            </Grid>
-          </div>
-
-          </>
-        )
-        }
       </div>
   )
 

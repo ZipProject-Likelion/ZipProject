@@ -55,7 +55,7 @@ const Products=()=> {
     const user = localStorage.getItem('user');
     console.log(user);
     if (!user){
-        window.location.href = "/sign-in";
+        window.location.href = "/onboard";
     }
   }
   const handleSearch = (e)=>{

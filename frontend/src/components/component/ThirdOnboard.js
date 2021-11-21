@@ -5,8 +5,7 @@ import {AiOutlineArrowLeft, AiFillCheckCircle} from "react-icons/ai";
 import axios from 'axios';
 
 
-const ThirdOnboard =({prevStage}) =>{
-  const[items, setItems]=useState([]);
+const ThirdOnboard =({prevStage,handleRecommenderAxios, handleSubmit}) =>{
   const[products, setProducts]=useState([]);
   const[curations,setCurations]=useState([]);
   const[productsTag, setproductsTag]=useState([]);
@@ -107,7 +106,8 @@ const ThirdOnboard =({prevStage}) =>{
     const testBtn=document.getElementById('api-test-btn');
     testBtn.addEventListener('click',(e)=>{
       e.preventDefault();
-      handleAxios();
+      handleSubmit(request);
+      testBtn.removeEventListener('click',(e)=>{});
     })
   }
 
@@ -171,30 +171,6 @@ const ThirdOnboard =({prevStage}) =>{
     setcurationsTag(newarray);
   }
 
-
-  const handleAxios=async (e)=>{
-
-    const request_data={
-      target_user:request.target_user,
-      curations:request.curations,
-      curation_tags:request.curation_tags,
-      products:request.products,
-      product_tags:request.product_tags
-    }
-    console.log(request_data);
-    axios
-    .post('/api/recommender/add/',JSON.stringify(request_data),{
-      headers:{
-        'content-type':'application/json',
-      }
-    })
-    .then((res)=>{
-      alert('성공했습니다.');
-    })
-    .catch((err)=>{
-      alert('실패했습니다.')
-    })
-  }
 
   const checkData=()=>{
     console.log(products);
@@ -265,7 +241,7 @@ const ThirdOnboard =({prevStage}) =>{
                   <FormControlLabel value={item.name} control={<Checkbox />} onClick={checkBoxhandle2} label={item.name} name={item.id}/>
                ))}
             </FormControl>
-            <div><a id="api-test-btn" onClick={handleTestBtn}>API TEST BUTTON</a></div>
+            <div class="third-onboard-finalsubmit-btn"><a id="api-test-btn" onClick={handleTestBtn}>회원가입</a></div>
         </div>
         </>
     )
