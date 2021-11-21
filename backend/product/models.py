@@ -46,7 +46,7 @@ class Product(models.Model):
 
 class ProductReview(models.Model) :
     product = models.ForeignKey('Product',related_name='product_comments',on_delete=models.CASCADE)
-    review_user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name="review_user",default='')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name="review_user",default='')
     RATE = {
         ('1','1'),
         ('2','2'),
