@@ -11,28 +11,39 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 const CurationDetail= ({match}) =>{
     const [curationinfo, setCurationinfo] = useState('');
     const [curationdelete, setCurationdelete]=useState(false);
-    const [productinfo, setProductinfo]=useState();
+    const [productId, setProductId]=useState([]);
+    const [productinfo, setProductinfo]=useState([]);
 
     const renderCurationInfo = async() =>{
-        const response=await axios.get(`/api/curation/add/${match.params.id}/`)
-        setCurationinfo(response.data);
-        console.log(response.data);
-        let products=[]
-        for (let i=0; i<response.data.products.length; i++){
-            const response2=await axios.get(`/api/product/add/${response.data.products[i]}`)
-            products.push(response2.data)
-            console.log(response.data.products[i]);
-        }
-        console.log('가져온 product 정보들', products)
-        setProductinfo(products)
+        await axios
+        .get(`http://localhost:8000/api/curation/add/${match.params.id}/`)
+        .then((res)=>{
+            setCurationinfo(res.data);
+            res.data.products.map((id)=>{
+                if(id!==undefined){
+                    testProductInfo(id);
+                }
+            })
+        })
+        .catch((err)=>console.log(err));
+        
+    }
+    const testProductInfo=async(id)=>{
+        await axios
+        .get(`http://localhost:8000/api/product/add/${id}/`)
+        .then((res)=>{
+            setProductinfo(productinfo=>[...productinfo,res.data]);
+        })
+        .catch((err)=>console.log(err));
     }
 
     useEffect (()=>{
         renderCurationInfo();
+        testProductInfo();
     },[])
 
     const deleteCuration =  () =>{
-        axios.delete(`/api/curation/add/${match.params.id}/`)
+        axios.delete(`http://localhost:8000/api/curation/add/${match.params.id}/`)
             .then(response=>setCurationdelete(true))
             .catch(error=>{
                 setCurationdelete(true);

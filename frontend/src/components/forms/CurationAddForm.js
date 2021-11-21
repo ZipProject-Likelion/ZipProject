@@ -116,7 +116,7 @@ const CurationAddForm= ()=> {
         console.log('form_data입니다',form_data);
         setSuccess(true);
         axios
-        .post('/api/curation/add/', form_data, {
+        .post('http://localhost:8000/api/curation/add/', form_data, {
             headers:{
                 'content-type':'multipart/form-data'
             }

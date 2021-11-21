@@ -73,7 +73,7 @@ export default function SignUp() {
     form_data.append('last_name',values.lastname);
 
     axios
-    .post('/api/users/auth/register/', form_data, {
+    .post('http://localhost:8000/api/users/auth/register/', form_data, {
         headers:{
             'content-type':'multipart/form-data'
         }

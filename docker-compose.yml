@@ -3,10 +3,16 @@ version: "3"
 services:
   backend:
     build: ./backend
+    expose:
+      - "8000"
+    links:
+      - frontend:frontend
     volumes:
       - ./backend/:/backend # maps host diretory to internal container directory
     working_dir: /backend/
-    command: sh entrypoint.sh
+    command: gunicorn config.wsgi:application -w 2 -b :8000
+    networks:
+      - zipproject
 
   frontend:
     build:
@@ -19,6 +25,9 @@ services:
       - build_folder:/frontend/build
       - ./frontend/node_modules/:/frontend/node_modules
     tty: true
+    networks:
+      - zipproject
+    
 
   nginx:
     build: ./nginx
@@ -26,10 +35,19 @@ services:
       - 8080:8080
     volumes:
       - build_folder:/var/www/frontend
+    links:
+      - backend:backend
+      - frontend:frontend
     depends_on:
       - backend
       - frontend
+    networks:
+      - zipproject
 
 
 volumes:
   build_folder:
+
+networks:
+  zipproject:
+    driver: bridge

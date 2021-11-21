@@ -14,7 +14,7 @@ import CurationAdd from '../component/CurationAdd';
 // django의 기본 셋팅에 맞추어 axios 통신의 기본 cookiename과 headername설정
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-
+axios.defaults.headers.post['Content-Type'] ='application/x-www-form-urlencoded';
 const Curations=()=> {
   const [curations, setCurations]=useState();
   const [shared, setShared]=useState();
@@ -29,7 +29,7 @@ const Curations=()=> {
 
   // curation list 가져오기
   const renderCuration = async()=> {
-    const response =  await axios.get('/api/curation/add/')
+    const response =  await axios.get('http://localhost:8000/api/curation/add/')
     setCurations(response.data);
     let sh=response.data.filter((data)=>data.share===true);
     let pr=response.data.filter((data)=>data.private===true);

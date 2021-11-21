@@ -19,30 +19,30 @@ from scrap.views import ScrapCurationViewSet,ScrapProductViewSet
 
 # for product app
 router = routers.DefaultRouter()
-router.register('product/add',ProductViewSet)
-router.register('product/review', ProductReviewViewSet)
-router.register('product/tag',ProductTagViewSet)
+router.register('api/product/add',ProductViewSet)
+router.register('api/product/review', ProductReviewViewSet)
+router.register('api/product/tag',ProductTagViewSet)
 
 # for curation app
-router.register('curation/add',CurationViewSet)
-router.register('curation/comment',CurationCommentViewSet)
-router.register('curation/tag',CurationTagViewSet)
+router.register('api/curation/add',CurationViewSet)
+router.register('api/curation/comment',CurationCommentViewSet)
+router.register('api/curation/tag',CurationTagViewSet)
 
 # for recommender app
-router.register('recommender/add',RecommenderViewSet)
+router.register('api/recommender/add',RecommenderViewSet)
 
 # for scrap app
-router.register('scrap/product/add',ScrapProductViewSet)
-router.register('scrap/curation/add',ScrapCurationViewSet)
+router.register('api/scrap/product/add',ScrapProductViewSet)
+router.register('api/scrap/curation/add',ScrapCurationViewSet)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include(router.urls)),
-    path('users/', include('users.urls')),
-    path('curation/', include('curation.urls')),
-    path('product/', include('product.urls')),
-    path('recommender/', include('recommender.urls')),
-    path('scrap/',include('scrap.urls')),
+    path('api/users/', include('users.urls')),
+    path('api/curation/', include('curation.urls')),
+    path('api/product/', include('product.urls')),
+    path('api/recommender/', include('recommender.urls')),
+    path('api/scrap/',include('scrap.urls')),
 ]
 
 if settings.DEBUG:

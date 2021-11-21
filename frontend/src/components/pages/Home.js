@@ -30,7 +30,7 @@ function Home() {
   }
   const handleTagsAxios=async()=>{
     axios
-    .get('/api/recommender/top_tag_list/')
+    .get('http://localhost:8000/api/recommender/top_tag_list/')
     .then((res)=>{
       console.log(res);
       setRecommendtags(res.data);
@@ -41,7 +41,7 @@ function Home() {
   }
   const handleCurationsAxios=async()=>{
     axios
-    .get('/api/recommender/recommended_curations/')
+    .get('http://localhost:8000/api/recommender/recommended_curations/')
     .then((res)=>{
       console.log(res);
       setRecommendcurations(res.data);
@@ -53,7 +53,7 @@ function Home() {
   }
   const handleProductsAxios=async()=>{
     axios
-    .get('/api/recommender/recommended_products/')
+    .get('http://localhost:8000/api/recommender/recommended_products/')
     .then((res)=>{
       console.log(res);
       setRecommendproducts(res.data);
