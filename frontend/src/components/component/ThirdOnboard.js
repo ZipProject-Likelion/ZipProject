@@ -52,7 +52,7 @@ const ThirdOnboard =({prevStage}) =>{
   }
 
   const renderData1=async()=>{
-    axios.get('http://localhost/api/product/productlist/')
+    axios.get('/api/product/productlist/')
     .then((res)=>{
       const response=res.data;
       getrandomInt(response,1);
@@ -62,7 +62,7 @@ const ThirdOnboard =({prevStage}) =>{
     })
   }
   const renderData2=async()=>{
-    axios.get('http://localhost/api/curation/curationlist/')
+    axios.get('/api/curation/curationlist/')
     .then((res)=>{
         const response=res.data;
         getrandomInt(response,2);
@@ -73,7 +73,7 @@ const ThirdOnboard =({prevStage}) =>{
   }
 
   const renderData3=async()=>{
-    axios.get('http://localhost/api/curation/taglist/')
+    axios.get('/api/curation/taglist/')
     .then((res)=>{
       const response=res.data;
       getrandomInt3(response);
@@ -84,7 +84,7 @@ const ThirdOnboard =({prevStage}) =>{
   }
 
    const renderData4=async()=>{
-    axios.get('http://localhost/api/product/taglist/')
+    axios.get('/api/product/taglist/')
     .then((res)=>{
       const response=res.data;
       getrandomInt2(response);
@@ -183,7 +183,7 @@ const ThirdOnboard =({prevStage}) =>{
     }
     console.log(request_data);
     axios
-    .post('http://localhost/api/recommender/add/',JSON.stringify(request_data),{
+    .post('/api/recommender/add/',JSON.stringify(request_data),{
       headers:{
         'content-type':'application/json',
       }

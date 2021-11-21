@@ -194,7 +194,7 @@ const FirstOnboard =({nextShow, setIndex}) =>{
         // form_data.append('profile_image',values.profile_image);
     
         axios
-        .post('http://localhost/api/users/auth/register/', form_data, {
+        .post('/api/users/auth/register/', form_data, {
             headers:{
                 'content-type':'multipart/form-data'
             }

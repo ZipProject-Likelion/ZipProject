@@ -15,7 +15,7 @@ export default function Profile() {
 
   const renderProfile=()=>{
     axios
-    .get(`http://localhost/api/users/profile/${user}/`)
+    .get(`/api/users/profile/${user}/`)
     .then((res)=>{
       setProfile(res.data);
     })
@@ -25,12 +25,12 @@ export default function Profile() {
   const getCurationData = () =>{
     const user = localStorage.getItem('user');
     axios
-    .get(`http://localhost/api/api/get-user-curation/${user}/`)
+    .get(`/api/api/get-user-curation/${user}/`)
     .then((res)=>setUsercuration(res.data))
     .catch(err=>console.log(err));
   };
   const getProductData=async()=>{
-    const response= await axios.get('http://localhost/api/product/productlist/');
+    const response= await axios.get('/api/product/productlist/');
     let userProduct=response.data.filter((data)=>data.user===user);
     setUserproduct(userProduct);
   }
@@ -39,7 +39,7 @@ export default function Profile() {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("user");
     axios
-    .post('http://localhost/api/users/auth/logout/')
+    .post('/api/users/auth/logout/')
     .then((res)=>console.log(res))
     .catch(err=>console.log(err));
 

@@ -42,7 +42,7 @@ const BookMarkProduct = (props) =>{
     const getCurationData = () =>{
         const user = localStorage.getItem('user');
         axios
-        .get(`http://localhost/api/curation/curationlist/`)
+        .get(`/api/curation/curationlist/`)
         .then((res)=>setMycurations(res.data))
         .catch(err=>console.log(err));
     }
@@ -66,7 +66,7 @@ const BookMarkProduct = (props) =>{
 
         console.log()
         axios
-        .post(`http://localhost/api/api/curation-products-update/${checkedid}/`, JSON.stringify(target),{
+        .post(`/api/api/curation-products-update/${checkedid}/`, JSON.stringify(target),{
             headers:{
                 'content-type':'application/json',
             }

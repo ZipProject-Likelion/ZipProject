@@ -14,12 +14,12 @@ const CurationDetail= ({match}) =>{
     const [productinfo, setProductinfo]=useState();
 
     const renderCurationInfo = async() =>{
-        const response=await axios.get(`http://localhost/api/curation/add/${match.params.id}/`)
+        const response=await axios.get(`/api/curation/add/${match.params.id}/`)
         setCurationinfo(response.data);
         console.log(response.data);
         let products=[]
         for (let i=0; i<response.data.products.length; i++){
-            const response2=await axios.get(`http://localhost/api/product/add/${response.data.products[i]}`)
+            const response2=await axios.get(`/api/product/add/${response.data.products[i]}`)
             products.push(response2.data)
         }
         console.log('가져온 product 정보들', products)
@@ -31,7 +31,7 @@ const CurationDetail= ({match}) =>{
     },[])
 
     const deleteCuration =  () =>{
-        axios.delete(`http://localhost/api/curation/add/${match.params.id}/`)
+        axios.delete(`/api/curation/add/${match.params.id}/`)
             .then(response=>setCurationdelete(true))
             .catch(error=>{
                 setCurationdelete(true);
