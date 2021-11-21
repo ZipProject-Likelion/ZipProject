@@ -22,14 +22,14 @@ const ProductDetail= ({match}) =>{
         renderProductInfo();
     },[])
 
-    const deleteProduct =  () =>{
-        axios.delete(`/api/product/add/${match.params.id}/`)
-            .then(response=>setProductdelete(true))
-            .catch(error=>{
-                setProductdelete(true);
-            })
+    // const deleteProduct =  () =>{
+    //     axios.delete(`/api/product/add/${match.params.id}/`)
+    //         .then(response=>setProductdelete(true))
+    //         .catch(error=>{
+    //             setProductdelete(true);
+    //         })
         
-    };
+    // };
 
     return(
         <>
@@ -67,7 +67,7 @@ const ProductDetail= ({match}) =>{
                             구매경로: {productinfo.shop_Type}
                         </li>
                     </ul>
-                    <button onClick={deleteProduct} className='delete-btn'>삭제하기</button>
+                    {/* <button onClick={deleteProduct} className='delete-btn'>삭제하기</button> */}
                 </div>
                 </>
                 }

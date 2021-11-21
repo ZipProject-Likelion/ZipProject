@@ -69,7 +69,7 @@ const BookMarkProduct = (props) =>{
 
         console.log()
         axios
-        .post(`/api/api/curation-products-update/${checkedid}/`, JSON.stringify(target),{
+        .post(`/api/curation/curation-products-update/${checkedid}/`, JSON.stringify(target),{
             headers:{
                 'content-type':'application/json',
             }
