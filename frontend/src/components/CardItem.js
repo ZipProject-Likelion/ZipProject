@@ -20,7 +20,7 @@ function CardItem(props) {
             </Link>
           <div className='cards__item__info'>
             <h5 className='cards__item__text'>{props.text}</h5>
-            <div className="cards__item__user__cat">{props.user} / {props.label}</div>
+            <div className="cards__item__user__cat">{props.user} {'>'} {props.label}</div>
             <BookMarkProduct image={props.src} user={props.user} id={props.id}/>
           </div>
         </div>

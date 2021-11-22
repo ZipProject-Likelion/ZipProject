@@ -9,6 +9,8 @@ axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 
 const CurationDetail= ({match}) =>{
+    const loginuser = localStorage.getItem('user');
+    const [checkUser, setCheckuser] = useState(false);
     const [curationinfo, setCurationinfo] = useState('');
     const [curationdelete, setCurationdelete]=useState(false);
     const [productId, setProductId]=useState([]);
@@ -28,6 +30,7 @@ const CurationDetail= ({match}) =>{
         .catch((err)=>console.log(err));
         
     }
+
     const testProductInfo=async(id)=>{
         await axios
         .get(`http://localhost:8000/api/product/add/${id}/`)
@@ -37,9 +40,18 @@ const CurationDetail= ({match}) =>{
         .catch((err)=>console.log(err));
     }
 
+    const checkSameUser = async() =>{
+        const response= await axios.get(`http://localhost:8000/api/curation/add/${match.params.id}/`)
+        const curation_user = response.data.user;
+        if(loginuser == curation_user){
+            setCheckuser(true);
+        }
+    }
+
     useEffect (()=>{
         renderCurationInfo();
         testProductInfo();
+        checkSameUser();
     },[])
 
     const deleteCuration =  () =>{
@@ -51,11 +63,15 @@ const CurationDetail= ({match}) =>{
         
     };
 
+    const undefined =  () =>{
+        alert("아직 구현되지 않은!")
+    };
+
     return(
         <>
         <div className="curation-detail-container">
                 <Link to='/curations'>
-                <button className='close-btn'> X </button>
+                <button className='close-btn'>×</button>
                 </Link>
                 <div className="curation-detail-info-box">
                     {(curationinfo!==''&&!curationdelete) &&
@@ -85,8 +101,14 @@ const CurationDetail= ({match}) =>{
                                     </>
                                 )}
                             </li>
+                            {checkUser && <>
+                                <button onClick={undefined} className='edit-btn'>수정하기</button>
+                                <button onClick={deleteCuration} className='delete-btn'>삭제하기</button>
+                                </>
+                            }
+                            <button onClick={undefined} className='scrap-btn'>스크랩</button>
+                            <button onClick={undefined} className='product-btn'>상품 추가하기</button>
                         </ul>
-                        <button onClick={deleteCuration} className='delete-btn'>삭제하기</button>
                     </div>
                     </>
                     }
