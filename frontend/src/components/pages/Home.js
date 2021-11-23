@@ -33,7 +33,7 @@ function Home() {
 
   const handleTagsAxios=async()=>{
     axios
-    .get('http://localhost:8000/api/recommender/top_tag_list/')
+    .get('http://13.124.164.255:8000/api/recommender/top_tag_list/')
     .then((res)=>{
       console.log(res);
       setRecommendtags(res.data);
@@ -45,7 +45,7 @@ function Home() {
 
   const handleCurationsAxios=async()=>{
     axios
-    .get('http://localhost:8000/api/recommender/recommended_curations/')
+    .get('http://13.124.164.255:8000/api/recommender/recommended_curations/')
     .then((res)=>{
       console.log(res);
       setRecommendcurations(res.data);
@@ -57,7 +57,7 @@ function Home() {
 
   const handleProductsAxios=async()=>{
     axios
-    .get('http://localhost:8000/api/recommender/recommended_products/')
+    .get('http://13.124.164.255:8000/api/recommender/recommended_products/')
     .then((res)=>{
       console.log(res);
       setRecommendproducts(res.data);
@@ -69,7 +69,7 @@ function Home() {
 
   const handlePopularProductsAxios=async()=>{
     axios
-    .get('http://localhost:8000/api/scrap/product/best/')
+    .get('http://13.124.164.255:8000/api/scrap/product/best/')
     .then((res)=>{
       console.log(res);
       setPopularproducts(res.data);

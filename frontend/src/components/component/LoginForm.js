@@ -38,7 +38,7 @@ const LoginForm =({prevShow}) =>{
         form_data.append('username',values.username)
         form_data.append('password',values.password)
         axios
-        .post('http://localhost:8000/api/users/auth/login/', form_data, {
+        .post('http://13.124.164.255:8000/api/users/auth/login/', form_data, {
             headers:{
                 'content-type':'multipart/form-data'
             }

@@ -15,7 +15,7 @@ export default function Profile() {
 
   const renderProfile=()=>{
     axios
-    .get(`http://localhost:8000/api/users/profile/${user}/`)
+    .get(`http://13.124.164.255:8000/api/users/profile/${user}/`)
     .then((res)=>{
       setProfile(res.data);
     })
@@ -23,13 +23,13 @@ export default function Profile() {
   };
 
   const getCurationData=async()=>{
-    const response= await axios.get('http://localhost:8000/api/curation/curationlist/');
+    const response= await axios.get('http://13.124.164.255:8000/api/curation/curationlist/');
     let userCuration=response.data.filter((data)=>data.user===user);
     setUsercuration(userCuration);
   }
 
   const getProductData=async()=>{
-    const response= await axios.get('http://localhost:8000/api/product/productlist/');
+    const response= await axios.get('http://13.124.164.255:8000/api/product/productlist/');
     let userProduct=response.data.filter((data)=>data.user===user);
     setUserproduct(userProduct);
   }
@@ -38,7 +38,7 @@ export default function Profile() {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("user");
     axios
-    .post('http://localhost:8000/api/users/auth/logout/')
+    .post('http://13.124.164.255:8000/api/users/auth/logout/')
     .then((res)=>console.log(res))
     .catch(err=>console.log(err));
 

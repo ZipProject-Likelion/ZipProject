@@ -35,7 +35,7 @@ const Products=()=> {
   // product list 가져오기
   const renderProduct = async()=> {
 
-    const response =  await axios.get('http://localhost:8000/api/product/productlist/')
+    const response =  await axios.get('http://13.124.164.255:8000/api/product/productlist/')
     console.log(response.data);
     setProducts(response.data);
     let _cat1=response.data.filter((data)=>data.type==='DIY/공구');
@@ -68,7 +68,7 @@ const Products=()=> {
   const submitHandler =(e) =>{
     e.preventDefault();
     axios
-    .get(`http://localhost:8000/api/product/add/?search=${search}`)
+    .get(`http://13.124.164.255:8000/api/product/add/?search=${search}`)
     .then((res)=>{
       setSearchData(res.data);
       setRendered(search);

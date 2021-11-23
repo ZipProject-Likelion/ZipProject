@@ -51,7 +51,7 @@ const ThirdOnboard =({prevStage,handleRecommenderAxios, handleSubmit}) =>{
   }
 
   const renderData1=async()=>{
-    axios.get('http://localhost:8000/api/product/productlist/')
+    axios.get('http://13.124.164.255:8000/api/product/productlist/')
     .then((res)=>{
       const response=res.data;
       getrandomInt(response,1);
@@ -61,7 +61,7 @@ const ThirdOnboard =({prevStage,handleRecommenderAxios, handleSubmit}) =>{
     })
   }
   const renderData2=async()=>{
-    axios.get('http://localhost:8000/api/curation/curationlist/')
+    axios.get('http://13.124.164.255:8000/api/curation/curationlist/')
     .then((res)=>{
         const response=res.data;
         getrandomInt(response,2);
@@ -72,7 +72,7 @@ const ThirdOnboard =({prevStage,handleRecommenderAxios, handleSubmit}) =>{
   }
 
   const renderData3=async()=>{
-    axios.get('http://localhost:8000/api/curation/taglist/')
+    axios.get('http://13.124.164.255:8000/api/curation/taglist/')
     .then((res)=>{
       const response=res.data;
       getrandomInt3(response);
@@ -83,7 +83,7 @@ const ThirdOnboard =({prevStage,handleRecommenderAxios, handleSubmit}) =>{
   }
 
    const renderData4=async()=>{
-    axios.get('http://localhost:8000/api/product/taglist/')
+    axios.get('http://13.124.164.255:8000/api/product/taglist/')
     .then((res)=>{
       const response=res.data;
       getrandomInt2(response);
