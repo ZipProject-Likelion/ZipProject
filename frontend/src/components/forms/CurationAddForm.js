@@ -183,7 +183,7 @@ const CurationAddForm= ()=> {
                                             onChange={handleChange} 
                                             on/>
                                     <label className="form-check-label" htmlFor="share">
-                                        <Button variant="primary" size="sm" className={classes.shareBtn}>
+                                        <Button size="sm" className="share_Btn">
                                         공유
                                         </Button> 
         

@@ -3,6 +3,11 @@ import '../App.css';
 import { Button } from './Button';
 import './HeroSection.css';
 import { Link } from 'react-router-dom';
+
+const undefined =  () =>{
+  alert("아직 구현되지 않은!")
+}
+
 function HeroSection() {
   return (
     <div className='hero-container'>
@@ -15,7 +20,7 @@ function HeroSection() {
                 className='serach-input'
                 placeholder='원하는 상품과 큐레이션을 검색해보세요!'
               />
-              <Button buttonStyle='btn--primary'>검색</Button>
+              <Button onClick={undefined} buttonStyle='btn--primary'>검색</Button>
           </div>
         <div className='hero-btns'>
           <Link to='/curations'>
@@ -23,7 +28,7 @@ function HeroSection() {
               buttonStyle='btn--primary'
               buttonSize='btn--large'
             >
-            새 큐레이션 만들기
+            큐레이션 보러가기
             </Button>
           </Link>
           <Link to='/products'>
@@ -32,13 +37,11 @@ function HeroSection() {
             buttonStyle='btn--primary'
             buttonSize='btn--large'
           >
-          새 상품 추가하기
+          상품 보러가기
           </Button>
           </Link>
           </div>
       </div>
-      {/* <div className='mid-container'></div>
-      <div className='bottom-container'></div> */}
     </div>
   );
 }

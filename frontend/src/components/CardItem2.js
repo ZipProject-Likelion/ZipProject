@@ -17,9 +17,11 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import {Button} from 'react-bootstrap';
+import './CardItem2.css'
+
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: 345,
+    width: 303,
     margin: '20px',
   },
   media: {
@@ -48,6 +50,10 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+const undefined =  () =>{
+  alert("아직 구현되지 않은!")
+}
+
 export default function CardItem2({curation}) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
@@ -69,7 +75,7 @@ export default function CardItem2({curation}) {
             </Avatar>
           }
           action={
-            <IconButton aria-label="settings">
+            <IconButton onClick={undefined} aria-label="settings">
               <MoreVertIcon />
             </IconButton>
           }
@@ -98,14 +104,14 @@ export default function CardItem2({curation}) {
               </>
             ):(
               <>
-            <Button variant="primary" size="sm" className={classes.shareBtn}>
+            <Button size="sm" className="share_Btn">
             공유
             </Button>
               </>
             )
           }
           </IconButton>
-          <IconButton aria-label="add to favorites">
+          <IconButton onClick={undefined} aria-label="add to favorites" >
             <FavoriteIcon />
           </IconButton>
         {/* <IconButton

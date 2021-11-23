@@ -22,13 +22,12 @@ export default function Profile() {
     .catch(err=>console.log(err));
   };
 
-  const getCurationData = () =>{
-    const user = localStorage.getItem('user');
-    axios
-    .get(`http://localhost:8000/api/get-user-curation/${user}/`)
-    .then((res)=>setUsercuration(res.data))
-    .catch(err=>console.log(err));
-  };
+  const getCurationData=async()=>{
+    const response= await axios.get('http://localhost:8000/api/curation/curationlist/');
+    let userCuration=response.data.filter((data)=>data.user===user);
+    setUsercuration(userCuration);
+  }
+
   const getProductData=async()=>{
     const response= await axios.get('http://localhost:8000/api/product/productlist/');
     let userProduct=response.data.filter((data)=>data.user===user);
@@ -60,7 +59,7 @@ export default function Profile() {
           <Avatar className="profile-avatar">
             {user}
           </Avatar>
-          {profile && <div className="hi-msg">{profile.last_name} {profile.first_name}님 환영합니다.</div>}
+          {profile && <div className="hi-msg">{profile.last_name} 님 환영합니다.</div>}
           <button onClick={handleLogout} className="logout-btn">로그아웃</button>
 
         </div>
@@ -72,10 +71,10 @@ export default function Profile() {
           className="curation-tab"
         >
           <Tab eventKey="내 큐레이션" title="내 큐레이션">
-            <CurationCards data={usercuration}/>;
+            <CurationCards data={usercuration}/>
           </Tab>
           <Tab eventKey="내 상품" title="내 상품">
-            <ProductCards data={userproduct}/>;
+            <ProductCards data={userproduct}/>
           </Tab>
         </Tabs>
       </div>
