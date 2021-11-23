@@ -4,7 +4,6 @@
 .modal-box{
     width: 100%;
     display:flex;
-    flex-wrap: wrap;
 }
 .left-modal-box{
     padding-left: 10%;
