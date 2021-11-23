@@ -4,7 +4,6 @@
 .modal-box{
     width: 100%;
     display:flex;
-    flex-wrap: wrap;
 }
 .left-modal-box{
     padding-left: 10%;
@@ -16,10 +15,13 @@
     border-radius: 20px;
     overflow: hidden;
 }
+.mycuration-list-wrapper{
+    height:250px;
+    overflow-x:scroll;
+    margin-top: 15px;
+}
 .mycuration-list{
-    height: 300px;
     width: 300px;
-    overflow: auto;
 }
 .mycuration-list-checkbox{
     padding-right: 20px;

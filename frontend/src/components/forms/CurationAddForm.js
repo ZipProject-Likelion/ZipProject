@@ -116,7 +116,7 @@ const CurationAddForm= ()=> {
         console.log('form_data입니다',form_data);
         setSuccess(true);
         axios
-        .post('/curation/add/', form_data, {
+        .post('http://13.124.164.255:8000/api/curation/add/', form_data, {
             headers:{
                 'content-type':'multipart/form-data'
             }
@@ -183,7 +183,7 @@ const CurationAddForm= ()=> {
                                             onChange={handleChange} 
                                             on/>
                                     <label className="form-check-label" htmlFor="share">
-                                        <Button variant="primary" size="sm" className={classes.shareBtn}>
+                                        <Button size="sm" className="share_Btn">
                                         공유
                                         </Button> 
         

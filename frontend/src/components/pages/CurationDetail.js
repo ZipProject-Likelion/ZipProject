@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
-import { Image} from 'react-bootstrap';
+import {Image} from 'react-bootstrap';
 import ProductCards from '../ProductCards';
 import '../css/CurationDetail.css';
 
@@ -9,29 +9,53 @@ axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 
 const CurationDetail= ({match}) =>{
+    const loginuser = localStorage.getItem('user');
+    const [checkUser, setCheckuser] = useState(false);
     const [curationinfo, setCurationinfo] = useState('');
     const [curationdelete, setCurationdelete]=useState(false);
-    const [productinfo, setProductinfo]=useState();
+    const [productId, setProductId]=useState([]);
+    const [productinfo, setProductinfo]=useState([]);
 
     const renderCurationInfo = async() =>{
-        const response=await axios.get(`/curation/add/${match.params.id}/`)
-        setCurationinfo(response.data);
-        console.log(response.data);
-        let products=[]
-        for (let i=0; i<response.data.products.length; i++){
-            const response2=await axios.get(`/product/add/${response.data.products[i]}`)
-            products.push(response2.data)
+        await axios
+        .get(`http://13.124.164.255:8000/api/curation/add/${match.params.id}/`)
+        .then((res)=>{
+            setCurationinfo(res.data);
+            res.data.products.map((id)=>{
+                if(id!==undefined){
+                    testProductInfo(id);
+                }
+            })
+        })
+        .catch((err)=>console.log(err));
+        
+    }
+
+    const testProductInfo=async(id)=>{
+        await axios
+        .get(`http://13.124.164.255:8000/api/product/add/${id}/`)
+        .then((res)=>{
+            setProductinfo(productinfo=>[...productinfo,res.data]);
+        })
+        .catch((err)=>console.log(err));
+    }
+
+    const checkSameUser = async() =>{
+        const response= await axios.get(`http://13.124.164.255:8000/api/curation/add/${match.params.id}/`)
+        const curation_user = response.data.user;
+        if(loginuser == curation_user){
+            setCheckuser(true);
         }
-        console.log('가져온 product 정보들', products)
-        setProductinfo(products)
     }
 
     useEffect (()=>{
         renderCurationInfo();
+        testProductInfo();
+        checkSameUser();
     },[])
 
     const deleteCuration =  () =>{
-        axios.delete(`/curation/add/${match.params.id}/`)
+        axios.delete(`http://13.124.164.255:8000/api/curation/add/${match.params.id}/`)
             .then(response=>setCurationdelete(true))
             .catch(error=>{
                 setCurationdelete(true);
@@ -39,11 +63,15 @@ const CurationDetail= ({match}) =>{
         
     };
 
+    const undefined =  () =>{
+        alert("아직 구현되지 않은!")
+    };
+
     return(
         <>
         <div className="curation-detail-container">
                 <Link to='/curations'>
-                <button className='close-btn'> X </button>
+                <button className='close-btn'>×</button>
                 </Link>
                 <div className="curation-detail-info-box">
                     {(curationinfo!==''&&!curationdelete) &&
@@ -73,8 +101,14 @@ const CurationDetail= ({match}) =>{
                                     </>
                                 )}
                             </li>
+                            {checkUser && <>
+                                <button onClick={undefined} className='edit-btn'>수정하기</button>
+                                <button onClick={deleteCuration} className='delete-btn'>삭제하기</button>
+                                </>
+                            }
+                            <button onClick={undefined} className='scrap-btn'>스크랩</button>
+                            <button onClick={undefined} className='product-btn'>상품 추가하기</button>
                         </ul>
-                        <button onClick={deleteCuration} className='delete-btn'>삭제하기</button>
                     </div>
                     </>
                     }

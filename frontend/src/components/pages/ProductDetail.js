@@ -1,50 +1,65 @@
 import axios from 'axios';
 import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
-import '../css/CurationDetail.css';
 import '../css/ProductDetail.css';
+import BookMarkProduct from '../component/BookMarkProduct';
 
 
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 
 const ProductDetail= ({match}) =>{
+    const loginuser = localStorage.getItem('user');
+    const [checkUser, setCheckuser] = useState(false);
     const [productinfo, setProductinfo] = useState('');
     const [productdelete, setProductdelete]=useState(false);
 
     const renderProductInfo = async() =>{
-        const response= await axios.get(`/product/add/${match.params.id}/`)
+        const response= await axios.get(`http://13.124.164.255:8000/api/product/add/${match.params.id}/`)
         setProductinfo(response.data);
         console.log(response.data);
     }
 
+    const checkSameUser = async() =>{
+        const response= await axios.get(`http://13.124.164.255:8000/api/product/add/${match.params.id}/`)
+        const product_user = response.data.user;
+        if(loginuser == product_user){
+            setCheckuser(true);
+        }
+    }
+
     useEffect (()=>{
         renderProductInfo();
+        checkSameUser();
     },[])
 
+    const undefined =  () =>{
+        alert("아직 구현되지 않은!")
+    }
+
     const deleteProduct =  () =>{
-        axios.delete(`/product/add/${match.params.id}/`)
+        axios.delete(`http://13.124.164.255:8000/api/product/add/${match.params.id}/`)
             .then(response=>setProductdelete(true))
             .catch(error=>{
                 setProductdelete(true);
             })
-        
-    };
+    }
+    
 
     return(
         <>
-        <div className="curation-detail-container"> 
+        <div className="product-detail-container"> 
             <Link to='/products'>
             <button className='close-btn'>×</button>
             </Link>
-            <div className="curation-detail-info-box">
+            <div className="product-detail-info-box">
                 {(productinfo!==''&&!productdelete) &&
                 <>
-                <div className="curation-detail-left">
-                    <img src={productinfo.image} alt='no-image' className="curation-thumbnail"/>
+                <div className="product-detail-left">
+                    <img src={productinfo.image} alt='no-image' className="product-thumbnail"/>
                 </div>
-                <div className="curation-detail-right">
-                    <ul className='curation-detail-list'>
+                <div className="product-detail-right">
+                    <ul className='product-detail-list'>
                         <li className="list-title">
                             {productinfo.title}
                         </li>
@@ -61,13 +76,18 @@ const ProductDetail= ({match}) =>{
                             카테고리: {productinfo.type}
                         </li>
                         <li>
-                            구매 URL: {productinfo.shop_url_location}
+                        구매 URL : <button onClick={() => window.open(productinfo.shop_URL_Location, '_blank')} className='url-btn'>바로가기</button>
                         </li>
                         <li>
                             구매경로: {productinfo.shop_Type}
                         </li>
+                        {checkUser && <>
+                            <button onClick={undefined} className='edit-btn'>수정하기</button>
+                            <button onClick={deleteProduct} className='delete-btn'>삭제하기</button>
+                            </>
+                        }
+                        <button onClick={undefined} className='bookmark-btn'>큐레이션에 추가</button>
                     </ul>
-                    <button onClick={deleteProduct} className='delete-btn'>삭제하기</button>
                 </div>
                 </>
                 }

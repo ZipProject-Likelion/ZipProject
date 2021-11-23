@@ -59,7 +59,7 @@ const ProductAdd = ()=>{
 
         // product-add (post)
         axios
-        .post('/product/add/', form_data, {
+        .post('http://13.124.164.255:8000/api/product/add/', form_data, {
             headers:{
                 'content-type':'multipart/form-data'
             }

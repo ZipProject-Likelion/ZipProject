@@ -44,7 +44,7 @@ const loginUser =(credentials) =>{
     form_data.append('email',credentials.email)
     form_data.append('password',credentials.password)
     const response =axios
-    .post('/users/auth/login/', form_data, {
+    .post('http://13.124.164.255:8000/api/users/auth/login/', form_data, {
         headers:{
             'content-type':'multipart/form-data'
         }
@@ -71,7 +71,7 @@ export default function Signin() {
     form_data.append('email',email)
     form_data.append('password',password)
     axios
-    .post('/users/auth/login/', form_data, {
+    .post('http://13.124.164.255:8000/api/users/auth/login/', form_data, {
         headers:{
             'content-type':'multipart/form-data'
         }

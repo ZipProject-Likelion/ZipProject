@@ -20,18 +20,21 @@ h1 {
 .cards__wrapper {
   position: relative;
   margin: 50px 0 45px;
-  display:flex;
+  display:grid;
   flex-direction: column-reverse;
+  width:100%;
 }
 .cards__wrapper2{
   position: relative;
-  display:flex;
+  display:grid;
   flex-direction: row-revsere;
 }
 .cards__items {
-  margin: 0 auto;
-  margin-bottom: 24px;
-  flex-direction:row-reverse;
+    margin: 0 auto;
+    margin-bottom: 24px;
+    grid-template-columns: repeat(3,1fr);
+    display: grid;
+    flex-direction: row-reverse;
 }
 
 .cards__item {
@@ -39,8 +42,9 @@ h1 {
   flex: 1;
   margin: 0 1rem;
   border-radius: 10px;
-  width: 300px !important;
+  width: 303px !important;
   position: relative;
+  margin-bottom: 20px;
 }
 
 .cards__item__link {
@@ -141,11 +145,11 @@ h1 {
   }
 }
 
-@media only screen and (min-width: 1024px) {
+/* @media only screen and (min-width: 1024px) {
   .cards__items {
     display: flex;
   }
-}
+} */
 
 @media only screen and (max-width: 1024px) {
   .cards__item {

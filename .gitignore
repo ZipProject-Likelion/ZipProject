@@ -1,3 +1,3 @@
 .gitsecret/keys/random_seed
-!*.secret
-backend/config/settings.py
+!*.secretㅊ
+# ./settings.py

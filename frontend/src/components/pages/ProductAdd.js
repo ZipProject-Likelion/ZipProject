@@ -60,7 +60,7 @@ const ProductAdd = ()=>{
 
         // product-add (post)
         axios
-        .post('/product/add/', form_data, {
+        .post('http://13.124.164.255:8000/api/product/add/', form_data, {
             headers:{
                 'content-type':'multipart/form-data'
             }
@@ -79,7 +79,7 @@ const ProductAdd = ()=>{
             shop_url_location:'',
             type:'',
         })
-        setSuccess('큐레이션이 성공적으로 만들어졌습니다!')
+        setSuccess('상품이 성공적으로 추가되었습니다!')
         
         
     }
@@ -108,7 +108,7 @@ const ProductAdd = ()=>{
                                 className='form-control'
                                 type="text"
                                 name="title"
-                                placeholder="상품명을 입력하세요"
+                                placeholder="상품명을 입력해 주세요."
                                 value={values.title}
                                 onChange={handleChange}
                             />
@@ -119,7 +119,7 @@ const ProductAdd = ()=>{
                                 className='form-control'
                                 type="text"
                                 name="content"
-                                placeholder="상품 설명을 입력하세요"
+                                placeholder="상품 설명을 입력해 주세요."
                                 value={values.content}
                                 onChange={handleChange}
                                 required
@@ -131,7 +131,7 @@ const ProductAdd = ()=>{
                                 className='form-control'
                                 type="number"
                                 name="price"
-                                placeholder="상품 가격을 입력하세요"
+                                placeholder="상품 가격을 입력해 주세요."
                                 value={values.price}
                                 onChange={handleChange}
                                 required
@@ -143,7 +143,7 @@ const ProductAdd = ()=>{
                                 className='form-control'
                                 type="text"
                                 name="shop_url_location"
-                                placeholder="상품 구매 링크를"
+                                placeholder="상품 구매 링크를 입력해 주세요."
                                 value={values.shop_url_location}
                                 onChange={handleChange}
                                 required

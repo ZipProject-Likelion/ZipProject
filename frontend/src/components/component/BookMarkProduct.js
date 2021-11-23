@@ -9,7 +9,6 @@ import '../css/BookMarkProduct.css'
 
 
 
-
 const BookMarkProduct = (props) =>{
     const [show, setShow] = useState(false);
     const [success, setSuccess] =useState(false);
@@ -39,11 +38,14 @@ const BookMarkProduct = (props) =>{
     const handleChange = (e) =>{
         console.log(e.target.value);
     }
-    const getCurationData = () =>{
-        const user = localStorage.getItem('user');
+    const getCurationData = async() =>{
+        const user=localStorage.getItem('user');
         axios
-        .get(`curation/curationlist/`)
-        .then((res)=>setMycurations(res.data))
+        .get(`http://13.124.164.255:8000/api/curation/add/`)
+        .then((res)=>{
+            let filtered_data=res.data.filter((data)=>data.share===true || data.username===user);
+            setMycurations(filtered_data);
+        })
         .catch(err=>console.log(err));
     }
     const addProductData =(e) =>{
@@ -66,7 +68,7 @@ const BookMarkProduct = (props) =>{
 
         console.log()
         axios
-        .post(`/api/curation-products-update/${checkedid}/`, JSON.stringify(target),{
+        .post(`http://13.124.164.255:8000/api/curation/curation-products-update/${checkedid}/`, JSON.stringify(target),{
             headers:{
                 'content-type':'application/json',
             }
@@ -104,20 +106,22 @@ const BookMarkProduct = (props) =>{
                     </img>
                 </div>
                 <div className="right-modal-box">
-                *    <ul className="mycuration-list">
-                        {mycurations && mycurations.map((item)=>{
-                            return ( 
-                            <li className="mycuration-list-titles">
-                                <Form.Check aria-label="option 1" onClick={oneCheckBox} onChange={handleChange} value={item.id} name="checkbox-one" className="mycuration-list-checkbox"/>
-                                <div className="mycurattion-list-title">
-                                <div>
-                                {item.title}
-                                </div>
-                                </div>
-                            </li>
-                            );
-                        })}
-                    </ul>
+                    <div className="mycuration-list-wrapper"> 
+                        <ul className="mycuration-list">
+                            {mycurations && mycurations.map((item)=>{
+                                return ( 
+                                <li className="mycuration-list-titles">
+                                    <Form.Check aria-label="option 1" onClick={oneCheckBox} onChange={handleChange} value={item.id} name="checkbox-one" className="mycuration-list-checkbox"/>
+                                    <div className="mycurattion-list-title">
+                                    <div>
+                                    {item.title}
+                                    </div>
+                                    </div>
+                                </li>
+                                );
+                            })}
+                        </ul>
+                    </div>
                 </div>
 
             </div>
