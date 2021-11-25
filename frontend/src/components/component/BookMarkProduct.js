@@ -41,7 +41,7 @@ const BookMarkProduct = (props) =>{
     const getCurationData = async() =>{
         const user=localStorage.getItem('user');
         axios
-        .get(`http://13.124.164.255:8000/api/curation/add/`)
+        .get(`http://13.124.164.255/api/curation/add/`)
         .then((res)=>{
             let filtered_data=res.data.filter((data)=>data.share===true || data.username===user);
             setMycurations(filtered_data);
@@ -68,7 +68,7 @@ const BookMarkProduct = (props) =>{
 
         console.log()
         axios
-        .post(`http://13.124.164.255:8000/api/curation/curation-products-update/${checkedid}/`, JSON.stringify(target),{
+        .post(`http://13.124.164.255/api/curation/curation-products-update/${checkedid}/`, JSON.stringify(target),{
             headers:{
                 'content-type':'application/json',
             }

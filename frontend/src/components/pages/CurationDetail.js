@@ -18,7 +18,7 @@ const CurationDetail= ({match}) =>{
 
     const renderCurationInfo = async() =>{
         await axios
-        .get(`http://13.124.164.255:8000/api/curation/add/${match.params.id}/`)
+        .get(`http://13.124.164.255/api/curation/add/${match.params.id}/`)
         .then((res)=>{
             setCurationinfo(res.data);
             res.data.products.map((id)=>{
@@ -33,7 +33,7 @@ const CurationDetail= ({match}) =>{
 
     const testProductInfo=async(id)=>{
         await axios
-        .get(`http://13.124.164.255:8000/api/product/add/${id}/`)
+        .get(`http://13.124.164.255/api/product/add/${id}/`)
         .then((res)=>{
             setProductinfo(productinfo=>[...productinfo,res.data]);
         })
@@ -41,7 +41,7 @@ const CurationDetail= ({match}) =>{
     }
 
     const checkSameUser = async() =>{
-        const response= await axios.get(`http://13.124.164.255:8000/api/curation/add/${match.params.id}/`)
+        const response= await axios.get(`http://13.124.164.255/api/curation/add/${match.params.id}/`)
         const curation_user = response.data.user;
         if(loginuser == curation_user){
             setCheckuser(true);
@@ -55,7 +55,7 @@ const CurationDetail= ({match}) =>{
     },[])
 
     const deleteCuration =  () =>{
-        axios.delete(`http://13.124.164.255:8000/api/curation/add/${match.params.id}/`)
+        axios.delete(`http://13.124.164.255/api/curation/add/${match.params.id}/`)
             .then(response=>setCurationdelete(true))
             .catch(error=>{
                 setCurationdelete(true);

@@ -15,13 +15,13 @@ const ProductDetail= ({match}) =>{
     const [productdelete, setProductdelete]=useState(false);
 
     const renderProductInfo = async() =>{
-        const response= await axios.get(`http://13.124.164.255:8000/api/product/add/${match.params.id}/`)
+        const response= await axios.get(`http://13.124.164.255/api/product/add/${match.params.id}/`)
         setProductinfo(response.data);
         console.log(response.data);
     }
 
     const checkSameUser = async() =>{
-        const response= await axios.get(`http://13.124.164.255:8000/api/product/add/${match.params.id}/`)
+        const response= await axios.get(`http://13.124.164.255/api/product/add/${match.params.id}/`)
         const product_user = response.data.user;
         if(loginuser == product_user){
             setCheckuser(true);
@@ -38,7 +38,7 @@ const ProductDetail= ({match}) =>{
     }
 
     const deleteProduct =  () =>{
-        axios.delete(`http://13.124.164.255:8000/api/product/add/${match.params.id}/`)
+        axios.delete(`http://13.124.164.255/api/product/add/${match.params.id}/`)
             .then(response=>setProductdelete(true))
             .catch(error=>{
                 setProductdelete(true);
