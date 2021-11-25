@@ -1,9 +1,9 @@
 import operator
 from rest_framework import viewsets
 from rest_framework.response import Response
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
-from .permissions import IsOwnerOrReadOnly
+# from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+# from rest_framework.permissions import IsAuthenticatedOrReadOnly
+# from .permissions import IsOwnerOrReadOnly
 
 from .models import Recommender
 from product.models import Product
@@ -15,18 +15,19 @@ from product.serializers import ProductTagSerializer
 from curation.serializers import CurationSerializer
 
 class RecommenderViewSet(viewsets.ModelViewSet):
-    authentication_classes = [BasicAuthentication, SessionAuthentication]
-    permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+    # authentication_classes = [BasicAuthentication, SessionAuthentication]
+    # permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
     queryset = Recommender.objects.all()
     serializer_class = RecommenderSerializer
+    lookup_field = 'target_user'
 
-    def chosen_tag_list(self,request):
+    def chosen_tag_list(self,request,username):
         choice = Recommender.objects.all()
         chosen_tags = []
-
+        
         # 이용자의 선택지에서 tag 요소를 모두 추출
         for i in choice:
-            if i.target_user==request.user:
+            if str(i.target_user)==username:
                 for product in i.products.all(): # 상품
                     for tag in product.tags.all():
                         chosen_tags.append(tag)
@@ -41,11 +42,11 @@ class RecommenderViewSet(viewsets.ModelViewSet):
         serializer = ProductTagSerializer(chosen_tags,many=True)
         return Response(serializer.data)
 
-    def top_tag_list(self,request):
+    def top_tag_list(self,request,username):
         choice = Recommender.objects.all()
         chosen_tags = []
         for i in choice:
-            if i.target_user==request.user:
+            if str(i.target_user)==username:
                 for product in i.products.all():
                     for tag in product.tags.all():
                         chosen_tags.append(tag)
@@ -87,20 +88,21 @@ class RecommenderViewSet(viewsets.ModelViewSet):
         serializer = ProductTagSerializer(top_tags,many=True)
         return Response(serializer.data)
 
-    def recommend_product(self,request):
+    def recommend_product(self,request,username):
         choice = Recommender.objects.all()
         chosen_tags = []
         for i in choice:
-            for product in i.products.all():
-                for tag in product.tags.all():
+            if str(i.target_user)==username:
+                for product in i.products.all(): # 상품
+                    for tag in product.tags.all():
+                        chosen_tags.append(tag)
+                for tag in i.product_tags.all(): # 상품 태그
                     chosen_tags.append(tag)
-            for tag in i.product_tags.all():
-                chosen_tags.append(tag)
-            for curations in i.curations.all():
-                for tag in curations.tags.all():
+                for curations in i.curations.all(): # 큐레이션
+                    for tag in curations.tags.all():
+                        chosen_tags.append(tag)
+                for tag in i.curation_tags.all(): # 큐레이션 태그
                     chosen_tags.append(tag)
-            for tag in i.curation_tags.all():
-                chosen_tags.append(tag)
 
         # 각 tag 요소의 개수를 count
         tag_count = {}
@@ -138,20 +140,21 @@ class RecommenderViewSet(viewsets.ModelViewSet):
         serializer = ProductSerializer(recommended_products,many=True)
         return Response(serializer.data)
 
-    def recommend_curation(self,request):
+    def recommend_curation(self,request,username):
         choice = Recommender.objects.all()
         chosen_tags = []
         for i in choice:
-            for product in i.products.all():
-                for tag in product.tags.all():
+            if str(i.target_user)==username:
+                for product in i.products.all(): # 상품
+                    for tag in product.tags.all():
+                        chosen_tags.append(tag)
+                for tag in i.product_tags.all(): # 상품 태그
                     chosen_tags.append(tag)
-            for tag in i.product_tags.all():
-                chosen_tags.append(tag)
-            for curations in i.curations.all():
-                for tag in curations.tags.all():
+                for curations in i.curations.all(): # 큐레이션
+                    for tag in curations.tags.all():
+                        chosen_tags.append(tag)
+                for tag in i.curation_tags.all(): # 큐레이션 태그
                     chosen_tags.append(tag)
-            for tag in i.curation_tags.all():
-                chosen_tags.append(tag)
 
         # 각 tag 요소의 개수를 count
         tag_count = {}
@@ -188,7 +191,9 @@ class RecommenderViewSet(viewsets.ModelViewSet):
         serializer = CurationSerializer(recommended_curations,many=True)
         return Response(serializer.data)
 
-recommender_list = RecommenderViewSet.as_view({'get': 'list'})
+target_user_list = RecommenderViewSet.as_view({'get': 'list'})
+recommender_list = RecommenderViewSet.as_view({'get': 'retrieve'})
+
 chosen_tag_list = RecommenderViewSet.as_view({'get': 'chosen_tag_list'})
 top_tag_list = RecommenderViewSet.as_view({'get': 'top_tag_list'})
 recommended_products = RecommenderViewSet.as_view({'get': 'recommend_product'})

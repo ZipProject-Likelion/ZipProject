@@ -196,13 +196,11 @@ const FirstOnboard =({nextShow, setIndex}) =>{
       if(key){
         swal("Success", '성공', "success", {
           buttons: false,
-          timer: 5000,
         })
         localStorage.setItem('accessToken', key);
         localStorage.setItem('user', user);
+        window.location.href="/";
       }
-      
-      alert('성공했습니다.');
     })
     .catch((err)=>{
       console.log(err);

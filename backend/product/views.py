@@ -3,7 +3,6 @@ from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.authentication import SessionAuthentication,BasicAuthentication
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from .permissions import IsOwnerOrReadOnly
 
 from django.shortcuts import render, get_list_or_404
@@ -17,7 +16,7 @@ from .serializers import ProductSerializer,ProductTagSerializer,ProductReviewSer
 
 class ProductViewSet(viewsets.ModelViewSet):
     authentication_classes = [BasicAuthentication, SessionAuthentication]
-    permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+    permission_classes = [IsOwnerOrReadOnly]
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
@@ -26,7 +25,7 @@ class ProductViewSet(viewsets.ModelViewSet):
 
 class ProductReviewViewSet(viewsets.ModelViewSet):
     authentication_classes = [BasicAuthentication, SessionAuthentication]
-    permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+    permission_classes = [IsOwnerOrReadOnly]
     queryset = ProductReview.objects.all()
     serializer_class = ProductReviewSerializer
 
