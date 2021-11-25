@@ -20,7 +20,6 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 
 
 const Products=()=> {
-
   const [search, setSearch]=useState('');
   const [searchData, setSearchData]=useState('');
   const [products, setProducts]=useState('');
@@ -35,7 +34,7 @@ const Products=()=> {
   // product list 가져오기
   const renderProduct = async()=> {
 
-    const response =  await axios.get('http://13.124.164.255:8000/api/product/productlist/')
+    const response =  await axios.get('http://13.124.164.255/api/product/productlist/')
     console.log(response.data);
     setProducts(response.data);
     let _cat1=response.data.filter((data)=>data.type==='DIY/공구');
@@ -68,7 +67,7 @@ const Products=()=> {
   const submitHandler =(e) =>{
     e.preventDefault();
     axios
-    .get(`http://13.124.164.255:8000/api/product/add/?search=${search}`)
+    .get(`http://13.124.164.255/api/product/add/?search=${search}`)
     .then((res)=>{
       setSearchData(res.data);
       setRendered(search);
@@ -83,7 +82,11 @@ const Products=()=> {
     checkUser();
   },[])
 
-
+  const closeHandler =(e)=>{
+    setSearch(false);
+    setSearchData(false);
+    setRendered(false);
+  }
 
   return(
     <>
@@ -147,10 +150,18 @@ const Products=()=> {
         (
           <>
           <div className="search-result-container">
-          <h3 className="search-result-title"><span className="hightlight"> {rendered} </span> 키워드로 검색한 결과입니다.</h3>
+          <h3 className="search-result-title">
+            <span className="hightlight">{rendered}</span> 키워드로 검색한 결과입니다.
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <button onClick={closeHandler} className='delete-btn'>×</button>
+          </h3>
           <ProductCards data={searchData}/>
           </div>
-
           </>
           
         )}

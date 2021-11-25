@@ -33,7 +33,7 @@ const useForm = (callback, validate) => {
     form_data.append('first_name',values.firstname);
     form_data.append('last_name',values.lastname);
     axios
-    .post('http://13.124.164.255:8000/api/users/auth/register/', form_data, {
+    .post('http://13.124.164.255/api/users/auth/register/', form_data, {
         headers:{
             'content-type':'multipart/form-data'
         }

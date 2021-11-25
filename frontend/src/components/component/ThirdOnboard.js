@@ -36,7 +36,7 @@ const ThirdOnboard =({prevStage,handleRecommenderAxios, handleSubmit}) =>{
   const checkBoxhandle1=(e)=>{
     e.preventDefault();
     const {name}=e.target;
-    if(name!==NaN){
+    if(!isNaN(name)){
       setLikedCurationTag(likedCurationTags=>[...likedCurationTags, parseInt(name)]);
     }
     console.log(likedCurationTags);
@@ -44,14 +44,14 @@ const ThirdOnboard =({prevStage,handleRecommenderAxios, handleSubmit}) =>{
   const checkBoxhandle2=(e)=>{
     e.preventDefault();
     const {name}=e.target;
-    if(name!==NaN){
+    if(!isNaN(name)){
       setLikedProductsTag(likedProductsTags=>[...likedProductsTags, parseInt(name)]);
     }  
     console.log(likedProductsTags);
   }
 
   const renderData1=async()=>{
-    axios.get('http://13.124.164.255:8000/api/product/productlist/')
+    axios.get('http://13.124.164.255/api/product/productlist/')
     .then((res)=>{
       const response=res.data;
       getrandomInt(response,1);
@@ -61,7 +61,7 @@ const ThirdOnboard =({prevStage,handleRecommenderAxios, handleSubmit}) =>{
     })
   }
   const renderData2=async()=>{
-    axios.get('http://13.124.164.255:8000/api/curation/curationlist/')
+    axios.get('http://13.124.164.255/api/curation/curationlist/')
     .then((res)=>{
         const response=res.data;
         getrandomInt(response,2);
@@ -72,7 +72,7 @@ const ThirdOnboard =({prevStage,handleRecommenderAxios, handleSubmit}) =>{
   }
 
   const renderData3=async()=>{
-    axios.get('http://13.124.164.255:8000/api/curation/taglist/')
+    axios.get('http://13.124.164.255/api/curation/taglist/')
     .then((res)=>{
       const response=res.data;
       getrandomInt3(response);
@@ -83,7 +83,7 @@ const ThirdOnboard =({prevStage,handleRecommenderAxios, handleSubmit}) =>{
   }
 
    const renderData4=async()=>{
-    axios.get('http://13.124.164.255:8000/api/product/taglist/')
+    axios.get('http://13.124.164.255/api/product/taglist/')
     .then((res)=>{
       const response=res.data;
       getrandomInt2(response);
@@ -102,13 +102,9 @@ const ThirdOnboard =({prevStage,handleRecommenderAxios, handleSubmit}) =>{
 
   },[])
   
-  const handleTestBtn=()=>{
-    const testBtn=document.getElementById('api-test-btn');
-    testBtn.addEventListener('click',(e)=>{
+  const handleTestBtn=(e)=>{
       e.preventDefault();
       handleSubmit(request);
-      testBtn.removeEventListener('click',(e)=>{});
-    })
   }
 
   useEffect(()=>{
@@ -247,27 +243,4 @@ const ThirdOnboard =({prevStage,handleRecommenderAxios, handleSubmit}) =>{
     )
 }
 
-const itemData = [
-    {
-      img: 'https://images.unsplash.com/photo-1551963831-b3b1ca40c98e',
-      title: 'Breakfast',
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d',
-      title: 'Burger',
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1522770179533-24471fcdba45',
-      title: 'Camera',
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c',
-      title: 'Coffee',
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1533827432537-70133748f5c8',
-      title: 'Hats',
-    }
-
-  ];
 export default ThirdOnboard;

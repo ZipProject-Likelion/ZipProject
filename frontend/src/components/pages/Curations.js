@@ -35,7 +35,7 @@ const Curations=()=> {
 
   // curation list 가져오기
   const renderCuration = async()=> {
-    const response =  await axios.get('http://13.124.164.255:8000/api/curation/add/')
+    const response =  await axios.get('http://13.124.164.255/api/curation/add/')
     setCurations(response.data);
     let sh=response.data.filter((data)=>data.share===true);
     let pr=response.data.filter((data)=>data.private===true);
@@ -61,7 +61,7 @@ const Curations=()=> {
   const submitHandler =(e) =>{
     e.preventDefault();
     axios
-    .get(`http://13.124.164.255:8000/api/curation/add/?search=${search}`)
+    .get(`http://13.124.164.255/api/curation/add/?search=${search}`)
     .then((res)=>{
       setSearchData(res.data);
       setRendered(search);
@@ -70,7 +70,11 @@ const Curations=()=> {
     .catch(err=>console.log(err));
   }
 
-
+  const closeHandler =(e)=>{
+    setSearch(false);
+    setSearchData(false);
+    setRendered(false);
+  }
 
   return(
     <>
@@ -121,7 +125,16 @@ const Curations=()=> {
 
         ( <>
           <div className="search-result-container">
-          <h3 className="search-result-title"><span className="hightlight"> {rendered} </span> 키워드로 검색한 결과입니다.</h3>
+          <h3 className="search-result-title"><span className="hightlight">
+            {rendered} </span> 키워드로 검색한 결과입니다.
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <button onClick={closeHandler} className='delete-btn'>×</button>
+          </h3>
           <CurationCards data={searchData}/>
           </div>
           </>

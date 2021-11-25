@@ -15,13 +15,13 @@ const ProductDetail= ({match}) =>{
     const [productdelete, setProductdelete]=useState(false);
 
     const renderProductInfo = async() =>{
-        const response= await axios.get(`http://13.124.164.255:8000/api/product/add/${match.params.id}/`)
+        const response= await axios.get(`http://13.124.164.255/api/product/add/${match.params.id}/`)
         setProductinfo(response.data);
         console.log(response.data);
     }
 
     const checkSameUser = async() =>{
-        const response= await axios.get(`http://13.124.164.255:8000/api/product/add/${match.params.id}/`)
+        const response= await axios.get(`http://13.124.164.255/api/product/add/${match.params.id}/`)
         const product_user = response.data.user;
         if(loginuser == product_user){
             setCheckuser(true);
@@ -38,7 +38,7 @@ const ProductDetail= ({match}) =>{
     }
 
     const deleteProduct =  () =>{
-        axios.delete(`http://13.124.164.255:8000/api/product/add/${match.params.id}/`)
+        axios.delete(`http://13.124.164.255/api/product/add/${match.params.id}/`)
             .then(response=>setProductdelete(true))
             .catch(error=>{
                 setProductdelete(true);
@@ -91,17 +91,16 @@ const ProductDetail= ({match}) =>{
                 </div>
                 </>
                 }
-                {productdelete &&
-                <>
+                {productdelete &&<>
+                <center>
                 <div>
-                    삭제되었습니다.
+                    <br></br> <br></br> <br></br> <br></br> <br></br>
+                    <br></br> &nbsp; 삭제되었습니다. <br></br> <br></br>
                 </div>
                 <Link to='/products'>
-                    <button>
-                        상품 페이지로 돌아가기
-                    </button>
+                    <button class="btn btn-primary" align="center"> 상품 페이지로 돌아가기 </button>
                 </Link>
-                </>
+                </center></>
                 }
             </div>
         </div>

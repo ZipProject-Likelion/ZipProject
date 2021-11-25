@@ -187,7 +187,7 @@ const FirstOnboard =({nextShow, setIndex}) =>{
     }
     console.log(request_data);
     axios
-    .post('http://13.124.164.255:8000/api/recommender/add/',JSON.stringify(request_data),{
+    .post('http://13.124.164.255/api/recommender/add/',JSON.stringify(request_data),{
       headers:{
         'content-type':'application/json',
       }
@@ -196,13 +196,11 @@ const FirstOnboard =({nextShow, setIndex}) =>{
       if(key){
         swal("Success", '성공', "success", {
           buttons: false,
-          timer: 5000,
         })
         localStorage.setItem('accessToken', key);
         localStorage.setItem('user', user);
+        window.location.href="/";
       }
-      
-      alert('성공했습니다.');
     })
     .catch((err)=>{
       console.log(err);
@@ -225,7 +223,7 @@ const FirstOnboard =({nextShow, setIndex}) =>{
         // form_data.append('profile_image',values.profile_image);
     
         axios
-        .post('http://13.124.164.255:8000/api/users/auth/register/', form_data, {
+        .post('http://13.124.164.255/api/users/auth/register/', form_data, {
             headers:{
                 'content-type':'multipart/form-data'
             }

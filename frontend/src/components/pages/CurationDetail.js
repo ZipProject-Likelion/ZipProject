@@ -18,7 +18,7 @@ const CurationDetail= ({match}) =>{
 
     const renderCurationInfo = async() =>{
         await axios
-        .get(`http://13.124.164.255:8000/api/curation/add/${match.params.id}/`)
+        .get(`http://13.124.164.255/api/curation/add/${match.params.id}/`)
         .then((res)=>{
             setCurationinfo(res.data);
             res.data.products.map((id)=>{
@@ -33,7 +33,7 @@ const CurationDetail= ({match}) =>{
 
     const testProductInfo=async(id)=>{
         await axios
-        .get(`http://13.124.164.255:8000/api/product/add/${id}/`)
+        .get(`http://13.124.164.255/api/product/add/${id}/`)
         .then((res)=>{
             setProductinfo(productinfo=>[...productinfo,res.data]);
         })
@@ -41,7 +41,7 @@ const CurationDetail= ({match}) =>{
     }
 
     const checkSameUser = async() =>{
-        const response= await axios.get(`http://13.124.164.255:8000/api/curation/add/${match.params.id}/`)
+        const response= await axios.get(`http://13.124.164.255/api/curation/add/${match.params.id}/`)
         const curation_user = response.data.user;
         if(loginuser == curation_user){
             setCheckuser(true);
@@ -55,7 +55,7 @@ const CurationDetail= ({match}) =>{
     },[])
 
     const deleteCuration =  () =>{
-        axios.delete(`http://13.124.164.255:8000/api/curation/add/${match.params.id}/`)
+        axios.delete(`http://13.124.164.255/api/curation/add/${match.params.id}/`)
             .then(response=>setCurationdelete(true))
             .catch(error=>{
                 setCurationdelete(true);
@@ -113,6 +113,8 @@ const CurationDetail= ({match}) =>{
                     </>
                     }
                 </div>
+
+                {!curationdelete && <>
                 <div className="curation-product-container">
                     <div className="title">
                         <span className="curation-title">{curationinfo.title}</span> 큐레이션에 담겨있는 상품들
@@ -121,20 +123,19 @@ const CurationDetail= ({match}) =>{
                     <div className="curation-products">
                     <ProductCards title="" data={productinfo}/>
                     </div>
-                </div>
+                </div></>
+                }
                 <div>
-                    
-                    {curationdelete &&
-                    <>
-                    <div>
-                        삭제되었습니다.
-                    </div>
-                    <Link to='/curations'>
-                        <button>
-                            큐레이션 페이지로 돌아가기
-                        </button>
-                    </Link>
-                    </>
+                    {curationdelete &&<>
+                    <center>
+                        <div>
+                            <br></br> <br></br> <br></br> <br></br> <br></br>
+                            <br></br> &nbsp; 삭제되었습니다. <br></br> <br></br>
+                        </div>
+                        <Link to='/curations'>
+                            <button class="btn btn-primary" align="center"> 큐레이션 페이지로 돌아가기 </button>
+                        </Link>
+                    </center></>
                     }
                 </div>
         </div>

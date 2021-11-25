@@ -25,27 +25,28 @@ function Home() {
   }
 
   const handleAxios=()=>{
-    handleTagsAxios();
+    // handleTagsAxios();
     handleCurationsAxios();
     handleProductsAxios();
     handlePopularProductsAxios();
   }
 
-  const handleTagsAxios=async()=>{
-    axios
-    .get('http://13.124.164.255:8000/api/recommender/top_tag_list/')
-    .then((res)=>{
-      console.log(res);
-      setRecommendtags(res.data);
-    })
-    .catch((err)=>{
-      console.log(err);
-    })
-  }
+  // const handleTagsAxios=async()=>{
+  //   axios
+  //   .get('http://13.124.164.255:8000/api/recommender/top_tag_list/')
+  //   .then((res)=>{
+  //     console.log(res);
+  //     setRecommendtags(res.data);
+  //   })
+  //   .catch((err)=>{
+  //     console.log(err);
+  //   })
+  // }
 
   const handleCurationsAxios=async()=>{
+    const user_ = localStorage.getItem('user');
     axios
-    .get('http://13.124.164.255:8000/api/recommender/recommended_curations/')
+    .get(`http://13.124.164.255/api/recommender/recommended_curations/${user_}`)
     .then((res)=>{
       console.log(res);
       setRecommendcurations(res.data);
@@ -56,8 +57,9 @@ function Home() {
   }
 
   const handleProductsAxios=async()=>{
+    const user_ = localStorage.getItem('user');
     axios
-    .get('http://13.124.164.255:8000/api/recommender/recommended_products/')
+    .get(`http://13.124.164.255/api/recommender/recommended_products/${user_}`)
     .then((res)=>{
       console.log(res);
       setRecommendproducts(res.data);
@@ -69,7 +71,7 @@ function Home() {
 
   const handlePopularProductsAxios=async()=>{
     axios
-    .get('http://13.124.164.255:8000/api/scrap/product/best/')
+    .get('http://13.124.164.255/api/scrap/product/best/')
     .then((res)=>{
       console.log(res);
       setPopularproducts(res.data);
@@ -96,12 +98,13 @@ function Home() {
       </> }
 
       { !user && <>
+        <br></br><br></br><br></br>
         <h3 className="need-login">ZIP 이용을 위해 로그인 해주세요!</h3>
-        <h3 className="home-section-title">최근 인기 <span className="user-highlight">큐레이션 리스트</span></h3>
+        {/* <h3 className="home-section-title">최근 인기 <span className="user-highlight">큐레이션 리스트</span></h3>
         <hr></hr>
         <div>
           <CurationCards data={popularproducts}/>
-        </div>
+        </div> */}
       </> }
 
       { user && <>
@@ -114,10 +117,10 @@ function Home() {
 
       { !user && <>
         <h3 className="home-section-title">최근 인기 <span className="user-highlight">상품 리스트</span></h3>
-        <hr></hr>
+        {/* <hr></hr>
         <div>
           <ProductCards data={popularproducts}/>
-        </div>
+        </div> */}
       </> }
 
       </div>
