@@ -70,7 +70,11 @@ const Curations=()=> {
     .catch(err=>console.log(err));
   }
 
-
+  const closeHandler =(e)=>{
+    setSearch(false);
+    setSearchData(false);
+    setRendered(false);
+  }
 
   return(
     <>
@@ -121,7 +125,16 @@ const Curations=()=> {
 
         ( <>
           <div className="search-result-container">
-          <h3 className="search-result-title"><span className="hightlight"> {rendered} </span> 키워드로 검색한 결과입니다.</h3>
+          <h3 className="search-result-title"><span className="hightlight">
+            {rendered} </span> 키워드로 검색한 결과입니다.
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <button onClick={closeHandler} className='delete-btn'>×</button>
+          </h3>
           <CurationCards data={searchData}/>
           </div>
           </>

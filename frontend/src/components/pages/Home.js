@@ -98,12 +98,13 @@ function Home() {
       </> }
 
       { !user && <>
+        <br></br><br></br><br></br>
         <h3 className="need-login">ZIP 이용을 위해 로그인 해주세요!</h3>
-        <h3 className="home-section-title">최근 인기 <span className="user-highlight">큐레이션 리스트</span></h3>
+        {/* <h3 className="home-section-title">최근 인기 <span className="user-highlight">큐레이션 리스트</span></h3>
         <hr></hr>
         <div>
           <CurationCards data={popularproducts}/>
-        </div>
+        </div> */}
       </> }
 
       { user && <>
@@ -116,10 +117,10 @@ function Home() {
 
       { !user && <>
         <h3 className="home-section-title">최근 인기 <span className="user-highlight">상품 리스트</span></h3>
-        <hr></hr>
+        {/* <hr></hr>
         <div>
           <ProductCards data={popularproducts}/>
-        </div>
+        </div> */}
       </> }
 
       </div>

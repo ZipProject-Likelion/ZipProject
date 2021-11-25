@@ -113,6 +113,8 @@ const CurationDetail= ({match}) =>{
                     </>
                     }
                 </div>
+
+                {!curationdelete && <>
                 <div className="curation-product-container">
                     <div className="title">
                         <span className="curation-title">{curationinfo.title}</span> 큐레이션에 담겨있는 상품들
@@ -121,20 +123,19 @@ const CurationDetail= ({match}) =>{
                     <div className="curation-products">
                     <ProductCards title="" data={productinfo}/>
                     </div>
-                </div>
+                </div></>
+                }
                 <div>
-                    
-                    {curationdelete &&
-                    <>
-                    <div>
-                        삭제되었습니다.
-                    </div>
-                    <Link to='/curations'>
-                        <button>
-                            큐레이션 페이지로 돌아가기
-                        </button>
-                    </Link>
-                    </>
+                    {curationdelete &&<>
+                    <center>
+                        <div>
+                            <br></br> <br></br> <br></br> <br></br> <br></br>
+                            <br></br> &nbsp; 삭제되었습니다. <br></br> <br></br>
+                        </div>
+                        <Link to='/curations'>
+                            <button class="btn btn-primary" align="center"> 큐레이션 페이지로 돌아가기 </button>
+                        </Link>
+                    </center></>
                     }
                 </div>
         </div>

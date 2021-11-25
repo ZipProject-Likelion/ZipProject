@@ -13,7 +13,7 @@
 .right-container{
     width: 370px;
     height: 100%;
-    padding: 20px
+    padding-left: 20px
 }
 .left-container{
     width: 50%;
@@ -30,6 +30,8 @@
 .show-container{
     height: 250px;
     margin-top: 40px;
+    padding-left : 20px;
+    margin-bottom : 10px;
 }
 .checkbox-container{
     height: 100px;
@@ -45,7 +47,7 @@
     border:none;
     padding: 10px 20px;
     position: absolute;
-    width:80%;
+    width:75%;
     bottom: 70px;
     right: 100px;
     left: 100px;

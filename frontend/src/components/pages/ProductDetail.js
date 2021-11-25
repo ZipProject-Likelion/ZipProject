@@ -91,17 +91,16 @@ const ProductDetail= ({match}) =>{
                 </div>
                 </>
                 }
-                {productdelete &&
-                <>
+                {productdelete &&<>
+                <center>
                 <div>
-                    삭제되었습니다.
+                    <br></br> <br></br> <br></br> <br></br> <br></br>
+                    <br></br> &nbsp; 삭제되었습니다. <br></br> <br></br>
                 </div>
                 <Link to='/products'>
-                    <button>
-                        상품 페이지로 돌아가기
-                    </button>
+                    <button class="btn btn-primary" align="center"> 상품 페이지로 돌아가기 </button>
                 </Link>
-                </>
+                </center></>
                 }
             </div>
         </div>
