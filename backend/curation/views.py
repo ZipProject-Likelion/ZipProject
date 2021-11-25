@@ -18,7 +18,7 @@ from .serializers import CurationSerializer,CurationCommentSerializer,CurationTa
 
 class CurationViewSet(viewsets.ModelViewSet):
     authentication_classes = [BasicAuthentication, SessionAuthentication]
-    permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+    permission_classes = [IsOwnerOrReadOnly]
     queryset = Curation.objects.all()
     serializer_class = CurationSerializer
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
@@ -27,7 +27,7 @@ class CurationViewSet(viewsets.ModelViewSet):
 
 class CurationCommentViewSet(viewsets.ModelViewSet):
     authentication_classes = [BasicAuthentication, SessionAuthentication]
-    permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+    permission_classes = [IsOwnerOrReadOnly]
     queryset = CurationComment.objects.all()
     serializer_class = CurationCommentSerializer
 
