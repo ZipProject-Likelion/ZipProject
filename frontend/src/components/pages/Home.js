@@ -25,27 +25,28 @@ function Home() {
   }
 
   const handleAxios=()=>{
-    handleTagsAxios();
+    // handleTagsAxios();
     handleCurationsAxios();
     handleProductsAxios();
     handlePopularProductsAxios();
   }
 
-  const handleTagsAxios=async()=>{
-    axios
-    .get('http://localhost:8000/api/recommender/top_tag_list/')
-    .then((res)=>{
-      console.log(res);
-      setRecommendtags(res.data);
-    })
-    .catch((err)=>{
-      console.log(err);
-    })
-  }
+  // const handleTagsAxios=async()=>{
+  //   axios
+  //   .get('http://localhost:8000/api/recommender/top_tag_list/')
+  //   .then((res)=>{
+  //     console.log(res);
+  //     setRecommendtags(res.data);
+  //   })
+  //   .catch((err)=>{
+  //     console.log(err);
+  //   })
+  // }
 
   const handleCurationsAxios=async()=>{
+    const user_ = localStorage.getItem('user');
     axios
-    .get('http://localhost:8000/api/recommender/recommended_curations/')
+    .get(`http://localhost:8000/api/recommender/recommended_curations/${user_}`)
     .then((res)=>{
       console.log(res);
       setRecommendcurations(res.data);
@@ -56,8 +57,9 @@ function Home() {
   }
 
   const handleProductsAxios=async()=>{
+    const user_ = localStorage.getItem('user');
     axios
-    .get('http://localhost:8000/api/recommender/recommended_products/')
+    .get(`http://localhost:8000/api/recommender/recommended_products/${user_}`)
     .then((res)=>{
       console.log(res);
       setRecommendproducts(res.data);
