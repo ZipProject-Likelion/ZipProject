@@ -15,8 +15,8 @@ from .models import Product,ProductTag,ProductReview
 from .serializers import ProductSerializer,ProductTagSerializer,ProductReviewSerializer
 
 class ProductViewSet(viewsets.ModelViewSet):
-    authentication_classes = [BasicAuthentication, SessionAuthentication]
-    permission_classes = [IsOwnerOrReadOnly]
+    # authentication_classes = [BasicAuthentication, SessionAuthentication]
+    # permission_classes = [IsOwnerOrReadOnly]
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
@@ -24,8 +24,8 @@ class ProductViewSet(viewsets.ModelViewSet):
     ordering_fields = ['pub_date']
 
 class ProductReviewViewSet(viewsets.ModelViewSet):
-    authentication_classes = [BasicAuthentication, SessionAuthentication]
-    permission_classes = [IsOwnerOrReadOnly]
+    # authentication_classes = [BasicAuthentication, SessionAuthentication]
+    # permission_classes = [IsOwnerOrReadOnly]
     queryset = ProductReview.objects.all()
     serializer_class = ProductReviewSerializer
 

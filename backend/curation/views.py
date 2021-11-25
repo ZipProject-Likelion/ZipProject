@@ -17,8 +17,8 @@ from .models import Curation,CurationComment,CurationTag
 from .serializers import CurationSerializer,CurationCommentSerializer,CurationTagSerializer,CurationProductsSerializer
 
 class CurationViewSet(viewsets.ModelViewSet):
-    authentication_classes = [BasicAuthentication, SessionAuthentication]
-    permission_classes = [IsOwnerOrReadOnly]
+    # authentication_classes = [BasicAuthentication, SessionAuthentication]
+    # permission_classes = [IsOwnerOrReadOnly]
     queryset = Curation.objects.all()
     serializer_class = CurationSerializer
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
@@ -26,8 +26,8 @@ class CurationViewSet(viewsets.ModelViewSet):
     ordering_fields = ['pub_date']
 
 class CurationCommentViewSet(viewsets.ModelViewSet):
-    authentication_classes = [BasicAuthentication, SessionAuthentication]
-    permission_classes = [IsOwnerOrReadOnly]
+    # authentication_classes = [BasicAuthentication, SessionAuthentication]
+    # permission_classes = [IsOwnerOrReadOnly]
     queryset = CurationComment.objects.all()
     serializer_class = CurationCommentSerializer
 
