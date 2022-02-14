@@ -34,7 +34,7 @@ const ProductDetail= ({match}) =>{
     },[])
 
     const undefined =  () =>{
-        alert("아직 구현되지 않은!")
+        alert("개발중인 서비스 입니다!")
     }
 
     const deleteProduct =  () =>{
@@ -64,22 +64,22 @@ const ProductDetail= ({match}) =>{
                             {productinfo.title}
                         </li>
                         <li>
-                            제품설명: {productinfo.content}
+                            제품설명 : {productinfo.content}
                         </li>
                         <li>
-                            작성자: {productinfo.user}
+                            작성자 : {productinfo.user}
                         </li>
                         <li>
-                            가격: {productinfo.price}
+                            가격 : {productinfo.price}
                         </li>
                         <li>
-                            카테고리: {productinfo.type}
+                            카테고리 : {productinfo.type}
                         </li>
                         <li>
                         구매 URL : <button onClick={() => window.open(productinfo.shop_URL_Location, '_blank')} className='url-btn'>바로가기</button>
                         </li>
                         <li>
-                            구매경로: {productinfo.shop_Type}
+                            구매경로 : {productinfo.shop_Type}
                         </li>
                         {checkUser && <>
                             <button onClick={undefined} className='edit-btn'>수정하기</button>

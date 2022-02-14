@@ -116,8 +116,8 @@ function Home() {
       </> }
 
       { !user && <>
-        <h3 className="home-section-title">최근 인기 <span className="user-highlight">상품 리스트</span></h3>
-        {/* <hr></hr>
+        {/*<h3 className="home-section-title">최근 인기 <span className="user-highlight">상품 리스트</span></h3>
+         <hr></hr>
         <div>
           <ProductCards data={popularproducts}/>
         </div> */}

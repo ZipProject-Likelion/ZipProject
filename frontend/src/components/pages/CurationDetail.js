@@ -64,7 +64,7 @@ const CurationDetail= ({match}) =>{
     };
 
     const undefined =  () =>{
-        alert("아직 구현되지 않은!")
+        alert("개발중인 서비스 입니다!")
     };
 
     return(
@@ -85,10 +85,10 @@ const CurationDetail= ({match}) =>{
                                 {curationinfo.title}
                             </li>
                             <li>
-                                내용: {curationinfo.content}
+                                내용 : {curationinfo.content}
                             </li>
                             <li>
-                                작성자: {curationinfo.user}
+                                작성자 : {curationinfo.user}
                             </li>
                             <li>
                                 {curationinfo.private?(

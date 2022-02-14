@@ -5,7 +5,7 @@ import './HeroSection.css';
 import { Link } from 'react-router-dom';
 
 const undefined =  () =>{
-  alert("아직 구현되지 않은!")
+  alert("개발중인 서비스 입니다!")
 }
 
 function HeroSection() {
