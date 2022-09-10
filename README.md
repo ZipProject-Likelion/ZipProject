@@ -1,5 +1,9 @@
 # ZipProject
 
+> [ZIP 상세설명 바로가기](https://bit.ly/3oIIm6g)
+
+> [ZIP 사용해보기](http://13.124.164.255)
+
 ### Git 명령어 정리
 - 특정 branch clone 받기 :
 
